@@ -1,0 +1,48 @@
+<html>
+<head>
+<!--  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<script type="text/javascript">
+$(document).on('pageshow',function(){
+    $('#messg').focus();
+
+   alert("動いてる？");
+
+  var log = function(text){
+    $('#log').val( $('#log').val() + text + "\n");
+  };
+
+    var ws = new WebSocket('ws://192.168.0.8:3900/signaling');
+    ws.onopen = function(){
+        log('Connection opened');
+    };
+    ws.onerror = function(){
+        log('Connection ERROR!!');
+    };
+ 
+    ws.onmessage = function(msg){
+        var res = JSON.parse(msg.data);
+            log(res.signal);
+    };
+
+    $('#messg').keydown(function(e){
+        if (e.keyCode == 13 && $('#messg').val()){
+            var json = {};
+            json.signal = $('#messg').val;
+            var jsonString = JSON.stringify(json);
+            ws.send(jsonString); 
+            $('#messg').val('');
+         };
+    });
+});
+</script>
+
+</head>
+<body>
+<h1>TEST signal</h1><br>
+<input type="text" id="messg"><br>
+<div>
+    <textarea id="log"></textarea>
+</div><br>
+
+</body>
+</html>

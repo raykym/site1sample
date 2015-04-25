@@ -1,0 +1,88 @@
+[Fri Mar 13 10:02:17 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri Mar 13 10:02:17 2015] [info] Manager 14567 started
+[Fri Mar 13 10:02:17 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Fri Mar 13 10:04:35 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri Mar 13 10:04:35 2015] [info] Manager 14582 started
+[Fri Mar 13 10:04:35 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun Mar 15 21:39:44 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sun Mar 15 21:39:44 2015] [info] Manager 26619 started
+[Sun Mar 15 21:39:44 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun Mar 15 22:59:37 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sun Mar 15 22:59:37 2015] [info] Manager 26788 started
+[Sun Mar 15 22:59:37 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Tue Mar 17 22:52:39 2015] [info] Listening at "http://192.168.0.8:3800"
+[Tue Mar 17 22:52:39 2015] [info] Manager 2210 started
+[Tue Mar 17 22:52:39 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Wed Mar 18 04:48:20 2015] [info] Listening at "http://192.168.0.8:3800"
+[Wed Mar 18 04:48:20 2015] [info] Manager 5625 started
+[Wed Mar 18 04:48:20 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Wed Mar 18 23:12:53 2015] [info] Listening at "http://192.168.0.8:3800"
+[Wed Mar 18 23:12:53 2015] [info] Manager 8058 started
+[Wed Mar 18 23:12:53 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Tue Mar 31 00:06:43 2015] [info] Listening at "http://192.168.0.8:3800"
+[Tue Mar 31 00:06:43 2015] [info] Manager 32573 started
+[Tue Mar 31 00:06:43 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu Apr  2 11:48:10 2015] [info] Listening at "http://192.168.0.8:3800"
+[Thu Apr  2 11:48:10 2015] [info] Manager 8150 started
+[Thu Apr  2 11:48:10 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun Apr  5 10:31:12 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sun Apr  5 10:31:15 2015] [info] Manager 19302 started
+[Sun Apr  5 10:31:15 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Tue Apr  7 22:52:53 2015] [info] Listening at "http://192.168.0.8:3800"
+[Tue Apr  7 22:52:53 2015] [info] Manager 26571 started
+[Tue Apr  7 22:52:53 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Fri Apr 10 19:29:47 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri Apr 10 19:29:47 2015] [info] Manager 8545 started
+[Fri Apr 10 19:29:47 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Fri Apr 10 23:34:35 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri Apr 10 23:34:35 2015] [info] Manager 9061 started
+[Fri Apr 10 23:34:35 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sat Apr 11 00:02:07 2015] [error] Modification of non-creatable array value attempted, subscript -5 at lib/Site1/Controller/Filestore.pm line 149.
+
+[Sun Apr 12 01:21:32 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sun Apr 12 01:21:32 2015] [info] Manager 13844 started
+[Sun Apr 12 01:21:32 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Mon Apr 13 22:40:51 2015] [info] Listening at "http://192.168.0.8:3800"
+[Mon Apr 13 22:40:51 2015] [info] Manager 19178 started
+[Mon Apr 13 22:40:51 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Tue Apr 14 22:55:20 2015] [info] Listening at "http://192.168.0.8:3800"
+[Tue Apr 14 22:55:20 2015] [info] Manager 25271 started
+[Tue Apr 14 22:55:20 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Wed Apr 15 22:49:05 2015] [info] Listening at "http://192.168.0.8:3800"
+[Wed Apr 15 22:49:05 2015] [info] Manager 28203 started
+[Wed Apr 15 22:49:05 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu Apr 16 22:39:45 2015] [info] Listening at "http://192.168.0.8:3800"
+[Thu Apr 16 22:39:45 2015] [info] Manager 31752 started
+[Thu Apr 16 22:39:45 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Fri Apr 17 23:45:43 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri Apr 17 23:45:43 2015] [info] Manager 10404 started
+[Fri Apr 17 23:45:43 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun Apr 19 00:01:35 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sun Apr 19 00:01:35 2015] [info] Manager 17075 started
+[Sun Apr 19 00:01:35 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun Apr 19 13:28:49 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sun Apr 19 13:28:49 2015] [info] Manager 20609 started
+[Sun Apr 19 13:28:49 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun Apr 19 13:46:00 2015] [error] Global symbol "@alldata" requires explicit package name at lib/Site1/Controller/Chatroom.pm line 315.
+Global symbol "@alldata" requires explicit package name at lib/Site1/Controller/Chatroom.pm line 315.
+Compilation failed in require at (eval 65) line 1.
+
+[Sun Apr 19 13:54:51 2015] [error] Worker 20613 has no heartbeat, restarting
+[Mon Apr 20 22:50:57 2015] [info] Listening at "http://192.168.0.8:3800"
+[Mon Apr 20 22:50:57 2015] [info] Manager 28963 started
+[Mon Apr 20 22:50:57 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Tue Apr 21 23:21:05 2015] [info] Listening at "http://192.168.0.8:3800"
+[Tue Apr 21 23:21:05 2015] [info] Manager 3224 started
+[Tue Apr 21 23:21:05 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu Apr 23 22:47:51 2015] [info] Listening at "http://192.168.0.8:3800"
+[Thu Apr 23 22:47:51 2015] [info] Manager 15437 started
+[Thu Apr 23 22:47:51 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Fri Apr 24 04:09:41 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri Apr 24 04:09:41 2015] [info] Manager 16876 started
+[Fri Apr 24 04:09:41 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Fri Apr 24 22:47:27 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri Apr 24 22:47:27 2015] [info] Manager 21651 started
+[Fri Apr 24 22:47:27 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sat Apr 25 17:05:04 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sat Apr 25 17:05:04 2015] [info] Manager 26530 started
+[Sat Apr 25 17:05:04 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"

@@ -1,0 +1,40 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+   $("#messg").focus();
+   var ws = new WebSocket('wss://westwind.iobb.net/signaling');
+   ws.onopen = function (){
+      $("#log").text("Websocket open");
+        };
+   ws.omerror = function(){
+      $("#log").text("Websocket Error!!!");
+        };
+   ws.onmessage = function(msg){
+        var res = JSON.parse(msg.data); 
+      $("#log").text(res.signal);
+        };
+
+   $("#messg").keydown(function (e) {
+        if (e.keyCode == 13 && $('#messg').val()) {
+            var json = {};
+            json.signal = $('#messg').val();
+            var jsonString = JSON.stringify(json);
+            ws.send(jsonString);
+            $('#messg').val('');
+            }
+        });
+});
+</script>
+
+</head>
+<body>
+<h1>TEST signal</h1><br>
+<input type="text" id="messg"><br>
+<div>
+    <textarea id="log"></textarea>
+</div><br>
+
+</body>
+</html>

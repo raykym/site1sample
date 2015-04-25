@@ -1,0 +1,56 @@
+% layout 'mobidef';
+% title 'mirror page';
+<script     >
+%# scriptがあればココに
+</script>
+
+<div data-role="page" style="background: #80aa55">
+    <div><h3>mirror page</h3></div>
+    <div style="color: #ff0000"><%= $msg %></div>
+        <div style="border: 1px solid">
+          <button type="button" onclick="startVideo();">Start video</button>
+          <button type="button" onclick="stopVideo();">Stop video</button>
+          <div>
+              <video id="local-video" autoplay style="width: 300; height: 200px;"></video>
+          </div>
+
+
+        </div>
+    <div data-role="footer" style="backgroud: #aac78d;">
+    <a href="" data-rel="back">back</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+  var localVideo = document.getElementById('local-video');
+  var localStream = null;
+
+  // ---------------------- video handling -----------------------
+  // start local video
+  function startVideo() {
+    navigator.webkitGetUserMedia({video: true, audio: false},
+    function (stream) { // success
+      localStream = stream;
+      localVideo.src = window.webkitURL.createObjectURL(stream);
+      localVideo.play();
+      localVideo.volume = 0;
+    },
+    function (error) { // error
+      console.error('An error occurred: [CODE ' + error.code + ']');
+      return;
+    }
+    );
+  }
+
+  // stop local video
+  function stopVideo() {
+    localVideo.src = "";
+    localStream.stop();
+  }
+
+</script>
+
+
+
+
+

@@ -1,0 +1,20 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+$(document).on('pageshow',function(){
+   $("#messg").focus();
+});
+
+</script>
+
+</head>
+<body>
+<h1>TEST signal</h1><br>
+<input type="text" id="messg"><br>
+<div>
+    <textarea id="log"></textarea>
+</div><br>
+
+</body>
+</html>

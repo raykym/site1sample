@@ -1,0 +1,10 @@
+% layout 'mobidef';
+% title 'signin';
+<div><h3>ログイン</h3></div>
+<div style="border: 1px solid"><h5> 登録したe-mailアドレスとパスワードを入力してください。</h5></div>
+<div style="border: 1px solid">
+<form method="post" action="/signinact">
+   e-mail:<input type="email" name="email"><br>
+   password:<input type="password" name="password"><br>
+   <input type="submit" value="ログイン">
+</form>
