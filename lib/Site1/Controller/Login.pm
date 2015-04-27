@@ -3,6 +3,7 @@ use Mojo::Base 'Mojolicious::Controller';
 use Encode;
 use Date::Format;
 use MIME::Base64::URLSafe; # icon用oidを渡す
+use MongoDB;
 
 # 独自パスを指定して自前モジュールを利用
 use lib '/storage/perlwork/mojowork/server/site1/lib/Site1';
@@ -122,6 +123,12 @@ sub usercheck {
     my $sth_user_chk = $self->app->dbconn->dbh->prepare("$config->{sql_user_chk}");
     my $sth_chktimeupdate = $self->app->dbconn->dbh->prepare("$config->{sql_chktime_update}");
 
+    #mongoDBでロギング　pubsubに利用予定->うまく行かなかった
+    my $mongoclient = MongoDB::MongoClient->new(host => 'localhost', port => '27017');
+    my $accessdb = $mongoclient->get_database('accessdb');
+    my $sessionlog = $accessdb->get_collection('sessionlog');
+
+
     my $sid = $self->cookie('site1');
 
     # cookieが取れない->リダイレクト
@@ -152,9 +159,18 @@ sub usercheck {
        }
 
     #日付update 無意味なupdateでtimestampをupdate
-    my $dumy = time;
-    $sth_chktimeupdate->execute($dumy,$sid);
+    my $dumytime = time;
+    $sth_chktimeupdate->execute($dumytime,$sid);
   ###  $self->app->log->debug("DEBUG: DBI: $DBI::errstr ");
+
+#    my $requrl = $self->req->url->to_abs;
+# URLが取れなくて断念
+    #mongodbへの記録
+#    $sessionlog->insert({ sid => $sid,
+#                          uid => $uid,
+#                          epoctime => $dumytime,
+#                          url => $requrl
+#                       });
 
     $self->stash( email => $email );
     $self->stash( username => $username );

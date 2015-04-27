@@ -13,7 +13,7 @@
         <a href="/menu/upload" " class="anchor" data-transition="flip" rel="external">ファイルアップロード</a><br>
         <a href="/menu/mirror" " class="anchor" data-transition="flip" rel="external">ミラー</a><br>
         <a href="#" " class="anchor" data-transition="flip" rel="external">伝言板（開発中）</a><br>
-        <a href="/webrtc/test-sdi-2-sig.html" " class="anchor" data-transition="flip" rel="external">WebRTC</a><br>
+        <a href="/webrtc/test-sdi-2-sig.html" " class="anchor" data-transition="flip" rel="external">WebRTC(テストサンプル)</a><br>
         <a href="/menu/settings" class="anchor" data-transition="flip">設定変更</a><br>
     </div>
     <div data-role="footer" style="background: #aac78d;">

@@ -251,9 +251,9 @@ sub echopg {
 
 #echodbと同じだが、pubsub通信を利用したPushを利用する。
 
-# postgresqlの準備
-my $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
-my $pubsub = Mojo::Pg::PubSub->new(pg => $pg);
+    # postgresqlの準備
+    my $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
+    my $pubsub = Mojo::Pg::PubSub->new(pg => $pg);
 
     # mongoDBの用意
     my $mongoclient = MongoDB::MongoClient->new(host => 'localhost', port => '27017');
@@ -380,21 +380,32 @@ sub signaling {
     my $self = shift;
 
     # webRTC用にシグナルサーバとしてJSONを受けてそのままJSONを届ける
+    # pubsubの振り分けについて検討中
+    # セッションテーブルをPGのsignal_tblに作成。websocket切断で削除される。
+
+    #cookieからsid取得
+    my $sid = $self->cookie('site1');
+    ###$self->app->log->debug("DEBUG: SID: $sid");
 
     #websocket 確認
     $self->app->log->debug(sprintf 'Client connected: %s', $self->tx);
-    my $id = sprintf "%s", $self->tx;
+    my $id = sprintf "%s", $self->tx->connection;
     $clients->{$id} = $self->tx;
 
     # postgresqlの準備
         my $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
         my $pubsub = Mojo::Pg::PubSub->new(pg => $pg);
+        my $subscall = Mojo::Pg::PubSub->new(pg => $pg);
 
-    # 接続維持設定
-       my $stream = Mojo::IOLoop->stream($self->tx->connection);
-          $stream->timeout(3000);
-          $self->inactivity_timeout(3000);
-       #つなぎっぱなしの為のループ  ・・・無限にメッセージを交換続けるゴミでSDPが途絶える。。。
+    #リスナー登録　pgのsignal_tblへsidを登録
+        $pg->db->query('INSERT INTO signal_tbl (sessionid) values(?)',$sid);
+
+
+    # 接続維持設定 WebRTCではICE交換が終わればすぐにwebsocketは閉じたい。
+#       my $stream = Mojo::IOLoop->stream($self->tx->connection);
+#          $stream->timeout(3000);
+#          $self->inactivity_timeout(3000);
+       #つなぎっぱなしの為のループ  ・・・ つながれば切れてOKなので
 #       Mojo::IOLoop->recurring(
 #          60 => sub {
 #             my $char = "dummey";
@@ -403,28 +414,36 @@ sub signaling {
 #          });
 
     #pubsubから受信設定 
-        my $cb = $pubsub->listen(signalon => sub {
+        my $cb = $pubsub->listen($sid => sub {
             my ($pubsub, $payload) = @_;
+
             #JSONキャラ->perl形式
             my $jsonobj = from_json($payload);
 
-         ###   $self->app->log->debug("DEBUG: payload: $payload");
+              my $connid = $self->tx->connection;
+                 $self->app->log->debug("DEBUG: go session: $connid");
+             #    $self->app->log->debug("DEBUG: payload: $payload");
 
-            for (keys %$clients){
-                # 自分には返らない unless
-                $clients->{$_}->send({ json => $jsonobj}) unless($_ eq $id);
-            }
-        });
+                 #websocketは自分にだけ送信する
+                 $clients->{$id}->send({ json => $jsonobj});
+          });
 
     # on message・・・・・・・
        $self->on(message => sub {
                   my ($self, $msg) = @_;
                    # $msgはJSONキャラを想定
-                   ####my $jsonobj = from_json($msg);
-                   $self->app->log->debug("DEBUG: msg: $msg");
+                   #my $jsonobj = from_json($msg);
+                 my $connid = $self->tx->connection;
+                   $self->app->log->debug("DEBUG: on session: $connid");
+              #     $self->app->log->debug("DEBUG: msg: $msg");
 
-                   # 書き込みを通知
-                   $pubsub->notify( signalon => $msg);
+              # 書き込みを通知 signal_tblにsubscriberされたidのみ通知
+              # 自分は除外する。
+        my $subs_member = $pg->db->query('SELECT * FROM signal_tbl');
+              while ( my $subs_id = $subs_member->hash){
+                   $pubsub->notify( $subs_id->{sessionid} => $msg) unless ($sid eq $subs_id->{sessionid});
+                   $self->app->log->debug("DEBUG: subs_id: $subs_id->{sessionid}");
+              }
           });
 
     # on finish・・・・・・・
@@ -436,6 +455,8 @@ sub signaling {
 
                # pubsubリスナーの停止
                if ( ! defined $clients->{$id}){ $pubsub->unlisten(signalon => $cb); }
+               # リスナー登録の解除
+               $pg->db->query('DELETE FROM signal_tbl WHERE sessionid = ?' , $sid);
         });
 
 }

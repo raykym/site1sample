@@ -28,6 +28,7 @@ $(document).on('pageshow',function () {
         $('#msg').val('');
     }
   });
+
 });
 </script>
 
