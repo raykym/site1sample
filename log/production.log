@@ -92,3 +92,7 @@ Compilation failed in require at (eval 65) line 1.
 [Mon Apr 27 01:49:35 2015] [info] Listening at "http://192.168.0.8:3800"
 [Mon Apr 27 01:49:35 2015] [info] Manager 2634 started
 [Mon Apr 27 01:49:35 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Mon Apr 27 17:00:59 2015] [info] Listening at "http://192.168.0.8:3800"
+[Mon Apr 27 17:00:59 2015] [info] Manager 7350 started
+[Mon Apr 27 17:00:59 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Mon Apr 27 19:39:36 2015] [error] Worker 7351 has no heartbeat, restarting

@@ -90,6 +90,9 @@ sub startup {
   $bridge->get('/menu/chatroompg')->to('chatroom#viewpg');
   $bridge->get('/menu/mirror')->to('mirror#mirror');
 
+  $bridge->get('/webrtcx4')->to('chatroom#webrtcx4');
+  $bridge->get('/webrtcx2')->to('chatroom#webrtcx2');
+
   $r->any('*')->to('Top#unknown'); # 未定義のパスは全てtop画面へ
 }
 

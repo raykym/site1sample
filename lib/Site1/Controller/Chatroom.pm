@@ -376,16 +376,27 @@ sub echopg {
          );
 }
 
+sub webrtcx4 {
+    my $self = shift;
+
+    $self->render();
+}
+
 sub signaling {
     my $self = shift;
 
     # webRTC用にシグナルサーバとしてJSONを受けてそのままJSONを届ける
-    # pubsubの振り分けについて検討中
     # セッションテーブルをPGのsignal_tblに作成。websocket切断で削除される。
+    # 呼び出し元のURLに引数r=をつけるとテーブルを作成して、そのテーブルにsubscribeする。
 
     #cookieからsid取得
     my $sid = $self->cookie('site1');
     ###$self->app->log->debug("DEBUG: SID: $sid");
+
+    # getパラメータでroom指定を行う。 ->roomはそのままテーブル名として利用 ->これではダメのはず。。。
+    my $room = $self->param('r');
+    if ( ! defined $room ) { $room = 'signal_tbl'; }
+    $self->app->log->debug("DEBUG: room: $room");
 
     #websocket 確認
     $self->app->log->debug(sprintf 'Client connected: %s', $self->tx);
@@ -397,14 +408,17 @@ sub signaling {
         my $pubsub = Mojo::Pg::PubSub->new(pg => $pg);
         my $subscall = Mojo::Pg::PubSub->new(pg => $pg);
 
-    #リスナー登録　pgのsignal_tblへsidを登録
-        $pg->db->query('INSERT INTO signal_tbl (sessionid) values(?)',$sid);
+           $pg->db->query("CREATE TABLE IF NOT EXISTS $room (sessionid text)");
+           $self->app->log->debug("DEBUG: CREATE TABLE $room");
+
+    #リスナー登録　pgのsignal_tblへsidを登録 $roomがテーブル名
+        $pg->db->query("INSERT INTO $room (sessionid) values(?)",$sid);
 
 
     # 接続維持設定 WebRTCではICE交換が終わればすぐにwebsocketは閉じたい。
-#       my $stream = Mojo::IOLoop->stream($self->tx->connection);
-#          $stream->timeout(3000);
-#          $self->inactivity_timeout(3000);
+       my $stream = Mojo::IOLoop->stream($self->tx->connection);
+          $stream->timeout(3000);
+          $self->inactivity_timeout(3000);
        #つなぎっぱなしの為のループ  ・・・ つながれば切れてOKなので
 #       Mojo::IOLoop->recurring(
 #          60 => sub {
@@ -439,7 +453,7 @@ sub signaling {
 
               # 書き込みを通知 signal_tblにsubscriberされたidのみ通知
               # 自分は除外する。
-        my $subs_member = $pg->db->query('SELECT * FROM signal_tbl');
+        my $subs_member = $pg->db->query("SELECT * FROM $room");
               while ( my $subs_id = $subs_member->hash){
                    $pubsub->notify( $subs_id->{sessionid} => $msg) unless ($sid eq $subs_id->{sessionid});
                    $self->app->log->debug("DEBUG: subs_id: $subs_id->{sessionid}");
@@ -454,11 +468,17 @@ sub signaling {
                delete $clients->{$id};
 
                # pubsubリスナーの停止
-               if ( ! defined $clients->{$id}){ $pubsub->unlisten(signalon => $cb); }
+               if ( ! defined $clients->{$id}){ $pubsub->unlisten($sid => $cb); }
                # リスナー登録の解除
-               $pg->db->query('DELETE FROM signal_tbl WHERE sessionid = ?' , $sid);
+               $pg->db->query("DELETE FROM $room WHERE sessionid = ?" , $sid);
         });
 
+}
+
+sub webrtcx2 {
+    my $self = shift;
+
+    $self->render(msg => '');
 }
 
 1;

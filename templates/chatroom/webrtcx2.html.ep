@@ -1,64 +1,52 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>WebRTC 1 to 1 handshake V2</title>  
-</head>
-<body>
+% layout 'mobidef';
+% title 'WebRTC x2';
+
+<div data-role="page" style="background: #80aa55">
+    <div><h3>WebRTC page</h3></div>
+    <div style="color: #ff0000"><%= $msg %></div>
+        <div style="border: 1px solid">
+
+  <div>
+   <video id="local-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
+  </div>
+  <div>
+   <video id="remote-video" autoplay style="width: 480px; height: 360px; border: 1px solid black;"></video>
+  </div>
   <button type="button" onclick="startVideo();">Start video</button>
   <button type="button" onclick="stopVideo();">Stop video</button>
-  &nbsp;&nbsp;&nbsp;&nbsp;
   <button type="button" onclick="connect();">Connect</button>
   <button type="button" onclick="hangUp();">Hang Up</button>
   <br />
-  <div>
-   <video id="local-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
-   <video id="remote-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
-  </div>
-  
-  <p>
-   SDP to send:<br />
-   <textarea id="text-for-send-sdp" rows="5" cols="100" disabled="1">SDP to send</textarea>
-  </p>
-  <p>
-   SDP to receive:<br />
-   <textarea id="text-for-receive-sdp" rows="5" cols="100"></textarea><br />
-   <button type="button" onclick="onSDP();">Receive SDP</button>
-  </p>
-  
-  <p>
-   ICE Candidate to send:<br />
-   <textarea id="text-for-send-ice" rows="5" cols="100" disabled="1" onclick="this.focus(); this.select();">ICE Candidate to send</textarea>
-  </p>
-  <p>  
-   ICE Candidates to receive:<br />
-   <textarea id="text-for-receive-ice" rows="5" cols="100"></textarea><br />
-   <button type="button" onclick="onICE();">Receive ICE Candidates</button>
-  </p>
-  
-  
-  <script>
+
+         </div>
+    <div data-role="footer" style="backgroud: #aac78d;">
+    <a href="" data-rel="back" class="btn-inline">back</a>
+    <a href="/menu" class="btn-inline">メニュー</a>
+    </div>
+</div>
+
+  <script type="text/javascript">
+
   var localVideo = document.getElementById('local-video');
   var remoteVideo = document.getElementById('remote-video');
   var localStream = null;
   var peerConnection = null;
   var peerStarted = false;
-  //var mediaConstraints = {'mandatory': {'OfferToReceiveAudio':false, 'OfferToReceiveVideo':true }};
   var mediaConstraints = {'mandatory': {'OfferToReceiveAudio':true, 'OfferToReceiveVideo':true }};
 
   // --------- websocket ----------
   var socketReady = false;
-  var ws = new WebSocket('wss://westwind.iobb.net/signaling');
+  var roomname = getRoomName(); // 会議室名を取得する
+  var ws = new WebSocket('wss://westwind.iobb.net/signaling?r=' + roomname);
       ws.onopen = function(){
           console.log('socket opened.');
           socketReady = true;
           };
       ws.onmessage = function(msg){
-        var evt = JSON.parse(msg.data); 
+        var evt = JSON.parse(msg.data);
         if (evt.type === 'offer') {
-   //       if (!peerStarted){ //connectを押したらofferを受けないシグナリングサーバの輻輳対応で入れた処理、輻輳は解決したのでこのまま
           console.log("Received offer, set offer, sending answer....")
-          onOffer(evt);      
-   //            };
+          onOffer(evt);
             } else if (evt.type === 'answer' && peerStarted) {
           console.log('Received answer, settinng answer SDP');
           onAnswer(evt);
@@ -70,12 +58,25 @@
           stop();
             }
        };
-  
+
+  function getRoomName() { // たとえば、 URLに  ?roomname  とする
+    var url = document.location.href;
+    var args = url.split('?');
+    if (args.length > 1) {
+      var room = args[1];
+      if (room != "") {
+        return room;
+      }
+    }
+    return "signal_tbl";  //signalingのデフォルト値をここで指定
+  }
+
+
   // ----------------- handshake --------------
-  var textForSendSDP = document.getElementById('text-for-send-sdp');
-  var textForSendICE = document.getElementById('text-for-send-ice');
-  var textToReceiveSDP = document.getElementById('text-for-receive-sdp');
-  var textToReceiveICE = document.getElementById('text-for-receive-ice');
+  var textForSendSDP;
+  var textForSendICE;
+  var textToReceiveSDP;
+  var textToReceiveICE;
   var iceSeparator = '------ ICE Candidate -------';
   var CR = String.fromCharCode(13);
 
@@ -84,17 +85,12 @@
     var evt = JSON.parse(text);
     if (peerConnection) {
       onAnswer(evt);
-
-      textForendICE.focus();
-      textForSendICE.select();
     }
     else {
-      onOffer(evt); 
+      onOffer(evt);
     }
-    
-    textToReceiveSDP.value ="";
   }
-  
+
   //--- multi ICE candidate ---
   function onICE() {
     var text = textToReceiveICE.value;
@@ -103,14 +99,8 @@
       var evt = JSON.parse(arr[i]);
       onCandidate(evt);
     }
- 
-    textToReceiveICE.value ="";
-    
-    textForSendICE.focus();
-    textForSendICE.select();
   }
-  
-  
+
   function onOffer(evt) {
     console.log("Received offer...")
     console.log(evt);
@@ -118,56 +108,40 @@
     sendAnswer(evt);
     peerStarted = true; // 追加
   }
-  
+
   function onAnswer(evt) {
     console.log("Received Answer...")
     console.log(evt);
     setAnswer(evt);
   }
-  
+
   function onCandidate(evt) {
     var candidate = new RTCIceCandidate({sdpMLineIndex:evt.sdpMLineIndex, sdpMid:evt.sdpMid, candidate:evt.candidate});
     console.log("Received Candidate...")
     console.log(candidate);
     peerConnection.addIceCandidate(candidate);
-
-    var text = JSON.stringify(evt);  //追加
-    textToReceiveICE.value = text;  //追加
-
   }
- 
+
   function sendSDP(sdp) {
     var text = JSON.stringify(sdp);
     console.log("---sending sdp text ---");
     console.log(text);
-    
-    textForSendSDP.value = text;
-    textForSendSDP.focus();
-    textForSendSDP.select();
-  
-    //追加
     ws.send(text);
   }
-  
+
   function sendCandidate(candidate) {
     var text = JSON.stringify(candidate);
     console.log("---sending candidate text ---");
     console.log(text);
- 
-    textForSendICE.value = (textForSendICE.value + CR + iceSeparator + CR + text + CR);
-    textForSendICE.scrollTop = textForSendICE.scrollHeight;
-
-    //追加
     ws.send(text);
   }
-  
+
   // ---------------------- video handling -----------------------
   // start local video
   function startVideo() {
     navigator.webkitGetUserMedia({video: true, audio: true},
     function (stream) { // success
       localStream = stream;
-   //   localVideo.src = window.webkitURL.createObjectURL(stream);
       localVideo.src = window.URL.createObjectURL(stream);
       localVideo.play();
       localVideo.volume = 0;
@@ -178,16 +152,15 @@
     }
     );
   }
- 
+
   // stop local video
   function stopVideo() {
     localVideo.src = "";
     localStream.stop();
   }
- 
+
   // ---------------------- connection handling -----------------------
   function prepareNewConnection() {
-  //  var pc_config = {"iceServers":[]};
     //STUN対応
     var pc_config = {"iceServers":[{"url":"stun:stun.l.google.com:19302"}]};
     var peer = null;
@@ -196,12 +169,11 @@
     } catch (e) {
       console.log("Failed to create peerConnection, exception: " + e.message);
     }
- 
     // send any ice candidates to the other peer
     peer.onicecandidate = function (evt) {
       if (evt.candidate) {
         console.log(evt.candidate);
-        sendCandidate({type: "candidate", 
+        sendCandidate({type: "candidate",
                           sdpMLineIndex: evt.candidate.sdpMLineIndex,
                           sdpMid: evt.candidate.sdpMid,
                           candidate: evt.candidate.candidate}
@@ -210,29 +182,28 @@
         console.log("End of candidates. ------------------- phase=" + evt.eventPhase);
       }
     };
- 
+
     console.log('Adding local stream...');
     peer.addStream(localStream);
- 
+
     peer.addEventListener("addstream", onRemoteStreamAdded, false);
     peer.addEventListener("removestream", onRemoteStreamRemoved, false)
- 
+
     // when remote adds a stream, hand it on to the local video element
     function onRemoteStreamAdded(event) {
       console.log("Added remote stream");
-    //  remoteVideo.src = window.webkitURL.createObjectURL(event.stream);
       remoteVideo.src = window.URL.createObjectURL(event.stream);
     }
- 
+
     // when remote removes a stream, remove it from the local video element
     function onRemoteStreamRemoved(event) {
       console.log("Remove remote stream");
       remoteVideo.src = "";
     }
- 
+
     return peer;
   }
- 
+
   function sendOffer() {
     peerConnection = prepareNewConnection();
     peerConnection.createOffer(function (sessionDescription) { // in case of success
@@ -244,7 +215,7 @@
       console.log("Create Offer failed");
     }, mediaConstraints);
   }
- 
+
   function setOffer(evt) {
     if (peerConnection) {
       console.error('peerConnection alreay exist!');
@@ -252,14 +223,13 @@
     peerConnection = prepareNewConnection();
     peerConnection.setRemoteDescription(new RTCSessionDescription(evt));
   }
-  
+
   function sendAnswer(evt) {
     console.log('sending Answer. Creating remote session description...' );
     if (! peerConnection) {
       console.error('peerConnection NOT exist!');
       return;
     }
-    
     peerConnection.createAnswer(function (sessionDescription) { // in case of success
       peerConnection.setLocalDescription(sessionDescription);
       console.log("Sending: SDP Answer");
@@ -269,18 +239,14 @@
       console.log("Create Answer failed");
     }, mediaConstraints);
   }
- 
   function setAnswer(evt) {
     if (! peerConnection) {
       console.error('peerConnection NOT exist!');
       return;
     }
     peerConnection.setRemoteDescription(new RTCSessionDescription(evt));
-
-    var text = JSON.stringify(evt)  //追加
-    textToReceiveSDP.value = text;  //追加
   }
-  
+
   // -------- handling user UI event -----
   // start the connection upon user request
   function connect() {
@@ -291,20 +257,26 @@
       alert("Local stream not running yet - try again.");
     }
   }
- 
+
   // stop the connection upon user request
   function hangUp() {
     console.log("Hang up.");
     stop();
   }
- 
+
   function stop() {
     peerConnection.close();
     peerConnection = null;
-    peerStarted = false;    
+    peerStarted = false;
   }
- 
   </script>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
 
