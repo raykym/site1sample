@@ -108,6 +108,7 @@ sub startup {
   $bridge->get('/webrtcx4')->to('chatroom#webrtcx4'); # 未完
   $bridge->get('/webrtcx2')->to('chatroom#webrtcx2');
   $bridge->get('/voicechat')->to('chatroom#voicechat');
+  $bridge->get('/videochat')->to('chatroom#videochat');
 
   $r->any('*')->to('Top#unknown'); # 未定義のパスは全てtop画面へ
 }

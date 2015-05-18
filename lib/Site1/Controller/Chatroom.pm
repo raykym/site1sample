@@ -432,12 +432,12 @@ sub signaling {
           $stream->timeout(3000);
           $self->inactivity_timeout(3000);
        #つなぎっぱなしの為のループ  ・・・ つながれば切れてOKなので
-#       Mojo::IOLoop->recurring(
-#          60 => sub {
-#             my $char = "dummey";
-#             my $bytes = $clients->{$id}->build_message($char);
-#             $clients->{$id}->send( {binary => $bytes}) if ($clients->{$id}->is_websocket);
-#          });
+       Mojo::IOLoop->recurring(
+          60 => sub {
+             my $char = "dummey";
+             my $bytes = $clients->{$id}->build_message($char);
+             $clients->{$id}->send( {binary => $bytes}) if ($clients->{$id}->is_websocket);
+          });
 
     #pubsubから受信設定 
         my $cb = $pubsub->listen($connid => sub {
@@ -551,7 +551,7 @@ sub roomentrycheck {
 sub voicechat {
     my $self = shift;
 
-    $self->render(msg_w => '参加メンバーが揃ったら一人だけconnectを押してください。全員が通話可能になります。アイコン横のスピーカがオンになっていれば通じているはずです。切断時はブラウザを完全に閉じないとネットワークが切れていない場合が有ります。スマホでは通知にマイクマークが無いことを確認してください。');
+    $self->render(msg_w => '参加メンバーが揃ったら一人だけconnectを押してください。全員が通話可能になります。アイコン横のカウンターが動いていれば通じているはずです。切断時はブラウザを完全に閉じないとネットワークが切れていない場合が有ります。スマホでは通知にマイクマークが無いことを確認してください。');
 }
 
 sub roomentrylist {
@@ -588,7 +588,7 @@ sub roomentrylist {
        push @memberlist, to_json({from => $sid});
 
     my $loopid = Mojo::IOLoop->recurring( 
-             5 => sub {
+             10 => sub {
                 $result = $pg->db->query("SELECT connid,sessionid,username,icon FROM $room");
                 # $result  $_->{sessionid}の配列の想定
                 ####my $rownum = $result->rows;  # 何故か1回で０に成る。。
@@ -623,5 +623,10 @@ sub roomentrylist {
        });
 }
 
+sub videochat {
+    my $self = shift;
+
+    $self->render(msg_w => '参加メンバーが揃ったら一人だけconnectを押してください。全員が通話可能になります。アイコン横のカウンターが動いていれば通じているはずです。切断時はブラウザを完全に閉じないとネットワークが切れていない場合が有ります。スマホでは通知にマイクマークが無いことを確認してください。');
+}
 
 1;
