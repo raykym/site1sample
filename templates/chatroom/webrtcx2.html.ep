@@ -3,20 +3,23 @@
 
 <div data-role="page" style="background: #80aa55">
     <div><h3>WebRTC page</h3></div>
-    <div style="color: #ff0000"><%= $msg %></div>
+    <div style="color: #ff0000"><%= $msg_w %></div>
+    <div><textarea id="warn-msg"></textarea></div>
         <div style="border: 1px solid">
 
   <div>
-   <video id="local-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
-  </div>
-  <div>
-   <video id="remote-video" autoplay style="width: 480px; height: 360px; border: 1px solid black;"></video>
+   <video id="local-video" autoplay controls style="width: 240px; height: 180px; border: 1px solid black;"></video>
+%#   <audio id="local-video" autoplay controls style="border: 1px solid black;"></audio>
+   <video id="remote-video" autoplay controls style="width: 480px; height: 360px; border: 1px solid black;"></video>
+%#   <audio id="remote-video" autoplay controls style="border: 1px solid black;"></audio>
   </div>
   <button type="button" onclick="startVideo();">Start video</button>
   <button type="button" onclick="stopVideo();">Stop video</button>
   <button type="button" onclick="connect();">Connect</button>
   <button type="button" onclick="hangUp();">Hang Up</button>
   <br />
+  <div>
+  </div>
 
          </div>
     <div data-role="footer" style="backgroud: #aac78d;">
@@ -59,6 +62,18 @@
             }
        };
 
+    // websocket roomentrycheck 切断はsendSDPのダミー送信で行われる
+  var ws_count = new WebSocket('wss://westwind.iobb.net/roomentrycheck?r=' + roomname);
+      ws_count.onopen = function(){
+          console.log('ROOMENTRY: socket opened.');
+          };
+      ws_count.onmessage = function(cnt_msg){
+        var roomentr = JSON.parse(cnt_msg.data);
+        if (roomname == 'signal_tbl'){ roomname = 'default' };
+        $("#warn-msg").text(roomname + ":" + roomentr.count + "人入室中！");
+      }
+
+
   function getRoomName() { // たとえば、 URLに  ?roomname  とする
     var url = document.location.href;
     var args = url.split('?');
@@ -68,7 +83,7 @@
         return room;
       }
     }
-    return "signal_tbl";  //signalingのデフォルト値をここで指定
+    return "signal_tbl";  //signalingのデフォルト値をここで指定、空白でも大丈夫なんだけど・・・
   }
 
 
@@ -127,6 +142,8 @@
     console.log("---sending sdp text ---");
     console.log(text);
     ws.send(text);
+    // roomentrycountを終了するためのイベント
+    ws_count.send('{dummy:dummy}');
   }
 
   function sendCandidate(candidate) {
@@ -140,6 +157,7 @@
   // start local video
   function startVideo() {
     navigator.webkitGetUserMedia({video: true, audio: true},
+ %#   navigator.webkitGetUserMedia({video: false, audio: true},
     function (stream) { // success
       localStream = stream;
       localVideo.src = window.URL.createObjectURL(stream);
@@ -162,7 +180,10 @@
   // ---------------------- connection handling -----------------------
   function prepareNewConnection() {
     //STUN対応
+    var pc_config = {"iceServers":[]};
     var pc_config = {"iceServers":[{"url":"stun:stun.l.google.com:19302"}]};
+    var pc_config = {"iceServers":[{"url":"stun:westwind.iobb.net:5349"}]};
+    var pc_config = {"iceServers":[{"url":"turn:westwind.iobb.net:5349","username":"debiansv","credential":"debiansvpass"}]};
     var peer = null;
     try {
       peer = new webkitRTCPeerConnection(pc_config);

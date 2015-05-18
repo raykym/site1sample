@@ -11,7 +11,7 @@
           <button type="button" onclick="startVideo();">Start video</button>
           <button type="button" onclick="stopVideo();">Stop video</button>
           <div>
-              <video id="local-video" autoplay style="width: 300; height: 200px;"></video>
+              <video id="local-video" autoplay controls style="width: 300; height: 200px;"></video>
           </div>
 
 

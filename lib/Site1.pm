@@ -2,6 +2,7 @@ package Site1;
 use Mojo::Base 'Mojolicious';
 #use DBI;
 use DBIx::Connector;
+use Mojo::Pg;
 
 sub startup {
   my $self = shift;
@@ -27,6 +28,17 @@ sub startup {
       );
   } # else
 
+  # Pg環境の設定  $self->app->pgdbh  
+  (ref $self)->attr(
+        pgdbh => sub {
+            Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
+        });
+
+   # $self->app->pgでアクセス
+   $self->app->helper(pg =>
+        sub { state $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
+            });
+
 ##  my $sth = $self->app->dbh->prepare("$config->{sql1}");
 ##     $sth->execute();
 
@@ -43,7 +55,10 @@ sub startup {
   $bridge->websocket('/menu/chatroom/echo')->to(controller => 'Chatroom', action => 'echo');
   $bridge->websocket('/menu/chatroom/echodb')->to(controller => 'Chatroom', action => 'echodb');
   $bridge->websocket('/menu/chatroom/echopg')->to(controller => 'Chatroom', action => 'echopg');
-  $r->websocket('/signaling')->to(controller => 'Chatroom', action => 'signaling');
+  $bridge->websocket('/signaling')->to(controller => 'Chatroom', action => 'signaling');
+  $bridge->websocket('/roomentrycheck')->to(controller => 'Chatroom', action => 'roomentrycheck');
+  $bridge->websocket('/roomentrylist')->to(controller => 'Chatroom', action => 'roomentrylist');
+
 
   # Normal route to controller
 #   $r->get('/example')->to('example#welcome');
@@ -90,8 +105,9 @@ sub startup {
   $bridge->get('/menu/chatroompg')->to('chatroom#viewpg');
   $bridge->get('/menu/mirror')->to('mirror#mirror');
 
-  $bridge->get('/webrtcx4')->to('chatroom#webrtcx4');
+  $bridge->get('/webrtcx4')->to('chatroom#webrtcx4'); # 未完
   $bridge->get('/webrtcx2')->to('chatroom#webrtcx2');
+  $bridge->get('/voicechat')->to('chatroom#voicechat');
 
   $r->any('*')->to('Top#unknown'); # 未定義のパスは全てtop画面へ
 }

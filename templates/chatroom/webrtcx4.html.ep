@@ -240,7 +240,7 @@
   // socket: channel connected
 
   ws.onopen = function(msg) {
-    var evt = JSON.parse(msg);
+%#    var evt = JSON.parse(msg);
     console.log('socket opened.');
     socketReady = true;
 
@@ -561,7 +561,7 @@
 
     // call others, in same room
     console.log("call others in same room, befeore offer");
-    var typecall = JSON.stringfy('{type: "call"}');
+    var typecall = JSON.stringify('{type: "call"}');
     ws.send(typecall);
   }
 

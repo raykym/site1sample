@@ -4,10 +4,11 @@ use utf8;
 use DateTime;
 use MIME::Base64::URLSafe;
 use Data::Dumper;
-use Mojo::JSON qw(encode_json decode_json from_json);
+use Mojo::JSON qw(encode_json decode_json from_json to_json);
 use MongoDB;
+use Encode;
 
-use Mojo::Pg;
+#use Mojo::Pg;
 use Mojo::Pg::PubSub;
 
 # 300秒待機設定秒じゃないのか？ミリ秒？どんどん短くなる。。。
@@ -251,8 +252,9 @@ sub echopg {
 
 #echodbと同じだが、pubsub通信を利用したPushを利用する。
 
-    # postgresqlの準備
-    my $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
+    # postgresqlの準備 pgdbhはSite1.pmで全体定義した。
+ ###   my $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
+    my $pg = $self->app->pgdbh;
     my $pubsub = Mojo::Pg::PubSub->new(pg => $pg);
 
     # mongoDBの用意
@@ -387,13 +389,16 @@ sub signaling {
 
     # webRTC用にシグナルサーバとしてJSONを受けてそのままJSONを届ける
     # セッションテーブルをPGのsignal_tblに作成。websocket切断で削除される。
-    # 呼び出し元のURLに引数r=をつけるとテーブルを作成して、そのテーブルにsubscribeする。
+    # 呼び出し元のURLに引数?r=ルーム名をつけるとテーブルを作成して、そのテーブルにsubscribeする。
+    # メッセージ内にsendtoが含まれる場合、sessionidが指定されて、個別送信とする。
 
     #cookieからsid取得
     my $sid = $self->cookie('site1');
     ###$self->app->log->debug("DEBUG: SID: $sid");
+    my $username = $self->stash('username');
+    my $icon = $self->stash('icon');
 
-    # getパラメータでroom指定を行う。 ->roomはそのままテーブル名として利用 ->これではダメのはず。。。
+    # getパラメータでroom指定を行う。 ->roomはそのままテーブル名として利用 
     my $room = $self->param('r');
     if ( ! defined $room ) { $room = 'signal_tbl'; }
     $self->app->log->debug("DEBUG: room: $room");
@@ -402,20 +407,27 @@ sub signaling {
     $self->app->log->debug(sprintf 'Client connected: %s', $self->tx);
     my $id = sprintf "%s", $self->tx->connection;
     $clients->{$id} = $self->tx;
+    # トランザクションidをpubsubの受信に利用する
+    my $connid = $self->tx->connection;
 
-    # postgresqlの準備
-        my $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
+    # postgresqlの準備 Site1.pmに共通設定追加
+ #####       my $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
+        my $pg = $self->app->pgdbh;
         my $pubsub = Mojo::Pg::PubSub->new(pg => $pg);
         my $subscall = Mojo::Pg::PubSub->new(pg => $pg);
 
-           $pg->db->query("CREATE TABLE IF NOT EXISTS $room (sessionid text)");
+           $pg->db->query("CREATE TABLE IF NOT EXISTS $room (connid text, sessionid text,username varchar(255),icon char(30))");
            $self->app->log->debug("DEBUG: CREATE TABLE $room");
 
+    my @values = ($connid, $sid, $username, $icon);
+       $self->app->log->debug("DEBUG: @values");
+
     #リスナー登録　pgのsignal_tblへsidを登録 $roomがテーブル名
-        $pg->db->query("INSERT INTO $room (sessionid) values(?)",$sid);
+        $pg->db->query("INSERT INTO $room values(?,?,?,?)",@values);
 
 
     # 接続維持設定 WebRTCではICE交換が終わればすぐにwebsocketは閉じたい。
+    # 接続タイミングを合わせるまでは接続を続ける必要がある。
        my $stream = Mojo::IOLoop->stream($self->tx->connection);
           $stream->timeout(3000);
           $self->inactivity_timeout(3000);
@@ -428,13 +440,13 @@ sub signaling {
 #          });
 
     #pubsubから受信設定 
-        my $cb = $pubsub->listen($sid => sub {
+        my $cb = $pubsub->listen($connid => sub {
             my ($pubsub, $payload) = @_;
 
             #JSONキャラ->perl形式
             my $jsonobj = from_json($payload);
 
-              my $connid = $self->tx->connection;
+      ###       my $connid = $self->tx->connection;
                  $self->app->log->debug("DEBUG: go session: $connid");
              #    $self->app->log->debug("DEBUG: payload: $payload");
 
@@ -446,18 +458,30 @@ sub signaling {
        $self->on(message => sub {
                   my ($self, $msg) = @_;
                    # $msgはJSONキャラを想定
-                   #my $jsonobj = from_json($msg);
-                 my $connid = $self->tx->connection;
+                   my $jsonobj = from_json($msg);
+          ###         my $connid = $self->tx->connection;
                    $self->app->log->debug("DEBUG: on session: $connid");
-              #     $self->app->log->debug("DEBUG: msg: $msg");
+                   $self->app->log->debug("DEBUG: msg: $msg");
 
+           # fromとしてconnidを付加結局、ここでは自分か、他人か分からない
+           #      $jsonobj->{from} = $connid;
+           #      $msg = to_json($jsonobj);
+           #      $self->app->log->debug("DEBUG: msgaddid: $msg");
+
+              if ($jsonobj->{sendto}){
+                 #個別送信が含まれる場合、単独送信
+                 $pubsub->notify( $jsonobj->{sendto} => $msg);
+
+              } else {
+              # 個別では無い場合！！！
               # 書き込みを通知 signal_tblにsubscriberされたidのみ通知
               # 自分は除外する。
-        my $subs_member = $pg->db->query("SELECT * FROM $room");
+              my $subs_member = $pg->db->query("SELECT * FROM $room");
               while ( my $subs_id = $subs_member->hash){
-                   $pubsub->notify( $subs_id->{sessionid} => $msg) unless ($sid eq $subs_id->{sessionid});
-                   $self->app->log->debug("DEBUG: subs_id: $subs_id->{sessionid}");
+                   $pubsub->notify( $subs_id->{connid} => $msg) unless ($connid eq $subs_id->{connid});
+                   $self->app->log->debug("DEBUG: subs_id: $subs_id->{connid}") unless ($connid eq $subs_id->{connid});
               }
+             } # else
           });
 
     # on finish・・・・・・・
@@ -468,8 +492,8 @@ sub signaling {
                delete $clients->{$id};
 
                # pubsubリスナーの停止
-               if ( ! defined $clients->{$id}){ $pubsub->unlisten($sid => $cb); }
-               # リスナー登録の解除
+               if ( ! defined $clients->{$id}){ $pubsub->unlisten($connid => $cb); }
+               # リスナー登録の解除 削除はconnidではなくそのままsidで・・・
                $pg->db->query("DELETE FROM $room WHERE sessionid = ?" , $sid);
         });
 
@@ -478,7 +502,126 @@ sub signaling {
 sub webrtcx2 {
     my $self = shift;
 
-    $self->render(msg => '');
+    $self->render(msg_w => 'StartVideoを押して画面が来る状態で待機してください。その後、入室確認してからconnectボタンをどちらかが押してください');
 }
+
+sub roomentrycheck {
+    my $self = shift;
+    # websocketで入室状況を送信する。r=XXXXXで受け取ったルーム名のエントリー数をJSONで返す。
+
+    #websocket 確認
+    $self->app->log->debug(sprintf 'room Client connected: %s', $self->tx);
+    my $id = sprintf "%s", $self->tx->connection;
+  ####  $clients->{$id} = $self->tx;
+
+   ### 更新のイベント処理をタイマーで実行
+   # ブラウザからイベントが届くと切断する。
+    my $room = $self->param('r');
+    if ( ! defined $room) { $room = 'signal_tbl'};
+
+    my $pg = $self->app->pgdbh;
+
+    my $stream = Mojo::IOLoop->stream($self->tx->connection);
+       $stream->timeout(3000);
+       $self->inactivity_timeout(3000);
+
+    my $result;
+    my $roomcount;
+    my $loopid = Mojo::IOLoop->recurring( 10 => sub {
+                $result = $pg->db->query("SELECT count(*) FROM $room");
+                $roomcount = $result->hash->{count};
+                my $jsontext = to_json( {count => $roomcount});
+                $self->app->log->debug("send jsontext: $jsontext");
+                $self->tx->send($jsontext);
+                });
+
+       $self->on(message => sub {
+                  my ($self, $msg) = @_;
+                #メッセージが届いたら切断する。
+                  $self->app->log->debug("ROOMENTRY: $msg");
+                  $self->tx->finish;
+        });
+
+       $self->on(finish => sub{
+          Mojo::IOLoop->remove($loopid);
+          $self->app->log->debug('roomcount stop...');
+       });
+}
+
+sub voicechat {
+    my $self = shift;
+
+    $self->render(msg_w => '参加メンバーが揃ったら一人だけconnectを押してください。全員が通話可能になります。アイコン横のスピーカがオンになっていれば通じているはずです。切断時はブラウザを完全に閉じないとネットワークが切れていない場合が有ります。スマホでは通知にマイクマークが無いことを確認してください。');
+}
+
+sub roomentrylist {
+    my $self = shift;
+    # websocketで入室状況を送信する。r=XXXXXで受け取ったルーム名のエントリーメンバーをJSONで返す。
+    #voicechatのメンバー表示用 connidとsessionidを返すのでエレメントとして利用
+    # signaling側のconnidでroomentrylistのconnidでは無い。！
+
+    my $sid = $self->cookie('site1');
+
+    #websocket 確認
+    $self->app->log->debug(sprintf 'room Client connected: %s', $self->tx);
+    my $id = sprintf "%s", $self->tx->connection;
+
+   ### 更新のイベント処理をタイマーで実行
+   # ブラウザからイベントが届くと切断する。
+    my $room = $self->param('r');
+    if ( ! defined $room) { $room = 'signal_tbl'};
+
+    #DB設定
+####    my $pg = $self->app->pgdbh;
+    my $pg = $self->app->pg;
+    my $config = $self->app->plugin('Config');
+    my $sth_sesi_email = $self->app->dbconn->dbh->prepare("$config->{sql_sesi_email}");
+    my $sth_getchatmemb = $self->app->dbconn->dbh->prepare("$config->{sql_getchatmemb}");
+
+#    my $stream = Mojo::IOLoop->stream($self->tx->connection);
+#       $stream->timeout(3000);
+#       $self->inactivity_timeout(3000);
+
+    my $result;
+    my @memberlist;
+       # 送信元id 付加
+       push @memberlist, to_json({from => $sid});
+
+    my $loopid = Mojo::IOLoop->recurring( 
+             5 => sub {
+                $result = $pg->db->query("SELECT connid,sessionid,username,icon FROM $room");
+                # $result  $_->{sessionid}の配列の想定
+                ####my $rownum = $result->rows;  # 何故か1回で０に成る。。
+          #      my $resultcount = $pg->db->query("SELECT count(*) FROM $room");
+          #      my $rownum = $resultcount->hash->{count};
+          #      $self->app->log->debug("room rows: $rownum");
+
+                while (my $next = $result->hash){
+                    push @memberlist, to_json({sessionid => $next->{sessionid}, username => $next->{username}, icon => $next->{icon}, connid => $next->{connid}});
+          #         $self->app->log->debug("memberlist: $next->{sessionid} $next->{username} $next->{icon}");
+                } #while
+
+              # 配列で１ページ分を送る。
+                @memberlist = to_json([@memberlist]);
+                $self->app->log->debug("send jsontext: @memberlist");
+                $self->tx->send(@memberlist);
+
+                @memberlist = (); #空にする
+                $result = {}; #エラー消える。 何故？
+                });
+
+       $self->on(message => sub {
+                  my ($self, $msg) = @_;
+                #メッセージが届いたら切断する。 callした人だけ、callするまで動く
+                  $self->app->log->debug("ROOMENTRY: $msg");
+                  $self->tx->finish;
+        });
+
+       $self->on(finish => sub{
+          Mojo::IOLoop->remove($loopid);
+          $self->app->log->debug('roomentrylist stop...');
+       });
+}
+
 
 1;

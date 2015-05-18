@@ -13,7 +13,7 @@ $(document).on('pageshow',function () {
 
   var ws = new WebSocket('wss://westwind.iobb.net/menu/chatroom/echo');
   ws.onopen = function () {
-    log('Connection opened');
+    console.log('Connection opened');
   };
 
   ws.onmessage = function (msg) {
