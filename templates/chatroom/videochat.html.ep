@@ -29,6 +29,14 @@
        if (evt.type === 'call') {
             console.log('Receive call');
 
+    %# callしたらvideoがスタートする 最初のメンバーは自分のcallタイミングで。
+       if ( startflg === null){
+            startflg = "started";
+        %# ユーザリストからaudioエレメントを取得する
+            mlistget();
+            startvoice();
+           }
+
        if (isConnectPossible()) {
          %# callを受信したら、responseを返す
           var resp = JSON.stringify({"type":"response","sendto":id,"from":localconn});
@@ -47,7 +55,7 @@
       console.log("Received offer, set offer, sending answer....")
       onOffer(evt);
 
-      %# callを受けてコールを実行する
+      %# callを受けてコールを実行する 目的はsendcall()の実行だったりする。
       if (! oncall) { call() };
 
         } else if (evt.type === 'answer') {  // **
@@ -87,19 +95,12 @@
                 var resline = JSON.parse(res[i]); //２段目のparse カラムが取れる
 
         %#       console.log(JSON.stringify(resline));
-                if (resline.from) continue; // from行はパス 表示ループだから。
+                if (resline.from) continue; // from行はパス 表示ループだから。ここはsessionid
 
-        %# //        $("#userlist").append("<li><button><img src='/imgcomm?oid=" + resline.icon + "'width='50' height='50'>[" + resline.username + "]<audio id=" + resline.connid +" autoplay controls></audio></button></li>");
-                $("#userlist").append("<li><button><img src='/imgcomm?oid=" + resline.icon + "'width='50' height='50'>[" + resline.username + "]<video id=" + resline.connid +" autoplay controls width='150' height='150'></video></button></li>");
+                $("#userlist").append("<li><button><img src='/imgcomm?oid=" + resline.icon + "'width='50' height='50'>[" + resline.username + "]<video id=" + resline.connid +" autoplay controls width='300' height='300'></video></button></li>");
                 };
 
-       %# 最初のメンバーリストが届いた時にローカルストリームをスタートする。
-       if ( startflg === null){
-            startflg = "started";
-        %# ユーザリストからaudioエレメントを取得する
-            mlistget();
-            startvoice();
-           }
+       %# 最初のメンバーリストが届いた時にローカルストリームをスタートする。->変更　callのタイミングに移動。
 
         };   // onmessage
 
@@ -140,7 +141,6 @@ function mlistget(){
 
     var localstream = null;
     var peerConnection = null;
- %# //  var mediaConstraints = {'mandatory': {'OfferToReceiveAudio':true, 'OfferToReceiveVideo':false }};
     var mediaConstraints = {'mandatory': {'OfferToReceiveAudio':true, 'OfferToReceiveVideo':true }};
 
 var oncall = false;
@@ -150,8 +150,16 @@ function call(){
     ws_list.send({"dummy":"dummy"}); 
 
     oncall = true;
-    mlistget();  //再度実行しておく。
-    sendcall();
+
+    %# 自分でコールした場合のvideostart call受信時はバイパスされる
+       if ( startflg === null){
+            startflg = "started";
+        %# ユーザリストからaudioエレメントを取得する
+            mlistget();
+            startvoice();
+           }
+    mlistget(); // 念の為再取得
+    sendcall(); //callで各個にカメラが起動する
 
 };
 
@@ -163,13 +171,11 @@ function call(){
     stopAllConnections();
   }
 
-  // start local audio
+  // start local video
   function startvoice() {
     console.log('Start local Media');
-
-%#    navigator.webkitGetUserMedia({video: false, audio: true},
-      navigator.webkitGetUserMedia({video: true, audio: true},
-    function (stream) { // success
+   navigator.webkitGetUserMedia({video: true, audio: true},
+      function (stream) { // success
       localStream = stream;
       document.getElementById(localconn).src = window.URL.createObjectURL(stream); 
     },
@@ -178,6 +184,8 @@ function call(){
       return;
     }
     );
+
+    waittimer(2);
   }
 
   function sendcall(){
@@ -427,10 +435,25 @@ function call(){
       delete connections[id];
     }
   }
+
+    function waittimer(sec){
+        %# カメラ起動までsec秒のwait
+            var huga = 0;
+            var hoge = setInterval(function() {
+                console.log(huga);
+                huga++;
+                //終了条件
+                    if (huga == sec) {
+                        clearInterval(hoge);
+                        console.log("終わり");
+                        }
+                }, 100);
+            }
+
 </script>
 
 <div data-role="page" style="background: #80aa55">
-    <div><h3>Voice Chat</h3></div>
+    <div><h3>Video Chat</h3></div>
     <div style="color: #ff0000"><%= $msg_w %></div>
         <div style="border: 1px solid">
         <ul id="userlist" data-role="listview" data-inset="true"></ul>
@@ -441,6 +464,7 @@ function call(){
         <div>
            <ul>
              <li>音声は暗号化の影響でタイムラグが有ります。</li>
+             <li>初めて使うブラウザではカメラへのアクセスのポップアップが起動します。その結果タイミングがずれて表示できないケースが有ります。</li>
            </ul>
         </div>
     <div data-role="footer" style="backgroud: #aac78d;">

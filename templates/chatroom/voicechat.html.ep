@@ -441,6 +441,7 @@ function call(){
         <div>
            <ul>
              <li>音声は暗号化の影響でタイムラグが有ります。</li>
+             <li>接続が切れた場合、ページをリロードして、connectを押せばつながる場合が有ります。</li>
            </ul>
         </div>
     <div data-role="footer" style="backgroud: #aac78d;">

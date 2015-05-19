@@ -584,17 +584,18 @@ sub roomentrylist {
 
     my $result;
     my @memberlist;
-       # 送信元id 付加
-       push @memberlist, to_json({from => $sid});
 
     my $loopid = Mojo::IOLoop->recurring( 
-             10 => sub {
+             5 => sub {
                 $result = $pg->db->query("SELECT connid,sessionid,username,icon FROM $room");
                 # $result  $_->{sessionid}の配列の想定
                 ####my $rownum = $result->rows;  # 何故か1回で０に成る。。
           #      my $resultcount = $pg->db->query("SELECT count(*) FROM $room");
           #      my $rownum = $resultcount->hash->{count};
           #      $self->app->log->debug("room rows: $rownum");
+
+          # 送信元id 付加
+                 push @memberlist, to_json({from => $sid});
 
                 while (my $next = $result->hash){
                     push @memberlist, to_json({sessionid => $next->{sessionid}, username => $next->{username}, icon => $next->{icon}, connid => $next->{connid}});
