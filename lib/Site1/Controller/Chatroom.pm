@@ -463,10 +463,10 @@ sub signaling {
                    $self->app->log->debug("DEBUG: on session: $connid");
                    $self->app->log->debug("DEBUG: msg: $msg");
 
-           # fromとしてconnidを付加結局、ここでは自分か、他人か分からない
-           #      $jsonobj->{from} = $connid;
-           #      $msg = to_json($jsonobj);
-           #      $self->app->log->debug("DEBUG: msgaddid: $msg");
+           # fromとしてconnidを付加
+                 $jsonobj->{from} = $connid;
+                 $msg = to_json($jsonobj);
+                 $self->app->log->debug("DEBUG: msgaddid: $msg");
 
               if ($jsonobj->{sendto}){
                  #個別送信が含まれる場合、単独送信

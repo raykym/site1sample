@@ -104,7 +104,7 @@ if (!  navigator.webkitGetUserMedia) {  alert("Not Supported!!!"); }
 
        if (isConnectPossible()) {
          %# callを受信したら、responseを返す
-          var resp = JSON.stringify({"type":"response","sendto":id,"from":localconn});
+          var resp = JSON.stringify({"type":"response","sendto":id});
           ws.send(resp);
           }
           else {
@@ -231,7 +231,7 @@ function call(){
   // stop the connection upon user request
   function hangUp() {
     console.log("Hang up.");
-    ws.send({"type":"bye","from":localconn});
+    ws.send({"type":"bye"});
     detachAllvoice();
     stopAllConnections();
   }
@@ -261,7 +261,7 @@ function call(){
   function sendcall(){
     // call others, in same room
     console.log("call others in same room, befeore offer");
-    var typecall = JSON.stringify({"type":"call","from":localconn});
+    var typecall = JSON.stringify({"type":"call"});
     console.log("typecall:" + typecall);
     ws.send(typecall);
   }
@@ -362,7 +362,7 @@ function call(){
   }
 
   function sendSDP(sdp) {
-        sdp.from = localconn;
+    %#    sdp.from = localconn;
     var text = JSON.stringify(sdp);
     console.log("---sending sdp text ---");
  %#   console.log(text);
@@ -372,7 +372,7 @@ function call(){
   }
 
   function sendCandidate(candidate) {
-        candidate.from = localconn;
+    %#    candidate.from = localconn;
     var text = JSON.stringify(candidate);
     console.log("---sending candidate text ---");
  %#   console.log(text);
