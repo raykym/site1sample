@@ -2,6 +2,71 @@
 % title 'Video Chat';
 <script type="text/javascript">
 
+if (!  navigator.webkitGetUserMedia) {  alert("Not Supported!!!"); }
+
+      //カメラの情報を取得
+      var cameraData = [];
+      MediaStreamTrack.getSources(function(data){
+
+        //カメラ情報を取得して、出力する
+        var strCamera = "";
+        var len = data.length;
+        for( var i = 0 ; i < len ; i ++ ){
+    %#      strCamera += "<p>種類："+ data[i].kind+"<br/>ID："+ data[i].id+"</p>";
+          if( data[i].kind == "video" ){
+            cameraData.push(data[i]);
+          }
+        }
+        if( cameraData.length == 0 ){
+          alert("カメラが見つかりません");
+          return;
+        }
+    });
+
+  %# changecamボタンのdisable
+ %#   if (cameraData.length > 0) { $("#chgcam").prop("disabled",false);}
+
+   %# カメラのデフォルトを指定
+   var camnum = 0; // カメラ指定番号たいてい０か１
+
+   function switchcam(){
+    camnum++; 
+    if( camnum == cameraData.length ){
+          camnum = 0;
+           }
+
+     //カメラ再生中の場合は切り替えのため、一旦停止する。
+    if ( localStream ) {
+        localStream.stop();
+       }
+             //カメラをIDを使用して取得する
+        navigator.webkitGetUserMedia(
+          {
+            video: {
+              optional: [{sourceId: cameraData[camnum].id }] //カメラIDを直接指定する
+            },
+            audio: true
+          },
+          function(stream) {
+            localStream = stream;
+            $("#localconn").html( cameraData[camnum].id);
+           
+            document.getElementById(localconn).src = window.URL.createObjectURL(stream); 
+
+           },
+           function(error) {
+           // エラー処理
+              console.error('An error occurred: [CODE ' + error.code + ']');
+              return;
+            }
+         );
+    } // switchcam
+
+    %# カメラ切り替えボタンをクリックイベント
+    function changecam() {
+        console.log("clieck button-----------------");
+        switchcam();
+     }
 
 %# 除外してみる  $(document).on('pageshow',function(){
 
@@ -34,7 +99,7 @@
             startflg = "started";
         %# ユーザリストからaudioエレメントを取得する
             mlistget();
-            startvoice();
+            startvideo();
            }
 
        if (isConnectPossible()) {
@@ -156,7 +221,7 @@ function call(){
             startflg = "started";
         %# ユーザリストからaudioエレメントを取得する
             mlistget();
-            startvoice();
+            startvideo();
            }
     mlistget(); // 念の為再取得
     sendcall(); //callで各個にカメラが起動する
@@ -172,9 +237,14 @@ function call(){
   }
 
   // start local video
-  function startvoice() {
+  function startvideo() {
     console.log('Start local Media');
-   navigator.webkitGetUserMedia({video: true, audio: true},
+
+ %####  navigator.webkitGetUserMedia({video: true, audio: true},
+
+   navigator.webkitGetUserMedia({video:{
+                               optional: [{sourceId: cameraData[camnum].id }]
+                                   } , audio: true},
       function (stream) { // success
       localStream = stream;
       document.getElementById(localconn).src = window.URL.createObjectURL(stream); 
@@ -455,6 +525,7 @@ function call(){
 <div data-role="page" style="background: #80aa55">
     <div><h3>Video Chat</h3></div>
     <div style="color: #ff0000"><%= $msg_w %></div>
+    <div><button id="chgcam" type="button" onclick="changecam();">Change Camera</button></div>
         <div style="border: 1px solid">
         <ul id="userlist" data-role="listview" data-inset="true"></ul>
         <textarea cols"=40" rows="20" id="viewarea" autogrowspace></textarea>
@@ -463,8 +534,10 @@ function call(){
         </div>
         <div>
            <ul>
-             <li>音声は暗号化の影響でタイムラグが有ります。</li>
+             <li>画像音声は暗号化の影響でタイムラグが有ります。</li>
              <li>初めて使うブラウザではカメラへのアクセスのポップアップが起動します。その結果タイミングがずれて表示できないケースが有ります。</li>
+             <li>スマホで外側カメラを使いたい場合、メンバーリストが表示されて、接続前にchange cameraボタンを１回押すと利用できます。</li>
+             <li style="color: #ff0000">接続中にchange cameraボタンを押すと動画が止まります。</li>
            </ul>
         </div>
     <div data-role="footer" style="backgroud: #aac78d;">

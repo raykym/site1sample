@@ -2,6 +2,7 @@
 % title 'Voice Chat';
 <script type="text/javascript">
 
+ if (! navigator.webkitGetUserMedia) {  alert("Not Supported!!!"); }
 
 %# 除外してみる  $(document).on('pageshow',function(){
 
@@ -59,7 +60,7 @@
         } else if (evt.type === 'user dissconnected') { // **
       console.log("disconnected");
       //stop();
-      detachVideo(id); // force detach video
+      detachvoice(id); // force detach video
       stopConnection(id);
        }
     };    //onmessage
@@ -90,7 +91,6 @@
                 if (resline.from) continue; // from行はパス 表示ループだから。
 
                 $("#userlist").append("<li><button><img src='/imgcomm?oid=" + resline.icon + "'width='50' height='50'>[" + resline.username + "]<audio id=" + resline.connid +" autoplay controls></audio></button></li>");
-        %# //        $("#userlist").append("<li><button><img src='/imgcomm?oid=" + resline.icon + "'width='50' height='50'>[" + resline.username + "]<video id=" + resline.connid +" autoplay controls ></video></button></li>");
                 };
 
        %# 最初のメンバーリストが届いた時にローカルストリームをスタートする。
@@ -102,6 +102,7 @@
            }
 
         };   // onmessage
+
 
   function getRoomName() { // たとえば、 URLに  ?roomname  とする
     var url = document.location.href;
@@ -168,7 +169,6 @@ function call(){
     console.log('Start local Media');
 
     navigator.webkitGetUserMedia({video: false, audio: true},
-%#      navigator.webkitGetUserMedia({video: true, audio: true},
     function (stream) { // success
       localStream = stream;
   %#    document.getElementById(localconn).src = window.URL.createObjectURL(stream); 
@@ -178,7 +178,7 @@ function call(){
       return;
     }
     );
-  }
+  } // startvideo
 
   function sendcall(){
     // call others, in same room
@@ -242,7 +242,7 @@ function call(){
     // send any ice candidates to the other peer
     peer.onicecandidate = function (evt) {
       if (evt.candidate) {
-   %#     console.log(evt.candidate);
+  %#      console.log(evt.candidate);
         sendCandidate({type: "candidate",
                           sendto: conn.id,
                           sdpMLineIndex: evt.candidate.sdpMLineIndex,
@@ -270,7 +270,7 @@ function call(){
     // when remote removes a stream, remove it from the local video element
     function onRemoteStreamRemoved(event) {
       console.log("Remove remote stream");
-      detachVideo(this.id);
+      detachvoice(this.id);
       //remoteVideo.pause();
       //remoteVideo.src = "";
     }
@@ -297,7 +297,7 @@ function call(){
         candidate.from = localconn;
     var text = JSON.stringify(candidate);
     console.log("---sending candidate text ---");
- %#   console.log(text);
+%#    console.log(text);
 
     // send via socket
     ws.send(text);
@@ -408,8 +408,8 @@ function call(){
 
   function detachAllvoice() {
     var element = null;
-    for (var aaa in connections) {
-        aaa = null;
+    for (var id in connections) {
+        id = null;
     }
   }
 
@@ -427,6 +427,7 @@ function call(){
       delete connections[id];
     }
   }
+
 </script>
 
 <div data-role="page" style="background: #80aa55">
@@ -442,6 +443,7 @@ function call(){
            <ul>
              <li>音声は暗号化の影響でタイムラグが有ります。</li>
              <li>接続が切れた場合、ページをリロードして、connectを押せばつながる場合が有ります。</li>
+             <li>インジケーターは接続を確認できますが、切断されても認識出来ないので、あくまで目安程度です。</li>
            </ul>
         </div>
     <div data-role="footer" style="backgroud: #aac78d;">
