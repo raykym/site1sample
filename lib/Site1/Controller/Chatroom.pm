@@ -28,6 +28,8 @@ sub echo {
   
     my $username = $self->stash('username');
     my $icon = $self->stash('icon'); #encodeされたままのはず。
+    my $icon_url = $self->stash('icon_url');
+       $icon_url = "/imgcomm?oid=$icon" if (! defined $icon_url);
 
        $self->app->log->debug(sprintf 'Client connected: %s', $self->tx);
        my $id = sprintf "%s", $self->tx;
@@ -36,7 +38,7 @@ sub echo {
   # connect message write
       for (keys %$clients) {
         $clients->{$_}->send({json => {
-                                 icon => $icon,
+                                 icon_url => $icon_url,
                                  username => $username,
                                  hms => 'XX:XX:XX',
                                  text => 'Connect'
@@ -55,7 +57,7 @@ sub echo {
 
                   for (keys %$clients) {
                       $clients->{$_}->send({json => {
-                              icon => $icon,
+                              icon_url => $icon_url,
                               username => $username,
                               hms => $dt->hms,
                               text => $msg,
@@ -71,7 +73,7 @@ sub echo {
               # Disconnect message write
                 for (keys %$clients) {
                     $clients->{$_}->send({json => {
-                               icon => $icon,
+                               icon_url => $icon_url,
                                username => $username,
                                hms => 'XX:XX:XX',
                                text => 'Has gone.....'
@@ -98,6 +100,8 @@ sub echodb {
   
     my $username = $self->stash('username');
     my $icon = $self->stash('icon'); #encodeされたままのはず。
+    my $icon_url = $self->stash('icon_url');
+       $icon_url = "/imgcomm?oid=$icon" if (! defined $icon_url);
 
 
        $self->app->log->debug(sprintf 'Client connected: %s', $self->tx);
@@ -117,7 +121,7 @@ sub echodb {
     my $dt = DateTime->now( time_zone => 'Asia/Tokyo');
 
        # holldbへの書き込み $iconはurlsafeの状態で記録
-       $hollcoll->insert({ icon => $icon, 
+       $hollcoll->insert({ icon_url => $icon_url, 
                            username => $username, 
                            hms => $dt->hms,
                            text => 'Connect'
@@ -163,7 +167,7 @@ sub echodb {
 #                           }});
 #                      }
                    # holldbへの書き込み
-                   $hollcoll->insert({ icon => $icon, 
+                   $hollcoll->insert({ icon_url => $icon_url, 
                                        username => $username, 
                                        hms => $dt->hms,
                                        text => $msg, 
@@ -209,7 +213,7 @@ sub echodb {
                 my $dt = DateTime->now( time_zone => 'Asia/Tokyo');
 
                #holldbへの書き込み
-                   $hollcoll->insert({ icon => $icon, 
+                   $hollcoll->insert({ icon_url => $icon_url, 
                                        username => $username, 
                                        hms => $dt->hms,
                                        text => 'Has gone...' 
@@ -265,6 +269,8 @@ sub echopg {
     #param 認証をパスしているので、username,icon,emailがstashされている。
     my $username = $self->stash('username');
     my $icon = $self->stash('icon'); #encodeされたままのはず。
+    my $icon_url = $self->stash('icon_url');
+       $icon_url = "/imgcomm?oid=$icon" if (! defined $icon_url);
 
 
        $self->app->log->debug(sprintf 'Client connected: %s', $self->tx);
@@ -276,7 +282,7 @@ sub echopg {
     my $dt = DateTime->now( time_zone => 'Asia/Tokyo');
 
        # holldbへの書き込み $iconはurlsafeの状態で記録
-       $hollcoll->insert({ icon => $icon, 
+       $hollcoll->insert({ icon_url => $icon_url, 
                            username => $username, 
                            hms => $dt->hms,
                            text => 'Connect'
@@ -330,7 +336,7 @@ sub echopg {
                   my $dt = DateTime->now( time_zone => 'Asia/Tokyo');
 
                    # holldbへの書き込み
-                   $hollcoll->insert({ icon => $icon, 
+                   $hollcoll->insert({ icon_url => $icon_url, 
                                        username => $username, 
                                        hms => $dt->hms,
                                        text => $msg, 
@@ -362,7 +368,7 @@ sub echopg {
                 my $dt = DateTime->now( time_zone => 'Asia/Tokyo');
 
                #holldbへの書き込み
-                   $hollcoll->insert({ icon => $icon, 
+                   $hollcoll->insert({ icon_url => $icon_url, 
                                        username => $username, 
                                        hms => $dt->hms,
                                        text => 'Has gone...' 
@@ -391,12 +397,15 @@ sub signaling {
     # セッションテーブルをPGのsignal_tblに作成。websocket切断で削除される。
     # 呼び出し元のURLに引数?r=ルーム名をつけるとテーブルを作成して、そのテーブルにsubscribeする。
     # メッセージ内にsendtoが含まれる場合、sessionidが指定されて、個別送信とする。
+    # roomentrylistを統合　{type => "memberlist'}をイベントに追加
 
     #cookieからsid取得
     my $sid = $self->cookie('site1');
     ###$self->app->log->debug("DEBUG: SID: $sid");
     my $username = $self->stash('username');
     my $icon = $self->stash('icon');
+    my $icon_url = $self->stash('icon_url');
+       $icon_url = "/imgcomm?oid=$icon" if (! defined $icon_url);
 
     # getパラメータでroom指定を行う。 ->roomはそのままテーブル名として利用 
     my $room = $self->param('r');
@@ -414,12 +423,12 @@ sub signaling {
  #####       my $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
         my $pg = $self->app->pgdbh;
         my $pubsub = Mojo::Pg::PubSub->new(pg => $pg);
-        my $subscall = Mojo::Pg::PubSub->new(pg => $pg);
+ # 目的を見失った行       my $subscall = Mojo::Pg::PubSub->new(pg => $pg);
 
-           $pg->db->query("CREATE TABLE IF NOT EXISTS $room (connid text, sessionid text,username varchar(255),icon char(30))");
+           $pg->db->query("CREATE TABLE IF NOT EXISTS $room (connid text, sessionid text,username varchar(255),icon_url char(255))");
            $self->app->log->debug("DEBUG: CREATE TABLE $room");
 
-    my @values = ($connid, $sid, $username, $icon);
+    my @values = ($connid, $sid, $username, $icon_url);
        $self->app->log->debug("DEBUG: @values");
 
     #リスナー登録　pgのsignal_tblへsidを登録 $roomがテーブル名
@@ -427,17 +436,18 @@ sub signaling {
 
 
     # 接続維持設定 WebRTCではICE交換が終わればすぐにwebsocketは閉じたい。
+    # はずが、方針変更、rooentrylistをマージしてクローズしない方向で。。。
     # 接続タイミングを合わせるまでは接続を続ける必要がある。
        my $stream = Mojo::IOLoop->stream($self->tx->connection);
           $stream->timeout(3000);
           $self->inactivity_timeout(3000);
        #つなぎっぱなしの為のループ  ・・・ つながれば切れてOKなので
-       Mojo::IOLoop->recurring(
-          60 => sub {
-             my $char = "dummey";
-             my $bytes = $clients->{$id}->build_message($char);
-             $clients->{$id}->send( {binary => $bytes}) if ($clients->{$id}->is_websocket);
-          });
+#       Mojo::IOLoop->recurring(
+#          60 => sub {
+#             my $char = "dummey";
+#             my $bytes = $clients->{$id}->build_message($char);
+#             $clients->{$id}->send( {binary => $bytes}) if ($clients->{$id}->is_websocket);
+#          });
 
     #pubsubから受信設定 
         my $cb = $pubsub->listen($connid => sub {
@@ -587,7 +597,7 @@ sub roomentrylist {
 
     my $loopid = Mojo::IOLoop->recurring( 
              5 => sub {
-                $result = $pg->db->query("SELECT connid,sessionid,username,icon FROM $room");
+                $result = $pg->db->query("SELECT connid,sessionid,username,icon_url FROM $room");
                 # $result  $_->{sessionid}の配列の想定
                 ####my $rownum = $result->rows;  # 何故か1回で０に成る。。
           #      my $resultcount = $pg->db->query("SELECT count(*) FROM $room");
@@ -596,9 +606,8 @@ sub roomentrylist {
 
           # 送信元id 付加
                  push @memberlist, to_json({from => $sid});
-
                 while (my $next = $result->hash){
-                    push @memberlist, to_json({sessionid => $next->{sessionid}, username => $next->{username}, icon => $next->{icon}, connid => $next->{connid}});
+                    push @memberlist, to_json({sessionid => $next->{sessionid}, username => $next->{username}, icon_url => $next->{icon_url}, connid => $next->{connid}});
           #         $self->app->log->debug("memberlist: $next->{sessionid} $next->{username} $next->{icon}");
                 } #while
 

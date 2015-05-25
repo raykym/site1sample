@@ -18,7 +18,9 @@ $(document).on('pageshow',function () {
 
   ws.onmessage = function (msg) {
     var res = JSON.parse(msg.data);
-    $("#output").prepend("<li><button><img src='/imgcomm?oid=" + res.icon + "'  width='50' height='50'>" + "[" + res.username + "] " + "[" + res.hms + "] " + res.text + "</button></li>");
+%# $iconからicon_urlへ変更、エコーサーバで対応
+%#    $("#output").prepend("<li><button><img src='/imgcomm?oid=" + res.icon + "'  width='50' height='50'>" + "[" + res.username + "] " + "[" + res.hms + "] " + res.text + "</button></li>");
+    $("#output").prepend("<li><button><img src='" + res.icon_url + "' width='50' height='50'>" + "[" + res.username + "] " + "[" + res.hms + "] " + res.text + "</button></li>");
  %#### OLD    log('{' + res.username + '}' + '[' + res.hms + '] ' + res.text);
   };
 

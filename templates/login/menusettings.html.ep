@@ -9,7 +9,12 @@
    %#### ボタンからicon更新処理へのつなぎ確認前・・・・・・・・
             <form name="" method="post" action="/menu/settings/seticon">
             <input type="hidden" name="f" value="1">
+        %# iconパスの切り替え
+        % if (! defined $icon_url) {
             <button data-role="none" type="submit"><img src="/imgcomm?oid=<%= $icon %>" width="100" hight="100"></button>
+        %       } else {
+            <button data-role="none" type="submit"><img src="<%= $icon_url %>"></button>
+        %       }
             </form>
          </div>
           <table border width="50%" style="color: #778899; background: #FFFFFF;">

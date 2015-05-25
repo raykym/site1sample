@@ -4,13 +4,14 @@ use Encode;
 use Date::Format;
 use MIME::Base64::URLSafe; # icon用oidを渡す
 use MongoDB;
+use Mojo::JSON qw(from_json to_json encode_json decode_json);
+use Mojo::Util qw(dumper);
 
 # 独自パスを指定して自前モジュールを利用
 use lib '/storage/perlwork/mojowork/server/site1/lib/Site1';
 use Sessionid;
 use Inputchk;
 
-# This action will render a template
 sub signup {
   my $self = shift;
   #表示のみで入力結果を/signupactで処理する
@@ -122,6 +123,7 @@ sub usercheck {
     my $sth_sid_chk = $self->app->dbconn->dbh->prepare("$config->{sql_sid_chk}");
     my $sth_user_chk = $self->app->dbconn->dbh->prepare("$config->{sql_user_chk}");
     my $sth_chktimeupdate = $self->app->dbconn->dbh->prepare("$config->{sql_chktime_update}");
+    my $sth_atoken_update_sid = $self->app->dbconn->dbh->prepare("$config->{sql_atoken_update_sid}");
 
     #mongoDBでロギング　pubsubに利用予定->うまく行かなかった
     my $mongoclient = MongoDB::MongoClient->new(host => 'localhost', port => '27017');
@@ -138,18 +140,72 @@ sub usercheck {
         return;
       }
 
-    # sidからチェック開始
+    # sidからチェック開始 (signup_tbl)
        $sth_sid_chk->execute($sid);
-    my $get_email = $sth_sid_chk->fetchrow_hashref();
-    my $email = $get_email->{email};
+    my $get_value = $sth_sid_chk->fetchrow_hashref();
+    my $email = $get_value->{email};
+    my $atoken = $get_value->{atoken};
+    my $rtoken = $get_value->{rtoken};
+
+    #ローカル認証（user_tbl)
        $sth_user_chk->execute($email);
     my $get_uname = $sth_user_chk->fetchrow_hashref();
     my $username = $get_uname->{username};
+       $self->app->log->debug("DEBUG: username(local): $username");
     my $uid = $get_uname->{uid};
+       $self->app->log->debug("DEBUG: uid(local): $uid");
     my $icon = $get_uname->{icon};
     # $iconが空ならNow printingが設定される。
        if (! defined $icon ) { $icon = 'rKzHfJwYJkApps4uk7cjAQ';}
        $icon = urlsafe_b64encode($icon); #urlsafe_b64encode
+
+    # OAuth2の認証確認 ローカル認証で結果が得られない前提で！
+    my $ua = Mojo::UserAgent->new;
+    my $value = $ua->get(
+                "https://www.googleapis.com/plus/v1/people/me?access_token=$atoken"
+                )->res->json;
+
+    my $text = to_json($value);
+       $self->app->log->debug("DEBUG: value: $text");
+
+    my $newtoken = 0;
+    if ($text =~ "error") {
+        my $data = $ua->post(
+               "https://accounts.google.com/o/oauth2/token" => form => {
+                                  refresh_token => $rtoken,
+                                  client_id => "861600582037-j2gm11pu28gapapmdkjacjfi5jknngho.apps.googleusercontent.com", 
+                                  client_secret => "gsoKlLoL4vXI6u5GakodvS72",
+                                  grant_type => "refresh_token",
+                                           })->res->json;
+               my $newtoken = to_json($data);
+               $self->app->log->debug("DEBUG: newtoken: $newtoken");
+
+                  $atoken = $data->{access_token};
+                  $self->app->log->debug("DEBUG: access_token: $atoken");
+               
+               $sth_atoken_update_sid->execute($atoken,$sid);
+               $newtoken = $atoken;
+       }
+
+     #$newtokenが有れば再度取得し直す
+     $value = $ua->get(
+                "https://www.googleapis.com/plus/v1/people/me?access_token=$newtoken"
+                )->res->json unless ($newtoken eq 0);
+       #self->app->log->debug("DEBUG: newtoken: $newtoken");
+
+       $text = to_json($value);
+       $self->app->log->debug("DEBUG: new value: $text"); 
+
+    my $valueobj = encode_json($value);
+       $email = $value->{emails}->[0]->{value} unless $email; # 無ければ
+       $self->app->log->debug("DEBUG: email: $email");
+       $username = $value->{displayName} unless $username; #無ければ
+       $self->app->log->debug("DEBUG: displayName: $username");
+    my $icon_url =$value->{image}->{url};
+    my $gpid = $value->{id};
+
+       $uid = Sessionid->new($gpid)->guid unless $uid; #無ければ
+       $self->app->log->debug("DEBUG: guid: $uid");
 
     # email,usernameが取得できない場合 ->リダイレクト
     if ( ! defined $email and ! defined $username ) {
@@ -176,6 +232,7 @@ sub usercheck {
     $self->stash( username => $username );
     $self->stash( uid => $uid ); #uidはページで利用しないのでencodeしない
     $self->stash( icon => $icon );
+    $self->stash( icon_url => $icon_url );
 
   # 変数の解放
   undef $config;
@@ -227,7 +284,7 @@ sub signinact {
 sub menusettings {
   my $self = shift;
   #表示のみ テンプレートを共有化の為、emailsetact,unamesetact,passwdsetactと同じもの
-  $self->render(msg => '');
+  $self->render(msg => 'Google+アカウントはここで変更できません！！ と、言うか、しないで下さい。。。');
 }
 
 sub emailset {
@@ -332,6 +389,74 @@ sub passwdsetact {
      $sth_passwd_update->execute($passwd,$email);
 
   $self->redirect_to('/menu/settings'); #元のページヘ戻る
+}
+
+# google+の認証コールバック
+sub oauth2callback {
+    my $self = shift;
+
+  my $config = $self->app->plugin('Config');
+
+  # DB設定
+  my $sth_signup_gp = $self->app->dbconn->dbh->prepare("$config->{sql_signup_gp}");
+
+
+    $self->delay(
+        sub {
+         my $delay = shift;
+             my $args = {redirect_uri => "https://westwind.iobb.net/oauth2callback"};
+             $self->oauth2->get_token(google => $args,$delay->begin);
+         },
+        sub {
+            my ($delay,$err,$data) = @_;
+
+                return $self->redirect_to("/") unless $data;
+
+            my $ua = Mojo::UserAgent->new;
+            my $value = $ua->get(
+             #   "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=$data->{access_token}"
+                "https://www.googleapis.com/plus/v1/people/me?access_token=$data->{access_token}"
+                )->res->json;
+
+
+               $self->app->log->debug("DEBUG: Access_token: $data->{access_token}");
+               $self->app->log->debug("DEBUG: Refresh_token: $data->{refresh_token}");
+
+            my $valueobj = encode_json($value);
+
+            my $email = $value->{emails}->[0]->{value};
+               $self->app->log->debug("DEBUG: email: $email");
+
+            my $sid = Sessionid->new->sid;
+
+           # cookie設定
+               $self->cookie('site1'=>"$sid",{httponly => 'true',path => '/', max_age => '31536000', secure => 'true'});
+
+           # DBへの登録
+               $sth_signup_gp->execute($email,$sid,$data->{access_token},$data->{refresh_token}); 
+
+           my $username = $value->{displayName};
+           my $icon_url =$value->{image}->{url};
+           my $gpid = $value->{id};
+
+           $self->stash(username => $username);
+           $self->stash(icon_url => $icon_url);
+           $self->stash(gpid => $gpid);
+
+           $self->app->log->debug("DEBUG: Displayname: $value->{displayName}");
+           $self->app->log->debug("DEBUG: image: $value->{image}->{url}");
+           $self->app->log->debug("DEBUG: gpid: $value->{id}");
+
+            # uidの生成
+            my $uid = Sessionid->new($gpid)->guid;
+               $self->app->log->debug("DEBUG: uid: $uid");
+           $self->stash(uid => $uid);
+
+         #      return $self->render("connect",error => $err) unless $data;
+         #      return $self->render( json => $data);
+
+           $self->redirect_to("/menu");
+         });
 }
 
 

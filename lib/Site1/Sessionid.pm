@@ -39,4 +39,13 @@ sub uid {
     return $uid;
 }
 
+sub guid {
+    my $self = shift;
+
+    my $ctx = Digest::MD5->new();
+       $ctx->add($self->word);
+    my $guid = $ctx->b64digest;
+    return $guid;
+}
+
 1;

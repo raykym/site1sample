@@ -162,7 +162,9 @@ if (!  navigator.webkitGetUserMedia) {  alert("Not Supported!!!"); }
         %#       console.log(JSON.stringify(resline));
                 if (resline.from) continue; // from行はパス 表示ループだから。ここはsessionid
 
-                $("#userlist").append("<li><button><img src='/imgcomm?oid=" + resline.icon + "'width='50' height='50'>[" + resline.username + "]<video id=" + resline.connid +" autoplay controls width='300' height='300'></video></button></li>");
+  %# iconからicon_urlへの変更
+  %#              $("#userlist").append("<li><button><img src='/imgcomm?oid=" + resline.icon + "'width='50' height='50'>[" + resline.username + "]<video id=" + resline.connid +" autoplay controls width='300' height='300'></video></button></li>");
+                $("#userlist").append("<li><button><img src='" + resline.icon_url + "'width='50' height='50'>[" + resline.username + "]<video id=" + resline.connid +" autoplay controls width='300' height='300'></video></button></li>");
                 };
 
        %# 最初のメンバーリストが届いた時にローカルストリームをスタートする。->変更　callのタイミングに移動。

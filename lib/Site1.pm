@@ -3,6 +3,7 @@ use Mojo::Base 'Mojolicious';
 #use DBI;
 use DBIx::Connector;
 use Mojo::Pg;
+use Mojolicious::Plugin::OAuth2;
 
 sub startup {
   my $self = shift;
@@ -41,6 +42,17 @@ sub startup {
 
 ##  my $sth = $self->app->dbh->prepare("$config->{sql1}");
 ##     $sth->execute();
+
+#OAuth2
+   $self->plugin('OAuth2' => {
+              google => {
+                  key => '861600582037-j2gm11pu28gapapmdkjacjfi5jknngho.apps.googleusercontent.com',
+                  secret => 'gsoKlLoL4vXI6u5GakodvS72',
+                  authorize_url => "https://accounts.google.com/o/oauth2/auth ",
+                  token_url => "https://accounts.google.com/o/oauth2/token",
+                    },
+               fix_get_token => 1,
+                  });
 
   # Router
   my $r = $self->routes;
@@ -109,6 +121,8 @@ sub startup {
   $bridge->get('/webrtcx2')->to('chatroom#webrtcx2');
   $bridge->get('/voicechat')->to('chatroom#voicechat');
   $bridge->get('/videochat')->to('chatroom#videochat');
+
+  $r->any('/oauth2callback')->to('login#oauth2callback');
 
   $r->any('*')->to('Top#unknown'); # 未定義のパスは全てtop画面へ
 }

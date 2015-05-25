@@ -16,6 +16,9 @@
         socketReady = true;
     };
 
+    var mlists = new Array;
+    var startflg = null;
+
     ws.onmessage = function(msg){
         var evt = JSON.parse(msg.data);
             console.log("evt:" + evt.type);
@@ -72,8 +75,8 @@
             console.log('ws_list Conection opened');
         };
 
-        var mlists = new Array;
-        var startflg = null;
+  %# ws側へ移動     var mlists = new Array;
+  %#                var startflg = null;
 
         ws_list.onmessage = function(mlist){
             %# mlistはJSONの配列が来る pubsubメンバーリスト
@@ -87,10 +90,12 @@
             for ( i=0; i<res.length; i++){
                 var resline = JSON.parse(res[i]); //２段目のparse カラムが取れる
 
-        %#       console.log(JSON.stringify(resline));
+        %#       console.log("icon_url:" + JSON.stringify(resline.icon_url));
                 if (resline.from) continue; // from行はパス 表示ループだから。
 
-                $("#userlist").append("<li><button><img src='/imgcomm?oid=" + resline.icon + "'width='50' height='50'>[" + resline.username + "]<audio id=" + resline.connid +" autoplay controls></audio></button></li>");
+        %# iconからicon_urlへ変更
+        %#        $("#userlist").append("<li><button><img src='/imgcomm?oid=" + resline.icon + "'width='50' height='50'>[" + resline.username + "]<audio id=" + resline.connid +" autoplay controls></audio></button></li>");
+                $("#userlist").append("<li><button><img src='" + resline.icon_url + "' width='50' height='50'>[" + resline.username + "]<audio id=" + resline.connid +" autoplay controls></audio></button></li>");
                 };
 
        %# 最初のメンバーリストが届いた時にローカルストリームをスタートする。
@@ -123,15 +128,18 @@
     var localconn = null;
 
 function mlistget(){
+    %# localconnが取れればOKなので・・・
      console.log("--- mlists get ---");
     for ( i=0; i<mlists.length; i++){
             var resline = JSON.parse(mlists[i]); //２段目のparse カラムが取れる
         %# relline.fromはsessionidなので、localvmとresline.sessionidが一致した時のresline.connidがエレメントを示す
-            if (resline.from) { localvm = resline.from; continue;} //from行
+        %# siglalingの統合でfromはそのままconnidに
+   %#         if (resline.from) { localvm = resline.from; continue;} //from行
+            if (resline.from) { localconn = resline.from; continue;} //from行
             console.log("localvm:" + localvm);
         %#    console.log("sessionid:" + resline.sessionid);
             console.log("connid:" + resline.connid);
-            if ( resline.sessionid === localvm ) { localconn = resline.connid;} //localvmとsessionidが一致すれば、それがローカル 
+    %#        if ( resline.sessionid === localvm ) { localconn = resline.connid;} //localvmとsessionidが一致すれば、それがローカル 
         %#    voicemember.push(document.getElementById(resline.connid));
             console.log("localconn:" + localconn);
                 };

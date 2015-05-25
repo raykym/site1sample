@@ -5,6 +5,8 @@ use Mojo::Base 'Mojolicious::Controller';
 sub top {
   my $self = shift;
 
+  $self->stash(clietnid =>'861600582037-i6qsq0tk7eqplaohomthm0e61he567jk.apps.googleusercontent.com');
+  $self->stash(secclient => 'ynd0015uuH0TQDwQ6gPZMKr9');
   $self->render(msg => 'Welcome to this site!');
 }
 
