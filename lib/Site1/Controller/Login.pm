@@ -147,6 +147,7 @@ sub usercheck {
     my $atoken = $get_value->{atoken};
     my $rtoken = $get_value->{rtoken};
 
+
     #ローカル認証（user_tbl)
        $sth_user_chk->execute($email);
     my $get_uname = $sth_user_chk->fetchrow_hashref();
@@ -168,7 +169,6 @@ sub usercheck {
     my $text = to_json($value);
        $self->app->log->debug("DEBUG: value: $text");
 
-    my $newtoken = 0;
     if ($text =~ "error") {
         my $data = $ua->post(
                "https://accounts.google.com/o/oauth2/token" => form => {
@@ -177,21 +177,27 @@ sub usercheck {
                                   client_secret => "gsoKlLoL4vXI6u5GakodvS72",
                                   grant_type => "refresh_token",
                                            })->res->json;
-               my $newtoken = to_json($data);
-               $self->app->log->debug("DEBUG: newtoken: $newtoken");
+               my $new_token = to_json($data);
+               $self->app->log->debug("DEBUG: newtoken: $new_token");
 
                   $atoken = $data->{access_token};
                   $self->app->log->debug("DEBUG: access_token: $atoken");
                
                $sth_atoken_update_sid->execute($atoken,$sid);
-               $newtoken = $atoken;
-       }
+        }
 
-     #$newtokenが有れば再度取得し直す
+    # 再度atokenを取得
+       $sth_sid_chk->execute($sid) if ($text =~ "error");
+       $get_value = $sth_sid_chk->fetchrow_hashref() if ($text =~ "error");
+       $email = $get_value->{email} if ($text =~ "error");
+       $atoken = $get_value->{atoken} if ($text =~ "error");
+       $rtoken = $get_value->{rtoken} if ($text =~ "error");
+
+     #$atokenが有れば再度取得し直す
      $value = $ua->get(
-                "https://www.googleapis.com/plus/v1/people/me?access_token=$newtoken"
-                )->res->json unless ($newtoken eq 0);
-       #self->app->log->debug("DEBUG: newtoken: $newtoken");
+                "https://www.googleapis.com/plus/v1/people/me?access_token=$atoken"
+                )->res->json unless ($atoken == '');
+       #self->app->log->debug("DEBUG: new atoken: $atoken");
 
        $text = to_json($value);
        $self->app->log->debug("DEBUG: new value: $text"); 
@@ -202,6 +208,7 @@ sub usercheck {
        $username = $value->{displayName} unless $username; #無ければ
        $self->app->log->debug("DEBUG: displayName: $username");
     my $icon_url =$value->{image}->{url};
+       $self->app->log->debug("DEBUG: icon_url: $icon_url");
     my $gpid = $value->{id};
 
        $uid = Sessionid->new($gpid)->guid unless $uid; #無ければ
@@ -399,6 +406,9 @@ sub oauth2callback {
 
   # DB設定
   my $sth_signup_gp = $self->app->dbconn->dbh->prepare("$config->{sql_signup_gp}");
+  my $sth_signup_update_gp1 = $self->app->dbconn->dbh->prepare("$config->{sql_signup_update_gp1}");
+  my $sth_signup_update_gp2 = $self->app->dbconn->dbh->prepare("$config->{sql_signup_update_gp2}");
+  my $sth_chk_signup = $self->app->dbconn->dbh->prepare("$config->{sql_chk_signup}");
 
 
     $self->delay(
@@ -432,8 +442,14 @@ sub oauth2callback {
            # cookie設定
                $self->cookie('site1'=>"$sid",{httponly => 'true',path => '/', max_age => '31536000', secure => 'true'});
 
-           # DBへの登録
-               $sth_signup_gp->execute($email,$sid,$data->{access_token},$data->{refresh_token}); 
+           # 重複チェック
+            $sth_chk_signup->execute($email);
+           my $chkcnt = $sth_chk_signup->rows;
+
+           # DBへの登録 重複ならupdate、初回ならinsert
+               $sth_signup_gp->execute($email,$sid,$data->{access_token},$data->{refresh_token}) if ($chkcnt == 0); 
+               $sth_signup_update_gp1->execute($sid,$email) if ($chkcnt != 0); 
+               $sth_signup_update_gp2->execute($data->{access_token},$email) if ($chkcnt != 0); 
 
            my $username = $value->{displayName};
            my $icon_url =$value->{image}->{url};
