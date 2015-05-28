@@ -164,7 +164,7 @@ sub usercheck {
     my $ua = Mojo::UserAgent->new;
     my $value = $ua->get(
                 "https://www.googleapis.com/plus/v1/people/me?access_token=$atoken"
-                )->res->json;
+                )->res->json if (defined $atoken);
 
     my $text = to_json($value);
        $self->app->log->debug("DEBUG: value: $text");
@@ -196,7 +196,7 @@ sub usercheck {
      #$atokenが有れば再度取得し直す
      $value = $ua->get(
                 "https://www.googleapis.com/plus/v1/people/me?access_token=$atoken"
-                )->res->json unless ($atoken == '');
+                )->res->json unless ($atoken eq '');
        #self->app->log->debug("DEBUG: new atoken: $atoken");
 
        $text = to_json($value);
@@ -474,6 +474,5 @@ sub oauth2callback {
            $self->redirect_to("/menu");
          });
 }
-
 
 1;

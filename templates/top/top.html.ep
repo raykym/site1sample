@@ -8,7 +8,8 @@
                 <a href="/signup" data-rel="dialog" data-transition="flip" class="ui-btn ui-corner-all ui-btn-left">登録</a>
                 <a href="/signin" data-rel="dialog" data-transition="flip" class="ui-btn ui-corner-all ui-btn-right">ログイン</a>
             </div>
-                <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=861600582037-j2gm11pu28gapapmdkjacjfi5jknngho.apps.googleusercontent.com&redirect_uri=https://westwind.iobb.net/oauth2callback&scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&access_type=offline" data-rel="dialog" data-transition="flip" class="ui-btn ui-corner-all ui-btn-right">Google+</a>
+         %# url shortener use.
+                <a href="https://goo.gl/zDCRrG" data-rel="dialog" data-transition="flip" class="ui-btn ui-corner-all ui-btn-right">Google+</a>
             <div>
             <h5 style="color: #b0c4de;">登録済みの場合、直接メニューから入れます</h5>
             <h5 style="color: #b0c4de;">Google+のアカウント利用する場合は右上からどうぞ。</h5>
@@ -28,8 +29,8 @@
     <div data-role="footer" style="background: #aac78d;" data-theme="b">
         <div>
         <h5 style="color: #000000;">このサイトはMojoliciousとJQuery mobileで作成しています。</h5>
-        <h5 style="color: #550000;">このサイトの参照はchromeを推奨します。</h5>
-        <h5 style="color: #550000;">android 4.2が必須です</h5>
+        <h5 style="color: #550000;">このサイトの参照はGoogle Chromeでお願いします。</h5>
+        <h5 style="color: #550000;">Android 4.2以上が必須です</h5>
         <div>
     </div><!-- /footer -->
 </div><!-- /page -->

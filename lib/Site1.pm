@@ -70,6 +70,7 @@ sub startup {
   $bridge->websocket('/signaling')->to(controller => 'Chatroom', action => 'signaling');
   $bridge->websocket('/roomentrycheck')->to(controller => 'Chatroom', action => 'roomentrycheck');
   $bridge->websocket('/roomentrylist')->to(controller => 'Chatroom', action => 'roomentrylist');
+  $bridge->websocket('/wsocket/signaling')->to(controller => 'Webroom', action => 'signaling');
 
 
   # Normal route to controller
@@ -79,7 +80,6 @@ sub startup {
   $r->get('/signin')->to('login#signin');       
   $r->post('/signinact')->to('login#signinact'); #template未使用
   $r->post('/signupact')->to('login#signupact'); #template未使用 
-
 
    # 以下はログイン認証済でないとページに入れない
   $bridge->get('/menu')->to('top#mainmenu');          
@@ -94,7 +94,6 @@ sub startup {
   $bridge->any('/menu/settings/seticonact')->to('filestore#seticonact');
 
 #  $r->get('/menu/upload')->to('filestore#upload');
-
   $bridge->route('/menu/upload')->to('filestore#upload');
   $bridge->post('/menu/uploadact')->to('filestore#uploadact');
 
@@ -121,8 +120,9 @@ sub startup {
   $bridge->get('/webrtcx2')->to('chatroom#webrtcx2');
   $bridge->get('/voicechat')->to('chatroom#voicechat');
   $bridge->get('/videochat')->to('chatroom#videochat');
+  $bridge->get('/voicechat2')->to('chatroom#voicechat2');
 
-  $r->any('/oauth2callback')->to('login#oauth2callback');
+  $r->any('/oauth2callback')->to(controller => 'Login', action => 'oauth2callback');
 
   $r->any('*')->to('Top#unknown'); # 未定義のパスは全てtop画面へ
 }

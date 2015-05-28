@@ -255,6 +255,7 @@ sub echopg {
     my $self = shift;
 
 #echodbと同じだが、pubsub通信を利用したPushを利用する。
+# mongodbが64bitならTTL indexで時間が来たら消すことが出来るが、環境的に無理。
 
     # postgresqlの準備 pgdbhはSite1.pmで全体定義した。
  ###   my $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
@@ -266,7 +267,7 @@ sub echopg {
     my $holldb = $mongoclient->get_database('holl_tl');
     my $hollcoll = $holldb->get_collection('holl');
   
-    #param 認証をパスしているので、username,icon,emailがstashされている。
+    #param 認証をパスしているので、username,icon_url,emailがstashされている。
     my $username = $self->stash('username');
     my $icon = $self->stash('icon'); #encodeされたままのはず。
     my $icon_url = $self->stash('icon_url');
@@ -596,7 +597,7 @@ sub roomentrylist {
     my @memberlist;
 
     my $loopid = Mojo::IOLoop->recurring( 
-             5 => sub {
+             1 => sub {
                 $result = $pg->db->query("SELECT connid,sessionid,username,icon_url FROM $room");
                 # $result  $_->{sessionid}の配列の想定
                 ####my $rownum = $result->rows;  # 何故か1回で０に成る。。
@@ -637,6 +638,13 @@ sub videochat {
     my $self = shift;
 
     $self->render(msg_w => '参加メンバーが揃ったら一人だけconnectを押してください。全員が通話可能になります。切断時はブラウザを完全に閉じないとネットワークが切れていない場合が有ります。スマホでは通知にマイクマークが無いことを確認してください。');
+}
+
+sub voicechat2 {
+    my $self = shift;
+    # webroom.pmへの対応用ページ
+
+    $self->render(msg_w => '１．共通のroom名を入力して待機して下さい。２．メンバーがそろったらStandbyを押して下さい。３．全員がStandbyしたら、connectボタンを押して通話状態を確認して下さい。');
 }
 
 1;

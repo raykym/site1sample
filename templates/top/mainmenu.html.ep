@@ -15,8 +15,9 @@
         <p>WebRTCはスマホでは受信出来ない場合があります。テザリングして別の端末からなら可能です。</p>
         <a href="/webrtc/test-sdi-2-sig.html" class="ui-btn ui-btn-inline" data-transition="flip" rel="external">WebRTC(テストサンプル)</a>
         <a href="/webrtcx2" class="ui-btn ui-btn-inline" data-transition="flip" rel="external">WebRTC(1対1)</a>
-        <a href="/voicechat" class="ui-btn" data-transition="flip" rel="external">VoiceChat(多人数)</a>
-        <a href="/videochat" class="ui-btn" data-transition="flip" rel="external">VideoChat(多人数)TEST</a>
+        <a href="/voicechat" class="ui-btn ui-btn-inline" data-transition="flip" rel="external">VoiceChat(多人数)</a>
+        <a href="/videochat" class="ui-btn ui-btn-inline" data-transition="flip" rel="external">VideoChat(多人数)TEST</a>
+        <a href="/voicechat2" class="ui-btn" data-transition="flip" rel="external">VoiceChat(改)</a>
         <div></div>
         <a href="/menu/settings" class="ui-btn" data-transition="flip">設定変更</a>
     </div>
