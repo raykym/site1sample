@@ -4,7 +4,7 @@ use Mojo::Base 'Mojolicious::Controller';
 use utf8;
 use Mojo::JSON qw(encode_json decode_json from_json to_json);
 use Mojo::Pg::PubSub;
-use Mojo::Util qw(dumper encode decode url_escape url_unescape md5_sum);
+use Mojo::Util qw(dumper encode decode url_escape url_unescape md5_sum sha1_sum);
 
 my $tablename;
 my $clients = {};
@@ -73,10 +73,23 @@ sub signaling {
 
            # room作成
            if ( $jsonobj->{entry} ) {
-                   my $chksum = md5_sum $jsonobj->{entry};
-                      $self->app->log->debug("Entry chksum: $chksum");
-                   my $tablename = $chksum."_tbl";
-                      $self->app->log->debug("TABLENAME: $tablename");
+                   #既に登録されていたら、
+                   my $roomname = qq($jsonobj->{entry});
+                   my $result = $pg->db->query("SELECT tablename FROM connidroom_tbl WHERE roomname = ?",$roomname);
+                   my $restable = $result->hash;   #1個の想定
+                   my $tablename = $restable->{tablename};
+                      $self->app->log->debug("Get connidroom tablename: $tablename");
+                   my $cnt = 1;
+                      $cnt = 0 if (! defined $tablename);
+                      $self->app->log->debug("if get tablename? $cnt");
+
+                   # テーブル名は時刻をハッシュ化してテンポラリに作成
+                   my $chksum = md5_sum time if ($cnt == 0);
+                      $self->app->log->debug("Entry chksum: $chksum") if ($cnt == 0);
+                    # 上かここで設定される
+                      $tablename = "room_".$chksum."_tbl" if ($cnt == 0);
+                      $self->app->log->debug("TABLENAME: $tablename") if ($cnt == 0);
+
                    my @connvalue = ($self->tx->connection,$jsonobj->{entry},$tablename); 
                    $pg->db->query("INSERT INTO connidroom_tbl values(?,?,?)",@connvalue); 
 
@@ -176,6 +189,16 @@ sub signaling {
                # リスナー登録の解除 
                $pg->db->query("DELETE FROM $tablename WHERE connid = ?" , $connid);
                $self->app->log->debug("DELETE entry: $tablename : $connid");
+
+               $result = $pg->db->query("SELECT * FROM $tablename");
+               my $cnt = $result->rows;
+               $self->app->log->debug("$tablename REMAIN entry $cnt");
+
+               if ($cnt == 0){
+                  $self->app->log->debug("NULL TABLE DELETE!  $tablename");
+                  $pg->db->query("DROP TABLE $tablename");
+               }
+
                $pg->db->query("DELETE FROM connidroom_tbl WHERE connid = ?" , $connid);
                $self->app->log->debug("del entry: $connid");
 

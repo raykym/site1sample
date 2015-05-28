@@ -644,7 +644,7 @@ sub voicechat2 {
     my $self = shift;
     # webroom.pmへの対応用ページ
 
-    $self->render(msg_w => '１．共通のroom名を入力して待機して下さい。２．メンバーがそろったらStandbyを押して下さい。３．全員がStandbyしたら、connectボタンを押して通話状態を確認して下さい。');
+    $self->render(msg_w => '１．共通のroom名を入力して待機して下さい。(エンター押してね）２．メンバーがそろったらStandbyを押して下さい。３．全員がStandbyしたら、connectボタンを押して通話状態を確認して下さい。');
 }
 
 1;

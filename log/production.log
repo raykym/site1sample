@@ -189,3 +189,9 @@ Compilation failed in require at (eval 65) line 1.
 [Thu May 28 11:29:12 2015] [info] Listening at "http://192.168.0.8:3800"
 [Thu May 28 11:29:12 2015] [info] Manager 5532 started
 [Thu May 28 11:29:12 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu May 28 13:43:09 2015] [info] Listening at "http://192.168.0.8:3800"
+[Thu May 28 13:43:09 2015] [info] Manager 6667 started
+[Thu May 28 13:43:09 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu May 28 18:25:05 2015] [info] Listening at "http://192.168.0.8:3800"
+[Thu May 28 18:25:05 2015] [info] Manager 8293 started
+[Thu May 28 18:25:05 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"

@@ -8,11 +8,20 @@
     // websocket
     var socketReady = false;
 
-    var ws = new WebSocket('wss://westwind.iobb.net/wsocket/signaling');
+    var ws = null;
+    ws = new WebSocket('wss://westwind.iobb.net/wsocket/signaling');
+
+    var socket_wait = null;
 
     ws.onopen = function(){
         console.log('Connection opened');
         socketReady = true;
+
+    soket_wait = setInterval(function (){
+       var dummsg = {"dummy":"dummy"};
+       ws.send(JSON.stringify(dummsg)); 
+       console.log("socket wait sending!");
+        }, 50000);
     };
 
     ws.onclose = function(){
@@ -338,6 +347,10 @@ function call(){
 
     sendcall();
 
+    %# 50秒単位のwait送信を止める
+    clearInterval(socket_wait);
+    sokect_wait = null;
+    console.log("socket_wait STOP.");
 }
 
 function sendcall(){
@@ -455,6 +468,7 @@ function member(){
     <div><h3>Voice Chat</h3></div>
     <div style="color: #ff0000"><%= $msg_w %></div>
         <div style="border: 1px solid">
+            <p>room名はわかりやすく短いものを使いましょう。</p>
             <ul id="userlist" data-role="listview" data-inset="true"></ul>
             <p><input type="text" id="roomname" placeholder="room..."></p>
 %#            <button type="button" onclick="member();">Memberlist Reload</button>
@@ -465,7 +479,7 @@ function member(){
         <div>
            <ul>
              <li>音声は暗号化の影響でタイムラグが有ります。</li>
-             <li>インジケーターは接続を確認できますが、切断されても認識出来ない>ので、あくまで目安程度です。</li>
+             <li>インジケーターは接続を確認できますが、切断されても認識出来ないので、あくまで目安程度です。</li>
            </ul>
         </div>
     <div data-role="footer" style="backgroud: #aac78d;">
