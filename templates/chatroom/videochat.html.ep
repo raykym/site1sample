@@ -17,14 +17,16 @@ if (!  navigator.webkitGetUserMedia) {  alert("Not Supported!!!"); }
             cameraData.push(data[i]);
           }
         }
+        %# changecamボタンのdisable
+            if (cameraData.length == 1) { $("#chgcam").prop("disabled",true);};
+            console.log("cameraData:" + cameraData.length);
+
         if( cameraData.length == 0 ){
           alert("カメラが見つかりません");
           return;
         }
     });
 
-  %# changecamボタンのdisable
- %#   if (cameraData.length > 0) { $("#chgcam").prop("disabled",false);}
 
    %# カメラのデフォルトを指定
    var camnum = 0; // カメラ指定番号たいてい０か１
