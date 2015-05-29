@@ -73,12 +73,18 @@ sub signaling {
 
            # room作成
            if ( $jsonobj->{entry} ) {
-                   #既に登録されていたら、
+
+                   #重複入力の除外（リロードすればconnidroom_tblから除外されて再入力可能に成る）
+                   my $reschk = $pg->db->query("SELECT roomname FROM connidroom_tbl WHERE connid = ?", $connid);
+                   if ($reschk->rows >= 1) { return; } #エントリー済ならパス
+
+                   #room名が既に登録されているか？
                    my $roomname = qq($jsonobj->{entry});
                    my $result = $pg->db->query("SELECT tablename FROM connidroom_tbl WHERE roomname = ?",$roomname);
                    my $restable = $result->hash;   #1個の想定
                    my $tablename = $restable->{tablename};
                       $self->app->log->debug("Get connidroom tablename: $tablename");
+                   # 後置ifで振り分け
                    my $cnt = 1;
                       $cnt = 0 if (! defined $tablename);
                       $self->app->log->debug("if get tablename? $cnt");

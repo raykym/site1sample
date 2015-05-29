@@ -37,6 +37,9 @@
 
     var startflg = null; //localstream用フラグ
 
+    %# call()でボタンの押し間違いをチェックする
+    var memberlist = new Array;
+
     ws.onmessage = function(msg){
                 var evt = JSON.parse(msg.data);
         %#        console.log(JSON.stringify(evt));
@@ -44,14 +47,19 @@
         %#        console.log("evt.type:" + evt.type);
         %#        console.log("evt.reslist:" + evt.reslist);
 
+                  %# 表示用リスト
                 var memlist = evt.reslist;
         %#        console.log("memlist:" + memlist);
+              
 
 
                 %# リスト表示用処理
            if (evt.type === 'reslist'){
 
-                   connid = evt.from;   // global定義
+                %# リストの場合だけmemberlistを更新する。
+                memberlist = memlist;
+
+                  connid = evt.from;   // global定義
         %#        console.log("view connid:" + connid);
         %#        console.log("memlist.length:" + memlist.length);
 
@@ -343,8 +351,25 @@ var oncall = false;
 
 function call(){
 
-    oncall = true;
+       console.log("Call Start!");
 
+  %# メンバー全員のreadyをチェック
+    var memcnt = memberlist.length;
+        console.log("memcnt:" + memcnt);
+    var discnt = 0;
+    for (i=0; i<memcnt; i++){
+        var resline = JSON.parse(memberlist[i]);
+        if ( resline.ready == '1' ) { discnt++ };
+    };
+
+        console.log("discnt:" + discnt);
+
+    if ( discnt !== memcnt || memcnt == 0) {
+         alert("Wait for Standby ALL members!");
+         return;
+    }; 
+
+    oncall = true;
     sendcall();
 
     %# 50秒単位のwait送信を止める
@@ -453,13 +478,18 @@ function sendcall(){
   }
 
 function member(){
-
+   %# メンバーリストの更新
     var getlist = {"getlist":"dummy"};
     ws.send(JSON.stringify(getlist));
     console.log("getlist:" + JSON.stringify(getlist));
 
 }
 
+function hangUp(){
+
+    window.location.reload();
+
+}
 
 
 </script>
