@@ -398,7 +398,6 @@ sub signaling {
     # セッションテーブルをPGのsignal_tblに作成。websocket切断で削除される。
     # 呼び出し元のURLに引数?r=ルーム名をつけるとテーブルを作成して、そのテーブルにsubscribeする。
     # メッセージ内にsendtoが含まれる場合、sessionidが指定されて、個別送信とする。
-    # roomentrylistを統合　{type => "memberlist'}をイベントに追加
 
     #cookieからsid取得
     my $sid = $self->cookie('site1');
@@ -585,6 +584,8 @@ sub roomentrylist {
     #DB設定
 ####    my $pg = $self->app->pgdbh;
     my $pg = $self->app->pg;
+    my $pubsub = Mojo::Pg::PubSub->new(pg => $pg);
+
     my $config = $self->app->plugin('Config');
     my $sth_sesi_email = $self->app->dbconn->dbh->prepare("$config->{sql_sesi_email}");
     my $sth_getchatmemb = $self->app->dbconn->dbh->prepare("$config->{sql_getchatmemb}");
@@ -593,11 +594,21 @@ sub roomentrylist {
 #       $stream->timeout(3000);
 #       $self->inactivity_timeout(3000);
 
+    #pubsubから受信設定 
+        my $cb = $pubsub->listen('roomentry' => sub {
+            my ($pubsub, $payload) = @_;
+
+                  $self->app->log->debug("ROOMENTRY: $payload");
+
+                  # 通知が届いたら切断する
+                  $self->tx->finish;
+           });
+
     my $result;
     my @memberlist;
 
     my $loopid = Mojo::IOLoop->recurring( 
-             1 => sub {
+             5 => sub {
                 $result = $pg->db->query("SELECT connid,sessionid,username,icon_url FROM $room");
                 # $result  $_->{sessionid}の配列の想定
                 ####my $rownum = $result->rows;  # 何故か1回で０に成る。。
@@ -626,6 +637,8 @@ sub roomentrylist {
                 #メッセージが届いたら切断する。 callした人だけ、callするまで動く
                   $self->app->log->debug("ROOMENTRY: $msg");
                   $self->tx->finish;
+                # その他のメンバーにも通知する
+                 $pubsub->notify( 'roomentry' => $msg);
         });
 
        $self->on(finish => sub{

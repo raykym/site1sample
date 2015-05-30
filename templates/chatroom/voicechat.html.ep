@@ -223,7 +223,13 @@ function call(){
       conn.iceReady = true;
       conn.peerconnection.setLocalDescription(sessionDescription);
       sessionDescription.sendto = id;
-      sendSDP(sessionDescription);
+
+      %# SDPにsendtoが付加出来ないのでコピーして付加し直す。
+      var cpsdp = JSON.parse(JSON.stringify(sessionDescription));
+          cpsdp.sendto = id; 
+      var newsdp = JSON.parse(JSON.stringify(cpsdp));
+
+      sendSDP(newsdp);
     }, function () { // in case of error
       console.log("Create Offer failed");
     }, mediaConstraints);
@@ -373,7 +379,13 @@ function call(){
       conn.iceReady = true;
       conn.peerconnection.setLocalDescription(sessionDescription);
       sessionDescription.sendto = id;
-      sendSDP(sessionDescription);
+
+      %# SDPにsendtoが付加出来ないのでコピーして付加し直す。
+      var cpsdp = JSON.parse(JSON.stringify(sessionDescription));
+          cpsdp.sendto = id; 
+      var newsdp = JSON.parse(JSON.stringify(cpsdp));
+
+      sendSDP(newsdp);
     }, function () { // in case of error
       console.log("Create Answer failed");
     }, mediaConstraints);

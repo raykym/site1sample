@@ -195,3 +195,24 @@ Compilation failed in require at (eval 65) line 1.
 [Thu May 28 18:25:05 2015] [info] Listening at "http://192.168.0.8:3800"
 [Thu May 28 18:25:05 2015] [info] Manager 8293 started
 [Thu May 28 18:25:05 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Fri May 29 16:10:10 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri May 29 16:10:10 2015] [info] Manager 15179 started
+[Fri May 29 16:10:10 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sat May 30 00:13:33 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sat May 30 00:13:33 2015] [info] Manager 17599 started
+[Sat May 30 00:13:33 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sat May 30 17:20:20 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sat May 30 17:20:20 2015] [info] Manager 24071 started
+[Sat May 30 17:20:20 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sat May 30 17:45:21 2015] [error] DBI connect('dbname=sitedata;host=192.168.0.8','sitedata',...) failed: FATAL:  ???????????????
+FATAL:  ??????????????? at /home/debian/perl5/lib/perl5/Mojo/Pg.pm line 83.
+
+[Sat May 30 17:45:28 2015] [error] DBI connect('dbname=sitedata;host=192.168.0.8','sitedata',...) failed: FATAL:  ???????????????
+FATAL:  ??????????????? at /home/debian/perl5/lib/perl5/Mojo/Pg.pm line 83.
+
+[Sat May 30 19:49:03 2015] [error] DBI connect('dbname=sitedata;host=192.168.0.8','sitedata',...) failed: FATAL:  ???????????????
+FATAL:  ??????????????? at /home/debian/perl5/lib/perl5/Mojo/Pg.pm line 83.
+
+[Sat May 30 19:49:08 2015] [error] DBI connect('dbname=sitedata;host=192.168.0.8','sitedata',...) failed: FATAL:  ???????????????
+FATAL:  ??????????????? at /home/debian/perl5/lib/perl5/Mojo/Pg.pm line 83.
+

@@ -102,8 +102,8 @@
     var id = evt.from;
     var target = evt.sendto;  // call時はundef
 
- %#       console.log("id:" + id);
- %#       console.log("sendto:" + target);
+        console.log("id:(from)" + id);
+        console.log("target:(sendto)" + target);
 
        if (evt.type === 'call') {
             console.log('Receive call');
@@ -112,6 +112,7 @@
              %# callを受信したら、responseを返す
               var resp = JSON.stringify({"type":"response","sendto":id});
               ws.send(resp);
+              console.log("send response----->");
               }
               else {
                   console.warn('max connections. so ignore call');
@@ -153,7 +154,7 @@ function startvoice() {
       return;
     }
     );
-} // startvideo
+} // startvoice
 
   function getConnectionCount() {
     var count = 0;
@@ -182,7 +183,13 @@ function startvoice() {
       conn.iceReady = true;
       conn.peerconnection.setLocalDescription(sessionDescription);
       sessionDescription.sendto = id;
-      sendSDP(sessionDescription);
+
+      %# SDPにsendtoが付加出来ないのでコピーして付加し直す。
+      var cpsdp = JSON.parse(JSON.stringify(sessionDescription));
+          cpsdp.sendto = id;
+      var newsdp = JSON.parse(JSON.stringify(cpsdp));
+
+      sendSDP(newsdp);
     }, function () { // in case of error
       console.log("Create Offer failed");
     }, mediaConstraints);
@@ -259,7 +266,7 @@ function startvoice() {
     var con = null;
     con = connections[id];
 %#    console.log("stringify con:" + JSON.stringify(con));
-    console.log("get con:" + con);
+    console.log("get con:" + JSON.stringify(con));
     return con;
   }
 
@@ -387,10 +394,10 @@ function sendcall(){
 }
 
   function sendSDP(sdp) {
-    %#    sdp.from = localconn;
+    %#    sdp.from = localconn;  //signalingで付加している。
     var text = JSON.stringify(sdp);
     console.log("---sending sdp text ---");
- %#   console.log(text);
+%#    console.log("sendSDP:" + text);
 
     // send via socket
     ws.send(text);
@@ -432,7 +439,12 @@ function sendcall(){
       conn.iceReady = true;
       conn.peerconnection.setLocalDescription(sessionDescription);
       sessionDescription.sendto = id;
-      sendSDP(sessionDescription);
+
+      var cpsdp = JSON.parse(JSON.stringify(sessionDescription));
+          cpsdp.sendto = id;
+      var newsdp = JSON.parse(JSON.stringify(cpsdp));
+
+      sendSDP(newsdp);
     }, function () { // in case of error
       console.log("Create Answer failed");
     }, mediaConstraints);
@@ -501,15 +513,16 @@ function hangUp(){
             <p>room名はわかりやすく短いものを使いましょう。</p>
             <ul id="userlist" data-role="listview" data-inset="true"></ul>
             <p><input type="text" id="roomname" placeholder="room..."></p>
-%#            <button type="button" onclick="member();">Memberlist Reload</button>
-            <button type="button" onclick="call();">Connect</button>
-            <button type="button" onclick="hangUp();">Hang Up</button>
-            <button type="button" onclick="standby();">Standby OK</button>
+  %#          <button type="button" onclick="member();">Memberlist Reload</button>
+            <button type="button" class="ui-btn ui-btn-inline" onclick="standby();">Standby</button>
+            <button type="button" class="ui-btn ui-btn-inline" onclick="call();">Connect</button>
+            <button type="button" class="ui-btn ui-btn-inline" onclick="hangUp();">Hang Up</button>
         </div>
         <div>
            <ul>
              <li>音声は暗号化の影響でタイムラグが有ります。</li>
              <li>インジケーターは接続を確認できますが、切断されても認識出来ないので、あくまで目安程度です。</li>
+             <li>端末の状態で接続出来ないケースがあります。Google play等でupdateが走ると処理が重くてつながらないケースがあります。</li1>
            </ul>
         </div>
     <div data-role="footer" style="backgroud: #aac78d;">

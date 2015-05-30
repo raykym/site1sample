@@ -155,7 +155,7 @@ sub signaling {
                my $res = $pg->db->query("SELECT * FROM connidroom_tbl WHERE connid = ?", $connid); 
                my $resline = $res->hash; # 1個の想定
                   $tablename = $resline->{tablename} if ($resline->{tablename});
-        ##          $self->app->log->debug("loop tablename: $tablename");
+        #          $self->app->log->debug("loop tablename: $tablename");
 
                 $result = $pg->db->query("SELECT connid,sessionid,username,icon_url,ready FROM $tablename") if ($tablename);
 
