@@ -52,7 +52,7 @@
       onOffer(evt);
 
       %# callを受けてコールを実行する
-      if (! oncall) { call() };
+ %#     if (! oncall) { call() };
 
         } else if (evt.type === 'answer') {  // **
       console.log('Received answer, settinng answer SDP');

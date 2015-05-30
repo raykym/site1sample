@@ -216,3 +216,9 @@ FATAL:  ??????????????? at /home/debian/perl5/lib/perl5/Mojo/Pg.pm line 83.
 [Sat May 30 19:49:08 2015] [error] DBI connect('dbname=sitedata;host=192.168.0.8','sitedata',...) failed: FATAL:  ???????????????
 FATAL:  ??????????????? at /home/debian/perl5/lib/perl5/Mojo/Pg.pm line 83.
 
+[Sun May 31 01:59:15 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sun May 31 01:59:15 2015] [info] Manager 27484 started
+[Sun May 31 01:59:15 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun May 31 02:24:51 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sun May 31 02:24:51 2015] [info] Manager 27857 started
+[Sun May 31 02:24:51 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"

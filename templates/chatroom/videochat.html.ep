@@ -122,8 +122,8 @@ if (!  navigator.webkitGetUserMedia) {  alert("Not Supported!!!"); }
       console.log("Received offer, set offer, sending answer....")
       onOffer(evt);
 
-      %# callを受けてコールを実行する 目的はsendcall()の実行だったりする。
-      if (! oncall) { call() };
+      %# callを受けてコールを実行する 目的はsendcall()の実行だったりする。sendtoが正しくSDPに設定できなかった為の不具合だった。不要になった。
+%#      if (! oncall) { call() };
 
         } else if (evt.type === 'answer') {  // **
       console.log('Received answer, settinng answer SDP');
@@ -297,7 +297,13 @@ function call(){
       conn.iceReady = true;
       conn.peerconnection.setLocalDescription(sessionDescription);
       sessionDescription.sendto = id;
-      sendSDP(sessionDescription);
+
+      %# SDPにsendtoが付加出来ないのでコピーして付加し直す。
+      var cpsdp = JSON.parse(JSON.stringify(sessionDescription));
+          cpsdp.sendto = id;
+      var newsdp = JSON.parse(JSON.stringify(cpsdp));
+
+      sendSDP(newsdp);
     }, function () { // in case of error
       console.log("Create Offer failed");
     }, mediaConstraints);
@@ -447,7 +453,13 @@ function call(){
       conn.iceReady = true;
       conn.peerconnection.setLocalDescription(sessionDescription);
       sessionDescription.sendto = id;
-      sendSDP(sessionDescription);
+
+      %# SDPにsendtoが付加出来ないのでコピーして付加し直す。
+      var cpsdp = JSON.parse(JSON.stringify(sessionDescription));
+          cpsdp.sendto = id;
+      var newsdp = JSON.parse(JSON.stringify(cpsdp));
+
+      sendSDP(newsdp);
     }, function () { // in case of error
       console.log("Create Answer failed");
     }, mediaConstraints);
