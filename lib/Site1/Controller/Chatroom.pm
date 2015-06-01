@@ -380,7 +380,7 @@ sub echopg {
                #更新チェックのループ停止
          ###       if ( ! defined $clients->{$id}){ Mojo::IOLoop->remove($loopid); }
                # pubsubリスナーの停止
-                if ( ! defined $clients->{$id}){ $pubsub->unlisten(messagetl => $cb); }
+                if ( ! defined $clients->{$id}){ $pubsub->unlisten('messagetl' => $cb); }
              }
          );
 }
@@ -608,7 +608,7 @@ sub roomentrylist {
     my @memberlist;
 
     my $loopid = Mojo::IOLoop->recurring( 
-             5 => sub {
+             1 => sub {
                 $result = $pg->db->query("SELECT connid,sessionid,username,icon_url FROM $room");
                 # $result  $_->{sessionid}の配列の想定
                 ####my $rownum = $result->rows;  # 何故か1回で０に成る。。
@@ -659,5 +659,116 @@ sub voicechat2 {
 
     $self->render(msg_w => '１．共通のroom名を入力して待機して下さい。(エンター押してね）２．メンバーがそろったらStandbyを押して下さい。３．全員がStandbyしたら、connectボタンを押して通話状態を確認して下さい。');
 }
+
+sub videochat2 {
+    my $self = shift;
+    # webroom.pmへの対応用ページ
+
+    $self->render(msg_w => '１．共通のroom名を入力して待機して下さい。(エンター押してね）２．メンバーがそろったらStandbyを押して下さい。３．全員がStandbyしたら、connectボタンを押して通話状態を確認して下さい。');
+}
+
+sub chatopen {
+    my $self = shift;
+
+    $self->render(msg_w => '履歴は残りません。切断はブラウザを完全に閉じて下さい。');
+}
+
+sub echopubsub {
+    my $self = shift;
+ # chatopen用 
+
+    # postgresqlの準備 pgdbhはSite1.pmで全体定義した。
+    my $pg = $self->app->pgdbh;
+    my $pubsub = Mojo::Pg::PubSub->new(pg => $pg);
+
+    #param 認証をパスしているので、username,icon_url,emailがstashされている。
+    my $username = $self->stash('username');
+    my $icon = $self->stash('icon'); #encodeされたままのはず。
+    my $icon_url = $self->stash('icon_url');
+       $icon_url = "/imgcomm?oid=$icon" if (! defined $icon_url);
+
+       $self->app->log->debug(sprintf 'Client connected: %s', $self->tx);
+       my $id = sprintf "%s", $self->tx;
+       $clients->{$id} = $self->tx;
+
+    # 接続時間延長 最大90sec
+       my $stream = Mojo::IOLoop->stream($self->tx->connection);
+          $stream->timeout(40);
+
+
+    # connect message write
+    #日付設定
+    my $dt = DateTime->now( time_zone => 'Asia/Tokyo');
+
+       my $resmsg = { icon_url => $icon_url, 
+                           username => $username, 
+                           hms => $dt->hms,
+                           text => 'Connect'
+                         };
+           # $resmsgがperl形式で、jsonで送信
+          $clients->{$id}->send({ json => $resmsg});
+
+       # 書き込みを通知
+       $resmsg = to_json($resmsg); #JSONにしてから 
+       $pubsub->notify('openchat' => $resmsg);
+
+    #pubsubから受信設定 共通なので基本ブロードキャスト
+        my $cb = $pubsub->listen(openchat => sub {
+            my ($pubsub, $payload) = @_;
+                $self->app->log->debug("on Message!! pubsub.");
+                # $payloadはJSON形式->perl形式        
+                $payload = from_json($payload);
+
+                 #websocketは自分にだけ送信する
+                 $self->tx->send({ json => $payload});
+          });
+
+    # on message・・・・・・・
+       $self->on(message => sub {
+                  my ($self, $msg) = @_;
+
+                  # dummyイベントはパスする
+                  my $chkmsg = from_json($msg);
+                  if ($chkmsg->{dummy}){
+                      $self->app->log->debug("Receive Dummy: $chkmsg->{dummy}");                      return; 
+                      }
+
+                  #日付設定 重複記述あり
+                  my $dt = DateTime->now( time_zone => 'Asia/Tokyo');
+
+                  my $resmsg = { icon_url => $icon_url, 
+                                       username => $username, 
+                                       hms => $dt->hms,
+                                       text => $chkmsg->{text}, 
+                                     };
+                     $resmsg = to_json($resmsg);
+                   $self->app->log->debug("resmsg: $resmsg");
+                   # 書き込みを通知 念の為後置のunless
+                   $pubsub->notify('openchat' => $resmsg ) unless ($chkmsg->{dummy});
+                  });
+
+    # on finish・・・・・・・
+         $self->on(finish => sub{
+                 $self->app->log->debug('Client disconnected');
+                 delete $clients->{$id};
+
+               #日付設定 重複記述あり
+                my $dt = DateTime->now( time_zone => 'Asia/Tokyo');
+
+                my $resmsg = { icon_url => $icon_url, 
+                                       username => $username, 
+                                       hms => $dt->hms,
+                                       text => 'Has gone...' 
+                                     };
+                   $resmsg = to_json($resmsg);
+               # 書き込みを通知
+               $pubsub->notify('openchat' => $resmsg);
+
+               # pubsubリスナーの停止
+                if ( ! defined $clients->{$id}){ $pubsub->unlisten( 'openchat' => $cb); }
+              });
+
+}
+
 
 1;

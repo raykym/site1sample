@@ -71,6 +71,7 @@ sub startup {
   $bridge->websocket('/roomentrycheck')->to(controller => 'Chatroom', action => 'roomentrycheck');
   $bridge->websocket('/roomentrylist')->to(controller => 'Chatroom', action => 'roomentrylist');
   $bridge->websocket('/wsocket/signaling')->to(controller => 'Webroom', action => 'signaling');
+  $bridge->websocket('/echopubsub')->to(controller => 'Chatroom', action => 'echopubsub');
 
 
   # Normal route to controller
@@ -83,6 +84,7 @@ sub startup {
 
    # 以下はログイン認証済でないとページに入れない
   $bridge->get('/menu')->to('top#mainmenu');          
+  $bridge->get('/menu2')->to('top#mainmenu2');          
   $bridge->get('/menu/settings')->to('login#menusettings');
   $bridge->get('/menu/settings/email')->to('login#emailset');
   $bridge->post('/menu/settings/emailact')->to('login#emailsetact'); #template未使用
@@ -121,6 +123,8 @@ sub startup {
   $bridge->get('/voicechat')->to('chatroom#voicechat');
   $bridge->get('/videochat')->to('chatroom#videochat');
   $bridge->get('/voicechat2')->to('chatroom#voicechat2');
+  $bridge->get('/videochat2')->to('chatroom#videochat2');
+  $bridge->get('/menu/chatopen')->to('chatroom#chatopen');
 
   $r->any('/oauth2callback')->to(controller => 'Login', action => 'oauth2callback');
 

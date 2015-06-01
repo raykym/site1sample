@@ -1,8 +1,15 @@
-% layout 'mobidef';
-% title 'mainmenu';
+% layout 'mobidef2';
+% title 'mainmenu2';
 <div data-role="page" id="menu-top" style="background: #80aa55;">
-    <div>
+    <div data-role="header">
+        <a href="#panel" data-icon="bars" data-iconpos="notext">panel</a>
         <h1>ThisSite</h1>
+    </div>
+    <div data-role="panel" id="panel" data-display="overlay">
+        <ul data-role="listview">
+            <li><a href="/voicechat" class="ui-btn" rel="external">VoiceChat(OPEN CHANNEL)</a></li>
+            <li><a href="/voicechat2" class="ui-btn" rel="external">VoiceChat(CLOSED CHANNEL)</a></li>
+        </ul>
     </div>
   <div role="main" class="ui-content">
         <h3>ようこそ、<%= $username %>さん</h3>
@@ -11,7 +18,6 @@
         <a href="/menu/chatroom" class="ui-btn ui-btn-inline" data-transition="flip" rel="external">チャット(websocket test)</a>
         <a href="/menu/chatroomdb" class="ui-btn ui-btn-inline" data-transition="flip" rel="external">チャット(mongoDB base)</a>
         <a href="/menu/chatroompg" class="ui-btn ui-btn-inline" data-transition="flip" rel="external">チャット(mongoDB base pubsub)</a>
-        <a href="/menu/chatopen" class="ui-btn ui-btn-inline" data-transition="flip" rel="external">オープンチャット</a>
         <a href="/menu/upload" class="ui-btn" data-transition="flip" rel="external">ファイルアップロード</a>
         <a href="/menu/mirror" class="ui-btn" data-transition="flip" rel="external">ミラー</a>
         <p>WebRTCはスマホでは受信出来ない場合があります。テザリングして別の端末からなら可能です。</p>
@@ -23,9 +29,6 @@
         <a href="/videochat2" class="ui-btn" data-transition="flip" rel="external">VideoChat(CLOSED CHANNEL)</a>
         <div></div>
         <a href="/menu/settings" class="ui-btn" data-transition="flip">設定変更</a>
-    </div>
-    <div data-role="footer" style="backgroud: #aac78d;">
-    <a href="/" class="ui-btn ui-btn-inline">top</a>
     </div>
 </div>
 

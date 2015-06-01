@@ -16,6 +16,12 @@ sub mainmenu {
     $self->render(msg => 'OPEN the Menu!');
 }
 
+sub mainmenu2 {
+    my $self = shift;
+
+    $self->render(msg => 'OPEN the Menu!');
+}
+
 sub unknown {
     my $self = shift;
     # 未定義ページヘのアクセス
