@@ -19,6 +19,7 @@
 
     <div role="main" class="ui-content" id='border'>
         <h2><%= $msg %></h2>
+        <p style="color: #FF0000">知り合い向けのWebRTCシグナリングサーバです。関係者以外立ち入り禁止</p>
         <a href="/menu" style="text-decoration: none; background: #222222; color: #ffffff;" class="ui-btn ui-corner-all ui-btn-inline" data-transition="flip">メニュー</a>
  %# メニューボタンをformにするとdata-transition出来ない
  %#       <form method="get" action="/menu" >

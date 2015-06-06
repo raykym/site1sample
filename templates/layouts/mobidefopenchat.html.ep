@@ -19,9 +19,9 @@
     _background-color: #80aa55;
     _background: #b8f1f1;
    }
-  div {
-    background-color: #aac78d;
-    margin: 20px; 
+  div#chatroom {
+    background-color: #80aa55;
+    _margin: 20px; 
     padding: 2px;
     _border: 1px solid; 
    }

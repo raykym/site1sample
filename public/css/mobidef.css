@@ -1,0 +1,32 @@
+  <!--
+  body {
+    _border: 1px solid;
+    _background-color: #80aa55;
+    _background: #b8f1f1;
+   }
+  div {
+    background-color: #aac78d;
+    margin: 20px;
+    padding: 2px;
+    _border: 1px solid;
+   }
+  div#border {
+    border: 1px solid;
+  }
+  div#topasign {
+    position: relative; width: 140px; hight: 10px; left: 50%;
+    border: none;
+   }
+  div#checkbox {
+   background: #ffffff;
+   }
+  a {
+     _background: #aac78d;
+    text-decoration: none;
+  }
+  textarea {
+      _width: 40em;
+      _height: 10em;
+  }
+  -->
+

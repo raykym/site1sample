@@ -1,4 +1,4 @@
-% layout 'mobidef';
+% layout 'mobidefopenchat';
 % title 'Open Chat';
 
 <script type="text/javascript">
@@ -57,6 +57,18 @@ function wsopen() {
 </script>
 
 <div id="chatroom" data-role="page" style="background: #80aa55">
+    <div data-role="header">
+        <a href="#panel" data-icon="bars" data-iconpos="notext">panel</a>
+        <h1>ThisSite</h1>
+    </div>
+    <div data-role="panel" id="panel" data-display="overlay">
+        <ul data-role="listview">
+            <li><a href="/voicechat" class="ui-btn" rel="external">ボイスチャット(OPEN CHANNEL)</a></li>
+            <li><a href="/voicechat2" class="ui-btn" rel="external">ボイスチャット(CLOSED CHANNEL)</a></li>
+            <li><a href="/videochat" class="ui-btn" rel="external">ビデオチャット(OPEN CHANNEL)</a></li>
+            <li><a href="/videochat2" class="ui-btn" rel="external">ビデオチャット(CLOSED CHANNEL)</a></li>
+        </ul>
+    </div>
     <div><h3>Open chat</h3></div>
     <div style="color: #ff0000"><%= $msg_w %></div>
         <div style="border: 1px solid">

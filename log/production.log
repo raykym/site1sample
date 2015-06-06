@@ -225,3 +225,21 @@ FATAL:  ??????????????? at /home/debian/perl5/lib/perl5/Mojo/Pg.pm line 83.
 [Mon Jun  1 02:30:31 2015] [info] Listening at "http://192.168.0.8:3800"
 [Mon Jun  1 02:30:31 2015] [info] Manager 2944 started
 [Mon Jun  1 02:30:31 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Mon Jun  1 15:53:15 2015] [info] Listening at "http://192.168.0.8:3800"
+[Mon Jun  1 15:53:15 2015] [info] Manager 7537 started
+[Mon Jun  1 15:53:15 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu Jun  4 01:52:57 2015] [info] Listening at "http://192.168.0.8:3800"
+[Thu Jun  4 01:52:57 2015] [info] Manager 21781 started
+[Thu Jun  4 01:52:58 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Fri Jun  5 08:57:52 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri Jun  5 08:57:52 2015] [info] Manager 29514 started
+[Fri Jun  5 08:57:52 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Fri Jun  5 19:44:13 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri Jun  5 19:44:13 2015] [info] Manager 385 started
+[Fri Jun  5 19:44:13 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sat Jun  6 15:16:45 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sat Jun  6 15:16:45 2015] [info] Manager 6298 started
+[Sat Jun  6 15:16:45 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sat Jun  6 16:00:00 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sat Jun  6 16:00:00 2015] [info] Manager 6655 started
+[Sat Jun  6 16:00:00 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"

@@ -13,6 +13,7 @@ sub signaling {
   my $self = shift;
 
      #Chatroom.pmのsignaringとroomentrylistをマージした処理を作る。
+     # connectの同期を取るためにreadyフラグを用意している。
 
     #cookieからsid取得 認証を経由している前提
     my $sid = $self->cookie('site1');
@@ -37,8 +38,7 @@ sub signaling {
 
     # WebSocket接続維持設定
        my $stream = Mojo::IOLoop->stream($self->tx->connection);
-          $stream->timeout(3000);
-          $self->inactivity_timeout(3000);
+          $stream->timeout(90);
 
     #pubsubから受信設定
         my $cb = $pubsub->listen($connid => sub {
@@ -71,7 +71,7 @@ sub signaling {
                    $self->app->log->debug("DEBUG: on session: $connid");
                    $self->app->log->debug("DEBUG: msg: $msg");
 
-           # room作成
+           # room作成 {entry:connid}受信
            if ( $jsonobj->{entry} ) {
 
                    #重複入力の除外（リロードすればconnidroom_tblから除外されて再入力可能に成る）
@@ -110,6 +110,7 @@ sub signaling {
                    $pg->db->query("INSERT INTO $tablename values(?,?,?,?)",@values);
               } # $jsonobj->{entry}
 
+              # setReadyを受信
               if ($jsonobj->{setReady}) {
                # $tablenameが必要に成る度に検索が必要、サブルーチン内だから。
                my $res = $pg->db->query("SELECT * FROM connidroom_tbl WHERE connid = ?", $connid); 
@@ -131,6 +132,7 @@ sub signaling {
                    $msg = to_json($jsonobj);
                    $self->app->log->debug("DEBUG: msgaddid: $msg");
 
+              # sendtoが含まれる場合
                 if ($jsonobj->{sendto}){
                    #個別送信が含まれる場合、単独送信
                    $pubsub->notify( $jsonobj->{sendto} => $msg);
@@ -150,7 +152,7 @@ sub signaling {
                            }
 
 
-        #エントリーメンバーを送信コマンドの受信
+        #エントリーメンバーを送信コマンドの受信 自分宛て
              if ($jsonobj->{getlist}){
                my $res = $pg->db->query("SELECT * FROM connidroom_tbl WHERE connid = ?", $connid); 
                my $resline = $res->hash; # 1個の想定
@@ -174,6 +176,21 @@ sub signaling {
 
                  return;
                 } 
+
+        # roomからエントリー削除
+        if ($jsonobj->{bye}){
+               my $res = $pg->db->query("SELECT * FROM connidroom_tbl WHERE connid = ?", $connid); 
+               my $resline = $res->hash; # 1個の想定
+                  $tablename = $resline->{tablename} if ($resline->{tablename});
+
+               # リスナー登録の解除 
+               $pg->db->query("DELETE FROM $tablename WHERE connid = ?" , $connid);
+               $self->app->log->debug("DELETE entry: $tablename : $connid");
+
+               # connidroom_tblからエントリー削除
+               $pg->db->query("DELETE FROM connidroom_tbl WHERE connid = ?" , $connid);
+               $self->app->log->debug("del entry: $connid");
+           }
 
                 }); # onmessageのはず。。。
 

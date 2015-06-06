@@ -439,15 +439,15 @@ sub signaling {
     # はずが、方針変更、rooentrylistをマージしてクローズしない方向で。。。
     # 接続タイミングを合わせるまでは接続を続ける必要がある。
        my $stream = Mojo::IOLoop->stream($self->tx->connection);
-          $stream->timeout(3000);
+          $stream->timeout(60);
           $self->inactivity_timeout(3000);
        #つなぎっぱなしの為のループ  ・・・ つながれば切れてOKなので
-#       Mojo::IOLoop->recurring(
-#          60 => sub {
-#             my $char = "dummey";
-#             my $bytes = $clients->{$id}->build_message($char);
-#             $clients->{$id}->send( {binary => $bytes}) if ($clients->{$id}->is_websocket);
-#          });
+       Mojo::IOLoop->recurring(
+          50 => sub {
+             my $char = "dummey";
+             my $bytes = $clients->{$id}->build_message($char);
+             $clients->{$id}->send( {binary => $bytes}) if ($clients->{$id}->is_websocket);
+          });
 
     #pubsubから受信設定 
         my $cb = $pubsub->listen($connid => sub {
@@ -561,7 +561,7 @@ sub roomentrycheck {
 sub voicechat {
     my $self = shift;
 
-    $self->render(msg_w => '参加メンバーがそろったら、それぞれconnectを押してください。アイコン横のカウンターが動いていれば通じているはずです。切断時はブラウザを完全に閉じないとネットワークが切れていない場合が有ります。スマホでは通知にマイクマークが無いことを確認してください。');
+    $self->render(msg_w => '参加メンバーがそろったら、それぞれconnectを押してください。アイコン横のカウンターが動いていれば通じているはずです。切断時はブラウザを完全に閉じないとネットワークが切れていない場合が有ります。スマホでは通知にマイクマークが無いことを確認してください。!!!後から接続した場合、表示が出ません公開チャットであることを忘れずに!!!');
 }
 
 sub roomentrylist {
@@ -590,8 +590,8 @@ sub roomentrylist {
     my $sth_sesi_email = $self->app->dbconn->dbh->prepare("$config->{sql_sesi_email}");
     my $sth_getchatmemb = $self->app->dbconn->dbh->prepare("$config->{sql_getchatmemb}");
 
-#    my $stream = Mojo::IOLoop->stream($self->tx->connection);
-#       $stream->timeout(3000);
+    my $stream = Mojo::IOLoop->stream($self->tx->connection);
+       $stream->timeout(60);
 #       $self->inactivity_timeout(3000);
 
     #pubsubから受信設定 
@@ -770,5 +770,12 @@ sub echopubsub {
 
 }
 
+sub voicechatspot {
+    my $self = shift;
+    # webroom.pmへの対応用ページ
+    # ユーザが出入り自由な形式を目指す
+
+    $self->render(msg_w => '１．共通のroom名を入力して待機して下さい。(エンター押してね）２．メンバーがそろったらStandbyを押して下さい。３．全員がStandbyしたら、connectボタンを押して通話状態を確認して下さい。');
+}
 
 1;

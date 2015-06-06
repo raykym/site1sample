@@ -152,9 +152,9 @@ sub usercheck {
        $sth_user_chk->execute($email);
     my $get_uname = $sth_user_chk->fetchrow_hashref();
     my $username = $get_uname->{username};
-       $self->app->log->debug("DEBUG: username(local): $username");
+       $self->app->log->debug("DEBUG: username(local): $username") if ( defined $username);
     my $uid = $get_uname->{uid};
-       $self->app->log->debug("DEBUG: uid(local): $uid");
+       $self->app->log->debug("DEBUG: uid(local): $uid") if ( defined $uid);
     my $icon = $get_uname->{icon};
     # $iconが空ならNow printingが設定される。
        if (! defined $icon ) { $icon = 'rKzHfJwYJkApps4uk7cjAQ';}
@@ -196,7 +196,7 @@ sub usercheck {
      #$atokenが有れば再度取得し直す
      $value = $ua->get(
                 "https://www.googleapis.com/plus/v1/people/me?access_token=$atoken"
-                )->res->json unless ($atoken eq '');
+                )->res->json if ( defined $atoken );
        #self->app->log->debug("DEBUG: new atoken: $atoken");
 
        $text = to_json($value);
@@ -208,7 +208,7 @@ sub usercheck {
        $username = $value->{displayName} unless $username; #無ければ
        $self->app->log->debug("DEBUG: displayName: $username");
     my $icon_url =$value->{image}->{url};
-       $self->app->log->debug("DEBUG: icon_url: $icon_url");
+       $self->app->log->debug("DEBUG: icon_url: $icon_url") if (defined $icon_url);
     my $gpid = $value->{id};
 
        $uid = Sessionid->new($gpid)->guid unless $uid; #無ければ

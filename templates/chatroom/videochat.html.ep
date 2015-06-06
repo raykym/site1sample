@@ -37,6 +37,9 @@ if (!  navigator.webkitGetUserMedia) {  alert("Not Supported!!!"); }
           camnum = 0;
            }
 
+      if ( camnum == 0 ) { $("#chgcam").text("Change Camera [FRONT]");}
+      if ( camnum == 1 ) { $("#chgcam").text("Change Camera [BACK]");}
+
      //カメラ再生中の場合は切り替えのため、一旦停止する。
     if ( localStream ) {
         localStream.stop();
@@ -238,6 +241,9 @@ function call(){
     ws.send({"type":"bye"});
     detachAllvoice();
     stopAllConnections();
+
+    window.location.reload();
+
   }
 
   // start local video

@@ -8,7 +8,11 @@ use Mojolicious::Plugin::OAuth2;
 sub startup {
   my $self = shift;
   # hypnotoad start
-  $self->config(hypnotoad=>{listen => ['http://192.168.0.8:3800'],workers => 4});
+  $self->config(hypnotoad=>{
+                       listen => ['http://192.168.0.8:3800'],
+                       workers => 4,
+                       proxy => 1,
+                       });
 
 # DB設定 $self->app->dbconn->dbh でアクセス可能になる
 
@@ -82,6 +86,8 @@ sub startup {
   $r->post('/signinact')->to('login#signinact'); #template未使用
   $r->post('/signupact')->to('login#signupact'); #template未使用 
 
+  $r->any('/CAdownload')->to( controller => 'OreoreCA', action => 'download');
+
    # 以下はログイン認証済でないとページに入れない
   $bridge->get('/menu')->to('top#mainmenu');          
   $bridge->get('/menu2')->to('top#mainmenu2');          
@@ -125,6 +131,7 @@ sub startup {
   $bridge->get('/voicechat2')->to('chatroom#voicechat2');
   $bridge->get('/videochat2')->to('chatroom#videochat2');
   $bridge->get('/menu/chatopen')->to('chatroom#chatopen');
+  $bridge->get('/voicechatspot')->to('chatroom#voicechatspot');
 
   $r->any('/oauth2callback')->to(controller => 'Login', action => 'oauth2callback');
 

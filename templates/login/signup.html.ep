@@ -1,5 +1,6 @@
 % layout 'mobidef';
 % title 'signupact';
+<div data-role="page" style="background: #80aa55;">
 <div><h3>登録ページ</h3></div>
 <div style="color: #ff0000"><%= $msg %></div>
 <div style="border: 1px solid"><h5> e-mailを登録してください。これは呼び出しに利用を想定しています。Gmailを推奨します。<br>
@@ -17,4 +18,4 @@ passwordは8文字以上、英数字、記号（-!_#%&）をそれぞれ1文字�
    <div data-role="footer" style="background: #aac78d;">
    <a href="" data-rel="back">back</a>
    </div>
-
+</div>

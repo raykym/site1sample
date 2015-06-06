@@ -167,9 +167,12 @@ function call(){
   // stop the connection upon user request
   function hangUp() {
     console.log("Hang up.");
-    ws.send({"type":"bye"});
-    detachAllvoice();
-    stopAllConnections();
+ %#   ws.send({"type":"bye"});
+ %#   detachAllvoice();
+ %#   stopAllConnections();
+
+    window.location.reload();
+
   }
 
   // start local audio
