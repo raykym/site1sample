@@ -1,0 +1,36 @@
+<html>
+/* タイル状にドラッグ可能な表示*/
+<head>
+    <meta http-equiv="content-type" content="test/html; charset=utf-8">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<style >
+    #draggable_gray { background:gray; width: 150px; height: 150px; padding: 0.5em; }
+    #draggable_green { background:green; width: 150px; height: 150px; padding: 0.5em; }
+</style>
+
+<script>
+    $(function(){
+      $("#draggable_gray").draggable();
+      $("#draggable_green").draggable();
+    });
+</script>
+
+</head>
+
+<body>
+<h2 class="example">例</h2>
+<div class="ui-widget-content" id="draggable_gray" >
+.gray
+</div>
+
+<div class="ui-widget-content" id="draggable_green">
+.green
+</div>
+
+
+</body>
+</html>
+
+

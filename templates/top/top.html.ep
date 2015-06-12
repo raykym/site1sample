@@ -11,8 +11,8 @@
          %# url shortener use.
                 <a href="https://goo.gl/zDCRrG" data-rel="dialog" data-transition="flip" class="ui-btn ui-corner-all ui-btn-right">Google+</a>
             <div>
-            <h5 style="color: #b0c4de;">登録済みの場合、直接メニューから入れます</h5>
-            <h5 style="color: #b0c4de;">Google+のアカウント利用する場合は右上からどうぞ。</h5>
+            <h4 style="color: #005500;">登録済みの場合、直接メニューから入れます</h4>
+            <h4 style="color: #005500;">Google+のアカウントが有れば登録は不要です。</h4>
             </div>
         </div>
     </div><!-- /header -->
@@ -32,6 +32,7 @@
         <h5 style="color: #000000;">このサイトはMojoliciousとJQuery mobileで作成しています。</h5>
         <h5 style="color: #550000;">このサイトの参照はGoogle Chromeでお願いします。</h5>
         <h5 style="color: #550000;">Android 4.2以上が必須です</h5>
+        <h5 style="color: #550000;">MacOS iOSでは動かないかもです。</h5>
         <div>
     </div><!-- /footer -->
 </div><!-- /page -->

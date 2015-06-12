@@ -10,7 +10,7 @@ sub startup {
   # hypnotoad start
   $self->config(hypnotoad=>{
                        listen => ['http://192.168.0.8:3800'],
-                       workers => 4,
+                       workers => 10,
                        proxy => 1,
                        });
 
@@ -131,7 +131,8 @@ sub startup {
   $bridge->get('/voicechat2')->to('chatroom#voicechat2');
   $bridge->get('/videochat2')->to('chatroom#videochat2');
   $bridge->get('/menu/chatopen')->to('chatroom#chatopen');
-  $bridge->get('/voicechatspot')->to('chatroom#voicechatspot');
+  $bridge->get('/voicechatspot')->to('chatroom#voicechatspot'); # 未完
+  $bridge->get('/videochat2pc')->to('chatroom#videochat2pc');
 
   $r->any('/oauth2callback')->to(controller => 'Login', action => 'oauth2callback');
 

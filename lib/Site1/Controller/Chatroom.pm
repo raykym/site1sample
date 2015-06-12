@@ -426,10 +426,10 @@ sub signaling {
  # 目的を見失った行       my $subscall = Mojo::Pg::PubSub->new(pg => $pg);
 
            $pg->db->query("CREATE TABLE IF NOT EXISTS $room (connid text, sessionid text,username varchar(255),icon_url char(255))");
-           $self->app->log->debug("DEBUG: CREATE TABLE $room");
+           $self->app->log->info("INFO: CREATE TABLE $room");
 
     my @values = ($connid, $sid, $username, $icon_url);
-       $self->app->log->debug("DEBUG: @values");
+       $self->app->log->info("INFO: @values");
 
     #リスナー登録　pgのsignal_tblへsidを登録 $roomがテーブル名
         $pg->db->query("INSERT INTO $room values(?,?,?,?)",@values);
@@ -505,6 +505,7 @@ sub signaling {
                if ( ! defined $clients->{$id}){ $pubsub->unlisten($connid => $cb); }
                # リスナー登録の解除 削除はconnidではなくそのままsidで・・・
                $pg->db->query("DELETE FROM $room WHERE sessionid = ?" , $sid);
+               $self->app->log->info("INFO: DEL Entry $room $sid");
         });
 
 }
@@ -774,6 +775,13 @@ sub voicechatspot {
     my $self = shift;
     # webroom.pmへの対応用ページ
     # ユーザが出入り自由な形式を目指す
+
+    $self->render(msg_w => '１．共通のroom名を入力して待機して下さい。(エンター押してね）２．メンバーがそろったらStandbyを押して下さい。３．全員がStandbyしたら、connectボタンを押して通話状態を確認して下さい。');
+}
+
+sub videochat2pc {
+    my $self = shift;
+    # webroom.pmへの対応用ページ PC用draggable対応
 
     $self->render(msg_w => '１．共通のroom名を入力して待機して下さい。(エンター押してね）２．メンバーがそろったらStandbyを押して下さい。３．全員がStandbyしたら、connectボタンを押して通話状態を確認して下さい。');
 }

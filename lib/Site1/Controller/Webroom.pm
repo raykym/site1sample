@@ -39,6 +39,7 @@ sub signaling {
     # WebSocket接続維持設定
        my $stream = Mojo::IOLoop->stream($self->tx->connection);
           $stream->timeout(90);
+          $self->inactivity_timeout(3000);
 
     #pubsubから受信設定
         my $cb = $pubsub->listen($connid => sub {
@@ -83,7 +84,7 @@ sub signaling {
                    my $result = $pg->db->query("SELECT tablename FROM connidroom_tbl WHERE roomname = ?",$roomname);
                    my $restable = $result->hash;   #1個の想定
                    my $tablename = $restable->{tablename};
-                      $self->app->log->debug("Get connidroom tablename: $tablename");
+                      $self->app->log->info("Get connidroom tablename: $tablename");
                    # 後置ifで振り分け
                    my $cnt = 1;
                       $cnt = 0 if (! defined $tablename);
@@ -94,17 +95,18 @@ sub signaling {
                       $self->app->log->debug("Entry chksum: $chksum") if ($cnt == 0);
                     # 上かここで設定される
                       $tablename = "room_".$chksum."_tbl" if ($cnt == 0);
-                      $self->app->log->debug("TABLENAME: $tablename") if ($cnt == 0);
+                      $self->app->log->info("TABLENAME: $tablename") if ($cnt == 0);
 
                    my @connvalue = ($self->tx->connection,$jsonobj->{entry},$tablename); 
+                      $self->app->log->info("INFO: connvalue: @connvalue");
                    $pg->db->query("INSERT INTO connidroom_tbl values(?,?,?)",@connvalue); 
 
 
-                   $pg->db->query("CREATE TABLE IF NOT EXISTS $tablename (connid text, sessionid text,username varchar(255),icon_url char(255), ready boolean DEFAULT false)");
-                   $self->app->log->debug("DEBUG: CREATE TABLE $tablename");
+                   $pg->db->query("CREATE TABLE IF NOT EXISTS $tablename (connid text, sessionid text,username varchar(255),icon_url char(255), ready boolean DEFAULT false, gpslocation text)");
+                   $self->app->log->info("DEBUG: CREATE TABLE $tablename");
 
                 my @values = ($connid, $sid, $username, $icon_url);
-       #            $self->app->log->debug("DEBUG: @values");
+                   $self->app->log->info("INFO: @values");
 
                 #リスナー登録　pgのsignal_tblへsidを登録 
                    $pg->db->query("INSERT INTO $tablename values(?,?,?,?)",@values);
@@ -126,6 +128,20 @@ sub signaling {
 
               } # setReady
 
+              #gpslocationを受信
+              if ($jsonobj->{gpslocation}) {
+ 
+               my $resvalues = encode_json($jsonobj->{gpslocation});
+
+               # $tablenameが必要に成る度に検索が必要、サブルーチン内だから。
+               my $res = $pg->db->query("SELECT * FROM connidroom_tbl WHERE connid = ?", $connid); 
+               my $resline = $res->hash; # 1個の想定
+                  $tablename = $resline->{tablename} if ($resline->{tablename});
+                  
+                  $pg->db->query("UPDATE $tablename SET gpslocation = ? WHERE connid = ?", $resvalues, $connid);
+                  $self->app->log->debug("DEBUG: GPSLOCATION: $resvalues");
+                  return;
+              } # gpslocation
 
                # fromとしてconnidを付加
                    $jsonobj->{from} = $connid;
@@ -159,10 +175,10 @@ sub signaling {
                   $tablename = $resline->{tablename} if ($resline->{tablename});
         #          $self->app->log->debug("loop tablename: $tablename");
 
-                $result = $pg->db->query("SELECT connid,sessionid,username,icon_url,ready FROM $tablename") if ($tablename);
+                $result = $pg->db->query("SELECT connid,sessionid,username,icon_url,ready,gpslocation FROM $tablename") if ($tablename);
 
               while (my $next = $result->hash){
-                    push @memberlist, to_json({sessionid => $next->{sessionid}, username => $next->{username}, icon_url => $next->{icon_url}, connid => $next->{connid}, ready => $next->{ready}});
+                    push @memberlist, to_json({sessionid => $next->{sessionid}, username => $next->{username}, icon_url => $next->{icon_url}, connid => $next->{connid}, ready => $next->{ready}, gpslocation => $next->{gpslocation} });
           #         $self->app->log->debug("memberlist: $next->{connid} $next->{username} $next->{icon_url}");
                 } #while
 
@@ -185,11 +201,11 @@ sub signaling {
 
                # リスナー登録の解除 
                $pg->db->query("DELETE FROM $tablename WHERE connid = ?" , $connid);
-               $self->app->log->debug("DELETE entry: $tablename : $connid");
+               $self->app->log->info("DELETE entry: $tablename : $connid");
 
                # connidroom_tblからエントリー削除
                $pg->db->query("DELETE FROM connidroom_tbl WHERE connid = ?" , $connid);
-               $self->app->log->debug("del entry: $connid");
+               $self->app->log->info("del connidroom entry: $connid");
            }
 
                 }); # onmessageのはず。。。
@@ -211,11 +227,11 @@ sub signaling {
                if ( ! defined $self->tx){ $pubsub->unlisten($connid => $cb); }
                # リスナー登録の解除 
                $pg->db->query("DELETE FROM $tablename WHERE connid = ?" , $connid);
-               $self->app->log->debug("DELETE entry: $tablename : $connid");
+               $self->app->log->info("DELETE entry: $tablename : $connid");
 
                $result = $pg->db->query("SELECT * FROM $tablename");
                my $cnt = $result->rows;
-               $self->app->log->debug("$tablename REMAIN entry $cnt");
+               $self->app->log->info("$tablename REMAIN entry $cnt");
 
                if ($cnt == 0){
                   $self->app->log->debug("NULL TABLE DELETE!  $tablename");
@@ -223,7 +239,7 @@ sub signaling {
                }
 
                $pg->db->query("DELETE FROM connidroom_tbl WHERE connid = ?" , $connid);
-               $self->app->log->debug("del entry: $connid");
+               $self->app->log->info("del connid entry: $connid");
 
         });  # onfinish...
 
