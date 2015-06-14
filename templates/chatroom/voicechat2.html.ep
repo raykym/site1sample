@@ -5,6 +5,8 @@
  if (! navigator.webkitGetUserMedia) {  alert("Not Supported!!!"); }
 
   var mapoptions = null;
+  var mapobj = null;
+  var makerobj = new google.maps.Marker();
 
     // websocket
     var socketReady = false;
@@ -65,6 +67,9 @@
             //空にする 参加者が追加される度に更新される。
             $("#userlist").empty();
 
+                 %# makerobjの削除
+                 makerobj.setMap(null);
+
                 for (i=0; i<memlist.length; i++){
                     var resline = JSON.parse(memlist[i]);
 
@@ -78,8 +83,9 @@
                  %# Markerの描写　無ければパスする
                  if (resline.gpslocation){
                     console.log("Marker SET");
+
                     var gpspos = JSON.parse(resline.gpslocation);
-                    var maker = new google.maps.Marker({
+                        makerobj = new google.maps.Marker({
                            position: new google.maps.LatLng(gpspos.latitude, gpspos.longitude),
                            map: mapobj,
                            title: resline.username
@@ -523,7 +529,6 @@ function gpsset(){
   var lng = 0;
 
   // map描写
-        var mapobj = null;
         google.maps.event.addDomListener(window, 'load', function() {
                 var map = document.getElementById("gmap");
                 var options = {
@@ -535,9 +540,11 @@ function gpsset(){
                 mapobj = new google.maps.Map(map, options);
               });
 
-function getPosition(){
+
+ function getPosition(){
     console.log("getPosition START!!!");
-    navigator.geolocation.watchPosition(successCallback, errorCallback);
+  var watchID =  navigator.geolocation.watchPosition(successCallback, errorCallback);
+ %#   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
     function successCallback(position) {
 %#  var gl_text = "緯度：" + position.coords.latitude + "<br>";
@@ -547,6 +554,7 @@ function getPosition(){
 %#    gl_text += "高度の誤差：" + position.coords.altitudeAccuracy + "<br>";
 %#    gl_text += "方角：" + position.coords.heading + "<br>";
 %#    gl_text += "速度：" + position.coords.speed + "<br>";
+
 
       %# MAP表示センター指定
       lat = position.coords.latitude;
@@ -560,6 +568,9 @@ function getPosition(){
    %# 再描写用 GPSの座標をセンターに再描写
        var opt2 = { center: new google.maps.LatLng(lat, lng)};
        mapobj.setOptions(opt2);
+
+   %# 追跡の停止
+       navigator.geolocation.clearWatch(watchID);
 
     }  // successCallback
 
@@ -581,7 +592,7 @@ function errorCallback(error) {
   return;
  }
 
-}  //getPosition
+    }  //getPosition
 
 
 
@@ -598,15 +609,16 @@ function errorCallback(error) {
             <button type="button" class="ui-btn ui-btn-inline" onclick="standby();">Standby</button>
             <button type="button" class="ui-btn ui-btn-inline" onclick="call();">Connect</button>
             <button type="button" class="ui-btn ui-btn-inline" onclick="hangUp();">Hang Up</button>
-            <button type="button" class="ui-btn ui-btn-inline" onclick="gpsset();">GPS Enable</button>
         </div>
         <div>
            <a href="mailto:?subject=チャットへの招待&body=https://westwind.iobb.net/voicechat2 へアクセスして、room名”　　　　”に入って下さい。（アカウント登録が必要になります。もしくはgoogle+アカウントが利用出来ます。）" class="ui-btn">チャットへの招待メール起動</a>
            <ul>
              <li>音声は暗号化の影響でタイムラグが有ります。</li>
              <li>インジケーターは接続を確認できますが、切断されても認識出来ないので、あくまで目安程度です。</li>
-             <li>端末の状態で接続出来ないケースがあります。Google play等でupdateが走ると処理が重くてつながらないケースがあります。</li1>
+             <li>端末の状態で接続出来ないケースがあります。Google play等でupdateが走ると処理が重くてつながらないケースがあります。</li>
+             <li>GPSは屋外で利用している場合を想定しています。connect前に押しておく必要があります。</li>
            </ul>
+           <button type="button" class="ui-btn ui-btn-inline" onclick="gpsset();">GPS Enable</button>
         </div>
 
          <div page-role="panel" id="r_panel" data-display="overlay">

@@ -658,7 +658,7 @@ sub voicechat2 {
     my $self = shift;
     # webroom.pmへの対応用ページ
 
-    $self->render(msg_w => '１．共通のroom名を入力して待機して下さい。(エンター押してね）２．メンバーがそろったらStandbyを押して下さい。３．全員がStandbyしたら、connectボタンを押して通話状態を確認して下さい。');
+    $self->render(msg_w => '１．共通のroom名を入力して待機して下さい。(エンター押してね） GPSを共有する場合はここでGPS enable ２．メンバーがそろったらStandbyを押して下さい。３．全員がStandbyしたら、connectボタンを押して通話状態を確認して下さい。');
 }
 
 sub videochat2 {
@@ -671,7 +671,7 @@ sub videochat2 {
 sub chatopen {
     my $self = shift;
 
-    $self->render(msg_w => '履歴は残りません。切断はブラウザを完全に閉じて下さい。');
+    $self->render(msg_w => '履歴は残りません。切断はブラウザを完全に閉じて下さい。左上のメニューからボイスチャット、ビデオチャットに展開出来ます。');
 }
 
 sub echopubsub {
