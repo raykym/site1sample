@@ -47,10 +47,11 @@ function wsopen() {
   $('#msg').keydown(function (e) {
     if (e.keyCode == 13 && $('#msg').val()) {
 
-        var mess = { "text":$('#msg').val()};
+        var mess = {"text":$('#msg').val()};
         var messjson = JSON.stringify(mess);    
         ws.send(messjson);
         $('#msg').val('');
+        $('#sendfile').val('');
     }
   });
 });
@@ -71,6 +72,7 @@ function wsopen() {
     <div style="color: #ff0000"><%= $msg_w %></div>
         <div style="border: 1px solid">
         <p><input type="text" id="msg" placeholder="message..."></p>
+        <p><input type="file" id="sendfile" name="fname"></p>
         <ul id="output" data-role="listview" data-inset="true"></ul>
         </div>
     <div data-role="footer" style="backgroud: #aac78d;">

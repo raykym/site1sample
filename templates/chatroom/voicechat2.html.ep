@@ -543,7 +543,14 @@ function gpsset(){
 
  function getPosition(){
     console.log("getPosition START!!!");
-  var watchID =  navigator.geolocation.watchPosition(successCallback, errorCallback);
+
+    var geoOptions = {
+        enableHighAccuracy: true,   //高精度要求
+        timeout: 6000,          //タイムアウト(ミリ秒)
+        maximumAge: 0       //キャッシュ有効期限(ミリ秒)
+    }
+
+  var watchID =  navigator.geolocation.watchPosition(successCallback, errorCallback,geoOptions);
  %#   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
     function successCallback(position) {

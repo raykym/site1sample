@@ -1,0 +1,61 @@
+% layout 'mobidef';
+% title 'webnotice';
+<script type="text/javascript">
+
+  var ws = null;
+  var cnt = 0;
+
+  wsconnect();
+
+%# wsconnectで再起呼び出し、何度でも接続する。
+function wsconnect() {
+
+function wsopen() {
+  ws = new WebSocket('wss://westwind.iobb.net/webnotice');
+  return ws;
+    }
+
+  ws = wsopen();
+
+  ws.onopen = function () {
+    console.log('Connection opened');
+
+%# dummy送信
+%#       soket_wait = setInterval(function (){
+%#       var dummsg = {"dummy":"dummy"};
+%#       ws.send(JSON.stringify(dummsg));
+%#       console.log("socket wait sending!");
+%#        }, 50000);
+    };
+
+  ws.onclose = function(){
+     cnt++;
+     ws.close;
+     console.log("Close: Websocket! " + cnt);
+    wsconnect(); // reconnect
+    };
+
+  ws.onerror = function(){
+     alert("please Reload, Reconnect websocket!");
+    };
+
+  ws.onmessage = function (msg) {
+    var res = JSON.parse(msg.data);
+      console.log("msg:" + res);
+    };
+
+   } // wsconnect
+
+</script>
+
+<div data-role="page" style="background: #80aa55">
+    <div><h3>webnotice page</h3></div>
+    <div style="color: #ff0000"><%= $msg %></div>
+        <div style="border: 1px solid">
+
+
+        </div>
+    <div data-role="footer" style="backgroud: #aac78d;">
+    <a href="" data-rel="back">back</a>
+    </div>
+</div>

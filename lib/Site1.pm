@@ -36,12 +36,12 @@ sub startup {
   # Pg環境の設定  $self->app->pgdbh  
   (ref $self)->attr(
         pgdbh => sub {
-            Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
+            Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8:5433/sitedata');
         });
 
    # $self->app->pgでアクセス
    $self->app->helper(pg =>
-        sub { state $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8/sitedata');
+        sub { state $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8:5433/sitedata');
             });
 
 ##  my $sth = $self->app->dbh->prepare("$config->{sql1}");
@@ -76,6 +76,7 @@ sub startup {
   $bridge->websocket('/roomentrylist')->to(controller => 'Chatroom', action => 'roomentrylist');
   $bridge->websocket('/wsocket/signaling')->to(controller => 'Webroom', action => 'signaling');
   $bridge->websocket('/echopubsub')->to(controller => 'Chatroom', action => 'echopubsub');
+  $bridge->websocket('/webnotice')->to(controller => 'Webnotice', action => 'webnotice');
 
 
   # Normal route to controller
@@ -134,9 +135,11 @@ sub startup {
   $bridge->get('/voicechatspot')->to('chatroom#voicechatspot'); # 未完
   $bridge->get('/videochat2pc')->to('chatroom#videochat2pc');
 
+  $bridge->get('/webnotice/view')->to('webnotice#view');
+
   $r->any('/oauth2callback')->to(controller => 'Login', action => 'oauth2callback');
 
-  $r->any('*')->to('Top#unknown'); # 未定義のパスは全てtop画面へ
+  $r->any('*')->to('Top#unknown'); # 未定義のパスは全てunknown画面へ
 }
 
 1;

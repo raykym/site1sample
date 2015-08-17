@@ -520,3 +520,293 @@ FATAL:  ??????????????? at /home/debian/perl5/lib/perl5/Mojo/Pg.pm line 83.
 [Sun Jun 14 19:02:44 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : 86cdfff6d0b08e9f83c5c41b438dd521
 [Sun Jun 14 19:02:44 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 0
 [Sun Jun 14 19:02:44 2015] [info] del connid entry: 86cdfff6d0b08e9f83c5c41b438dd521
+[Mon Jun 15 21:05:58 2015] [info] Listening at "http://192.168.0.8:3800"
+[Mon Jun 15 21:05:58 2015] [info] Manager 26883 started
+[Mon Jun 15 21:05:58 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Tue Jun 16 23:37:05 2015] [info] Listening at "http://192.168.0.8:3800"
+[Tue Jun 16 23:37:05 2015] [info] Manager 607 started
+[Tue Jun 16 23:37:06 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Wed Jun 17 14:54:37 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jun 17 14:54:37 2015] [info] INFO: connvalue: bae3986c9135b8cf9692f609eca7e101 あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jun 17 14:54:37 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jun 17 14:54:37 2015] [info] INFO: bae3986c9135b8cf9692f609eca7e101 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9 テスト２ユーザ /imgcomm?oid=Vy9Neko4YXlIb0ZXWThKNTFGVk9RUQ
+[Wed Jun 17 14:55:21 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jun 17 14:55:21 2015] [info] INFO: connvalue: b4a10880a3df94540201efd8de7ca21f あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jun 17 14:55:21 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jun 17 14:55:21 2015] [info] INFO: b4a10880a3df94540201efd8de7ca21f e657b5951393a1a864b01c760c362fbb3afec6fd974b231cbe61e629 tes6ユーザ /imgcomm?oid=ckt6SGZKd1lKa0FwcHM0dWs3Y2pBUQ
+[Wed Jun 17 14:57:29 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : bae3986c9135b8cf9692f609eca7e101
+[Wed Jun 17 14:57:29 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Wed Jun 17 14:57:29 2015] [info] del connid entry: bae3986c9135b8cf9692f609eca7e101
+[Wed Jun 17 14:57:36 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jun 17 14:57:36 2015] [info] INFO: connvalue: 50b132e380c1cbaaa7cfa8058f237ddb あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jun 17 14:57:36 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jun 17 14:57:36 2015] [info] INFO: 50b132e380c1cbaaa7cfa8058f237ddb 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9 テスト２ユーザ /imgcomm?oid=Vy9Neko4YXlIb0ZXWThKNTFGVk9RUQ
+[Wed Jun 17 14:58:21 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : 50b132e380c1cbaaa7cfa8058f237ddb
+[Wed Jun 17 14:58:21 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Wed Jun 17 14:58:21 2015] [info] del connid entry: 50b132e380c1cbaaa7cfa8058f237ddb
+[Wed Jun 17 14:58:44 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : b4a10880a3df94540201efd8de7ca21f
+[Wed Jun 17 14:58:44 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 0
+[Wed Jun 17 14:58:44 2015] [info] del connid entry: b4a10880a3df94540201efd8de7ca21f
+[Wed Jun 17 22:34:47 2015] [info] Listening at "http://192.168.0.8:3800"
+[Wed Jun 17 22:34:47 2015] [info] Manager 6611 started
+[Wed Jun 17 22:34:47 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Fri Jun 19 22:34:20 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri Jun 19 22:34:20 2015] [info] Manager 29191 started
+[Fri Jun 19 22:34:20 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sat Jun 20 07:39:48 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sat Jun 20 07:39:48 2015] [info] INFO: fecd592948ff2de1dfd80f02009bbef6 05255d8453e542a9d9f268f483c4f2de9bf2939ca37c257d91e57ff6 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Sat Jun 20 07:40:34 2015] [info] INFO: DEL Entry signal_tbl 05255d8453e542a9d9f268f483c4f2de9bf2939ca37c257d91e57ff6
+[Sat Jun 20 07:40:35 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sat Jun 20 07:40:35 2015] [info] INFO: f94c4081aecf864a9d8c9efb0fa2dcca 05255d8453e542a9d9f268f483c4f2de9bf2939ca37c257d91e57ff6 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Sat Jun 20 07:40:45 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sat Jun 20 07:40:45 2015] [info] INFO: 49619e2f40d4fb63cacb8f70920d7ba8 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9 テスト２ユーザ /imgcomm?oid=Vy9Neko4YXlIb0ZXWThKNTFGVk9RUQ
+[Sat Jun 20 07:41:02 2015] [info] INFO: DEL Entry signal_tbl 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9
+[Sat Jun 20 10:25:49 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sat Jun 20 10:25:49 2015] [info] INFO: 558655d1dc50469d1e4aa2416361eea5 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9 テスト２ユーザ /imgcomm?oid=Vy9Neko4YXlIb0ZXWThKNTFGVk9RUQ
+[Sat Jun 20 10:27:00 2015] [info] INFO: DEL Entry signal_tbl 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9
+[Sat Jun 20 11:21:30 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sat Jun 20 11:21:30 2015] [info] INFO: 4185b66fd5186f2eb41b6335644ed7a9 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9 テスト２ユーザ /imgcomm?oid=Vy9Neko4YXlIb0ZXWThKNTFGVk9RUQ
+[Sat Jun 20 11:21:42 2015] [info] INFO: DEL Entry signal_tbl 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9
+[Sat Jun 20 11:21:46 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sat Jun 20 11:21:46 2015] [info] INFO: 3c6e341ac17646d0f1950bafc05a0698 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9 テスト２ユーザ /imgcomm?oid=Vy9Neko4YXlIb0ZXWThKNTFGVk9RUQ
+[Sat Jun 20 11:21:47 2015] [info] INFO: DEL Entry signal_tbl 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9
+[Sat Jun 20 12:08:44 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Sat Jun 20 12:08:44 2015] [info] INFO: connvalue: e0d4935389a33587ac984d09ab63da96 あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Sat Jun 20 12:08:44 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Sat Jun 20 12:08:44 2015] [info] INFO: e0d4935389a33587ac984d09ab63da96 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9 テスト２ユーザ /imgcomm?oid=Vy9Neko4YXlIb0ZXWThKNTFGVk9RUQ
+[Sat Jun 20 12:09:26 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : e0d4935389a33587ac984d09ab63da96
+[Sat Jun 20 12:09:26 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 0
+[Sat Jun 20 12:09:26 2015] [info] del connid entry: e0d4935389a33587ac984d09ab63da96
+[Sat Jun 20 12:09:42 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sat Jun 20 12:09:42 2015] [info] INFO: 751ce0a0a62be1f066bc1e13d907ca71 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9 テスト２ユーザ /imgcomm?oid=Vy9Neko4YXlIb0ZXWThKNTFGVk9RUQ
+[Sat Jun 20 12:10:21 2015] [info] INFO: DEL Entry signal_tbl 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9
+[Sat Jun 20 12:10:23 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sat Jun 20 12:10:23 2015] [info] INFO: 655e72d75e0d18dee390a8c6b98b426e 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9 テスト２ユーザ /imgcomm?oid=Vy9Neko4YXlIb0ZXWThKNTFGVk9RUQ
+[Sat Jun 20 12:10:33 2015] [info] INFO: DEL Entry signal_tbl 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9
+[Sat Jun 20 15:14:59 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Sat Jun 20 15:14:59 2015] [info] INFO: connvalue: 7cc9e82cc5a826e3558869fe65147bd6 あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Sat Jun 20 15:14:59 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Sat Jun 20 15:14:59 2015] [info] INFO: 7cc9e82cc5a826e3558869fe65147bd6 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9 テスト２ユーザ /imgcomm?oid=Vy9Neko4YXlIb0ZXWThKNTFGVk9RUQ
+[Sat Jun 20 15:15:21 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : 7cc9e82cc5a826e3558869fe65147bd6
+[Sat Jun 20 15:15:21 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 0
+[Sat Jun 20 15:15:21 2015] [info] del connid entry: 7cc9e82cc5a826e3558869fe65147bd6
+[Sat Jun 20 15:15:32 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sat Jun 20 15:15:32 2015] [info] INFO: 818d2f863448b85f56a98e0f593fa972 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9 テスト２ユーザ /imgcomm?oid=Vy9Neko4YXlIb0ZXWThKNTFGVk9RUQ
+[Sat Jun 20 15:16:09 2015] [info] INFO: DEL Entry signal_tbl 32be0b0f19b598dec3c17339ca17a487ce91b6c0a25f713b7b3cb7b9
+[Sat Jun 20 17:52:13 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sat Jun 20 17:52:13 2015] [info] INFO: 41d0b11a819f954ed8fb1e165c334555 e657b5951393a1a864b01c760c362fbb3afec6fd974b231cbe61e629 tes6ユーザ /imgcomm?oid=ckt6SGZKd1lKa0FwcHM0dWs3Y2pBUQ
+[Sat Jun 20 17:52:59 2015] [info] INFO: DEL Entry signal_tbl e657b5951393a1a864b01c760c362fbb3afec6fd974b231cbe61e629
+[Sat Jun 20 17:53:02 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sat Jun 20 17:53:02 2015] [info] INFO: 2271d7d9fa9f094a419c40189f8fb1e0 e657b5951393a1a864b01c760c362fbb3afec6fd974b231cbe61e629 tes6ユーザ /imgcomm?oid=ckt6SGZKd1lKa0FwcHM0dWs3Y2pBUQ
+[Sat Jun 20 17:53:10 2015] [info] INFO: DEL Entry signal_tbl e657b5951393a1a864b01c760c362fbb3afec6fd974b231cbe61e629
+[Sat Jun 20 19:43:57 2015] [info] INFO: DEL Entry signal_tbl 05255d8453e542a9d9f268f483c4f2de9bf2939ca37c257d91e57ff6
+[Tue Jun 23 23:26:52 2015] [info] Listening at "http://192.168.0.8:3800"
+[Tue Jun 23 23:26:52 2015] [info] Manager 19110 started
+[Tue Jun 23 23:26:52 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun Jun 28 18:11:48 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sun Jun 28 18:11:48 2015] [info] Manager 5291 started
+[Sun Jun 28 18:11:48 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Fri Jul  3 22:46:41 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri Jul  3 22:46:41 2015] [info] Manager 3122 started
+[Fri Jul  3 22:46:41 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu Jul  9 00:42:11 2015] [info] Listening at "http://192.168.0.8:3800"
+[Thu Jul  9 00:42:11 2015] [info] Manager 5161 started
+[Thu Jul  9 00:42:12 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu Jul  9 23:59:48 2015] [info] Listening at "http://192.168.0.8:3800"
+[Thu Jul  9 23:59:48 2015] [info] Manager 10917 started
+[Thu Jul  9 23:59:48 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun Jul 12 08:50:02 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sun Jul 12 08:50:02 2015] [info] Manager 798 started
+[Sun Jul 12 08:50:02 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun Jul 12 08:52:28 2015] [error] Worker 808 has no heartbeat, restarting
+[Sun Jul 12 18:08:43 2015] [info] Listening at "http://192.168.0.8:3800"
+[Sun Jul 12 18:08:43 2015] [info] Manager 8186 started
+[Sun Jul 12 18:08:43 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Mon Jul 13 09:20:43 2015] [info] INFO: CREATE TABLE signal_tbl
+[Mon Jul 13 09:20:43 2015] [info] INFO: 45f66e5b8487af1ad370e366c119292a 020b3b7356f339620e3e8c97c5399646bf3b2bbd3e5926180a9b3792 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Mon Jul 13 09:21:26 2015] [info] INFO: DEL Entry signal_tbl 020b3b7356f339620e3e8c97c5399646bf3b2bbd3e5926180a9b3792
+[Mon Jul 13 09:21:28 2015] [info] INFO: CREATE TABLE signal_tbl
+[Mon Jul 13 09:21:28 2015] [info] INFO: c07bfd5746000cd6aeaca98941744ebb 020b3b7356f339620e3e8c97c5399646bf3b2bbd3e5926180a9b3792 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Mon Jul 13 09:21:33 2015] [info] INFO: DEL Entry signal_tbl 020b3b7356f339620e3e8c97c5399646bf3b2bbd3e5926180a9b3792
+[Mon Jul 13 10:25:38 2015] [info] INFO: CREATE TABLE signal_tbl
+[Mon Jul 13 10:25:38 2015] [info] INFO: 39c72c44fd8a0be8c54cd4f83c862748 020b3b7356f339620e3e8c97c5399646bf3b2bbd3e5926180a9b3792 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Mon Jul 13 10:26:02 2015] [info] INFO: DEL Entry signal_tbl 020b3b7356f339620e3e8c97c5399646bf3b2bbd3e5926180a9b3792
+[Mon Jul 13 21:14:14 2015] [info] Listening at "http://192.168.0.8:3800"
+[Mon Jul 13 21:14:14 2015] [info] Manager 14782 started
+[Mon Jul 13 21:14:14 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Wed Jul 15 13:33:55 2015] [info] Listening at "http://192.168.0.8:3800"
+[Wed Jul 15 13:33:55 2015] [info] Manager 24443 started
+[Wed Jul 15 13:33:55 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu Jul 23 10:02:58 2015] [info] INFO: CREATE TABLE signal_tbl
+[Thu Jul 23 10:02:58 2015] [info] INFO: 62e54db3e4ee2744518ac0036549678a 673c5fa1ab1aa5d6de48146718873b971c7f3fe5c0ce912a3e4c95e4 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Thu Jul 23 10:03:19 2015] [info] INFO: DEL Entry signal_tbl 673c5fa1ab1aa5d6de48146718873b971c7f3fe5c0ce912a3e4c95e4
+[Thu Jul 23 10:03:19 2015] [info] INFO: CREATE TABLE signal_tbl
+[Thu Jul 23 10:03:19 2015] [info] INFO: 2954cefc6fecbfc6368f93e495d24d13 673c5fa1ab1aa5d6de48146718873b971c7f3fe5c0ce912a3e4c95e4 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Thu Jul 23 10:03:31 2015] [info] INFO: DEL Entry signal_tbl 673c5fa1ab1aa5d6de48146718873b971c7f3fe5c0ce912a3e4c95e4
+[Thu Jul 23 10:13:28 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Thu Jul 23 10:13:28 2015] [info] INFO: connvalue: c669636aed859d2c3387223ed945cbd5 あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Thu Jul 23 10:13:29 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Thu Jul 23 10:13:29 2015] [info] INFO: c669636aed859d2c3387223ed945cbd5 e657b5951393a1a864b01c760c362fbb3afec6fd974b231cbe61e629 tes6ユーザ /imgcomm?oid=ckt6SGZKd1lKa0FwcHM0dWs3Y2pBUQ
+[Thu Jul 23 10:16:31 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Thu Jul 23 10:16:31 2015] [info] INFO: connvalue: 1161230c72eaca593c1eff8cd3fd22ba あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Thu Jul 23 10:16:32 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Thu Jul 23 10:16:32 2015] [info] INFO: 1161230c72eaca593c1eff8cd3fd22ba 673c5fa1ab1aa5d6de48146718873b971c7f3fe5c0ce912a3e4c95e4 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Thu Jul 23 10:17:06 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : 1161230c72eaca593c1eff8cd3fd22ba
+[Thu Jul 23 10:17:06 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Thu Jul 23 10:17:06 2015] [info] del connid entry: 1161230c72eaca593c1eff8cd3fd22ba
+[Thu Jul 23 15:14:16 2015] [info] Listening at "http://192.168.0.8:3800"
+[Thu Jul 23 15:14:16 2015] [info] Manager 4313 started
+[Thu Jul 23 15:14:16 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu Jul 23 17:02:12 2015] [info] INFO: CREATE TABLE signal_tbl
+[Thu Jul 23 17:02:12 2015] [info] INFO: c675f0deb51b7891e802e689f0d55595 673c5fa1ab1aa5d6de48146718873b971c7f3fe5c0ce912a3e4c95e4 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Thu Jul 23 17:02:27 2015] [info] INFO: DEL Entry signal_tbl 673c5fa1ab1aa5d6de48146718873b971c7f3fe5c0ce912a3e4c95e4
+[Fri Jul 24 22:47:03 2015] [info] Listening at "http://192.168.0.8:3800"
+[Fri Jul 24 22:47:03 2015] [info] Manager 13659 started
+[Fri Jul 24 22:47:03 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Wed Jul 29 08:38:50 2015] [info] INFO: CREATE TABLE signal_tbl
+[Wed Jul 29 08:38:50 2015] [info] INFO: 4c78a49d61ff15c3aadedb836df57c15 c85a603778b255c41fd8d5444d5437f248599dc90476cb00e9a246fe テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Wed Jul 29 08:39:20 2015] [info] INFO: CREATE TABLE signal_tbl
+[Wed Jul 29 08:39:20 2015] [info] INFO: bcefbc66ef678f1a1510dc564a4dfaa5 aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579 Yayoi Sakurai https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50
+[Wed Jul 29 08:40:21 2015] [info] INFO: DEL Entry signal_tbl c85a603778b255c41fd8d5444d5437f248599dc90476cb00e9a246fe
+[Wed Jul 29 08:40:22 2015] [info] INFO: CREATE TABLE signal_tbl
+[Wed Jul 29 08:40:22 2015] [info] INFO: 3ce321303c3263e0937e3c86c61d186a c85a603778b255c41fd8d5444d5437f248599dc90476cb00e9a246fe テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Wed Jul 29 08:40:24 2015] [info] INFO: DEL Entry signal_tbl aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579
+[Wed Jul 29 08:40:26 2015] [info] INFO: CREATE TABLE signal_tbl
+[Wed Jul 29 08:40:26 2015] [info] INFO: 3cc9b6260a540f4d9154d669de44b602 aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579 Yayoi Sakurai https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50
+[Wed Jul 29 08:40:48 2015] [info] INFO: DEL Entry signal_tbl c85a603778b255c41fd8d5444d5437f248599dc90476cb00e9a246fe
+[Wed Jul 29 08:40:49 2015] [info] INFO: CREATE TABLE signal_tbl
+[Wed Jul 29 08:40:49 2015] [info] INFO: 5e0f055351956ef2a88bdb4a21d45a62 c85a603778b255c41fd8d5444d5437f248599dc90476cb00e9a246fe テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Wed Jul 29 08:40:57 2015] [info] INFO: DEL Entry signal_tbl aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579
+[Wed Jul 29 08:41:00 2015] [info] INFO: CREATE TABLE signal_tbl
+[Wed Jul 29 08:41:00 2015] [info] INFO: 8ccf26170e9a7fb8df0b5e385ba416a4 aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579 Yayoi Sakurai https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50
+[Wed Jul 29 08:42:01 2015] [info] INFO: DEL Entry signal_tbl aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579
+[Wed Jul 29 08:42:03 2015] [info] INFO: CREATE TABLE signal_tbl
+[Wed Jul 29 08:42:03 2015] [info] INFO: 08d4ea974ebbba053c70976abf3465f9 aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579 Yayoi Sakurai https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50
+[Wed Jul 29 08:42:05 2015] [info] INFO: CREATE TABLE signal_tbl
+[Wed Jul 29 08:42:05 2015] [info] INFO: 69e1c11828b7a13246e24de089e1dc3c c85a603778b255c41fd8d5444d5437f248599dc90476cb00e9a246fe テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Wed Jul 29 08:42:24 2015] [info] INFO: DEL Entry signal_tbl aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579
+[Wed Jul 29 08:42:30 2015] [info] INFO: DEL Entry signal_tbl c85a603778b255c41fd8d5444d5437f248599dc90476cb00e9a246fe
+[Wed Jul 29 08:42:34 2015] [info] Get connidroom tablename: 
+[Wed Jul 29 08:42:34 2015] [info] TABLENAME: room_066ff8954924026ade4b659f8e768c30_tbl
+[Wed Jul 29 08:42:34 2015] [info] INFO: connvalue: a5882988f0eb5f87698af6049de323c1 a room_066ff8954924026ade4b659f8e768c30_tbl
+[Wed Jul 29 08:42:34 2015] [info] DEBUG: CREATE TABLE room_066ff8954924026ade4b659f8e768c30_tbl
+[Wed Jul 29 08:42:34 2015] [info] INFO: a5882988f0eb5f87698af6049de323c1 aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579 Yayoi Sakurai https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50
+[Wed Jul 29 08:42:46 2015] [info] Get connidroom tablename: room_066ff8954924026ade4b659f8e768c30_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 08:42:46 2015] [info] INFO: connvalue: ea321bb9aaa733bfc342ce41726cdab5 a room_066ff8954924026ade4b659f8e768c30_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 08:42:46 2015] [info] DEBUG: CREATE TABLE room_066ff8954924026ade4b659f8e768c30_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 08:42:46 2015] [info] INFO: ea321bb9aaa733bfc342ce41726cdab5 c85a603778b255c41fd8d5444d5437f248599dc90476cb00e9a246fe テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Wed Jul 29 08:43:04 2015] [info] INFO: DEL Entry signal_tbl c85a603778b255c41fd8d5444d5437f248599dc90476cb00e9a246fe
+[Wed Jul 29 08:43:15 2015] [info] DELETE entry: room_066ff8954924026ade4b659f8e768c30_tbl                                                                                                                                                                                                                       : ea321bb9aaa733bfc342ce41726cdab5
+[Wed Jul 29 08:43:15 2015] [info] room_066ff8954924026ade4b659f8e768c30_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Wed Jul 29 08:43:15 2015] [info] del connid entry: ea321bb9aaa733bfc342ce41726cdab5
+[Wed Jul 29 08:43:20 2015] [info] DELETE entry: room_066ff8954924026ade4b659f8e768c30_tbl                                                                                                                                                                                                                       : a5882988f0eb5f87698af6049de323c1
+[Wed Jul 29 08:43:20 2015] [info] room_066ff8954924026ade4b659f8e768c30_tbl                                                                                                                                                                                                                       REMAIN entry 0
+[Wed Jul 29 08:43:20 2015] [info] del connid entry: a5882988f0eb5f87698af6049de323c1
+[Wed Jul 29 08:43:39 2015] [info] Get connidroom tablename: 
+[Wed Jul 29 08:43:39 2015] [info] TABLENAME: room_544e1b11795b4ee23e8439e1567828ad_tbl
+[Wed Jul 29 08:43:39 2015] [info] INFO: connvalue: 0b09c1433f7f1f036410d94e279cf37f a room_544e1b11795b4ee23e8439e1567828ad_tbl
+[Wed Jul 29 08:43:39 2015] [info] DEBUG: CREATE TABLE room_544e1b11795b4ee23e8439e1567828ad_tbl
+[Wed Jul 29 08:43:39 2015] [info] INFO: 0b09c1433f7f1f036410d94e279cf37f c85a603778b255c41fd8d5444d5437f248599dc90476cb00e9a246fe テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Wed Jul 29 08:43:49 2015] [info] Get connidroom tablename: room_544e1b11795b4ee23e8439e1567828ad_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 08:43:49 2015] [info] INFO: connvalue: 99361615fc45fa6fe51fae307d7a77b1 a room_544e1b11795b4ee23e8439e1567828ad_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 08:43:49 2015] [info] DEBUG: CREATE TABLE room_544e1b11795b4ee23e8439e1567828ad_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 08:43:49 2015] [info] INFO: 99361615fc45fa6fe51fae307d7a77b1 aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579 Yayoi Sakurai https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50
+[Wed Jul 29 08:44:39 2015] [info] DELETE entry: room_544e1b11795b4ee23e8439e1567828ad_tbl                                                                                                                                                                                                                       : 0b09c1433f7f1f036410d94e279cf37f
+[Wed Jul 29 08:44:39 2015] [info] room_544e1b11795b4ee23e8439e1567828ad_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Wed Jul 29 08:44:39 2015] [info] del connid entry: 0b09c1433f7f1f036410d94e279cf37f
+[Wed Jul 29 08:44:43 2015] [info] DELETE entry: room_544e1b11795b4ee23e8439e1567828ad_tbl                                                                                                                                                                                                                       : 99361615fc45fa6fe51fae307d7a77b1
+[Wed Jul 29 08:44:43 2015] [info] room_544e1b11795b4ee23e8439e1567828ad_tbl                                                                                                                                                                                                                       REMAIN entry 0
+[Wed Jul 29 08:44:43 2015] [info] del connid entry: 99361615fc45fa6fe51fae307d7a77b1
+[Wed Jul 29 09:41:53 2015] [info] INFO: CREATE TABLE rooma
+[Wed Jul 29 09:41:53 2015] [info] INFO: ebad1a25409aaf691076bc27a5f794c8 b4ed3b60235e00f484ddbeade683ce90d86695f344151399a52c53ce test3パス /imgcomm?oid=ejdmVm0vOERvcUQ3V3lFVjRPZlhCZw
+[Wed Jul 29 09:42:02 2015] [info] INFO: DEL Entry rooma b4ed3b60235e00f484ddbeade683ce90d86695f344151399a52c53ce
+[Wed Jul 29 09:42:28 2015] [info] INFO: CREATE TABLE signal_tbl
+[Wed Jul 29 09:42:28 2015] [info] INFO: 33569770575312de15bca9ef570492bb aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579 Yayoi Sakurai https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50
+[Wed Jul 29 09:42:28 2015] [info] INFO: CREATE TABLE signal_tbl
+[Wed Jul 29 09:42:28 2015] [info] INFO: cdb65b0e0d73fce85eca57c1fa465afa b4ed3b60235e00f484ddbeade683ce90d86695f344151399a52c53ce test3パス /imgcomm?oid=ejdmVm0vOERvcUQ3V3lFVjRPZlhCZw
+[Wed Jul 29 09:43:10 2015] [info] INFO: DEL Entry signal_tbl aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579
+[Wed Jul 29 09:43:14 2015] [info] INFO: CREATE TABLE signal_tbl
+[Wed Jul 29 09:43:14 2015] [info] INFO: ab7e1b9b329a16ba56642b1ee1587b17 aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579 Yayoi Sakurai https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50
+[Wed Jul 29 09:43:14 2015] [info] INFO: DEL Entry signal_tbl b4ed3b60235e00f484ddbeade683ce90d86695f344151399a52c53ce
+[Wed Jul 29 09:43:16 2015] [info] INFO: CREATE TABLE signal_tbl
+[Wed Jul 29 09:43:16 2015] [info] INFO: 7dae115b9aee4d9d645f590de9e3fc0c b4ed3b60235e00f484ddbeade683ce90d86695f344151399a52c53ce test3パス /imgcomm?oid=ejdmVm0vOERvcUQ3V3lFVjRPZlhCZw
+[Wed Jul 29 09:59:04 2015] [info] INFO: DEL Entry signal_tbl b4ed3b60235e00f484ddbeade683ce90d86695f344151399a52c53ce
+[Wed Jul 29 10:02:17 2015] [info] INFO: DEL Entry signal_tbl aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579
+[Wed Jul 29 10:02:27 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:02:27 2015] [info] INFO: connvalue: da31c014c9a4b99aaeaae92ec170e5b2 あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:02:27 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:02:27 2015] [info] INFO: da31c014c9a4b99aaeaae92ec170e5b2 aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579 Yayoi Sakurai https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50
+[Wed Jul 29 10:02:43 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:02:43 2015] [info] INFO: connvalue: ba10bde4ab125775f01f1320b54ab4d7 あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:02:43 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:02:43 2015] [info] INFO: ba10bde4ab125775f01f1320b54ab4d7 9b8f818d83b99c778784072de2279314860b9653faf67e9f6eef91a3 Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Wed Jul 29 10:02:57 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : ba10bde4ab125775f01f1320b54ab4d7
+[Wed Jul 29 10:02:57 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 2
+[Wed Jul 29 10:02:57 2015] [info] del connid entry: ba10bde4ab125775f01f1320b54ab4d7
+[Wed Jul 29 10:03:00 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : da31c014c9a4b99aaeaae92ec170e5b2
+[Wed Jul 29 10:03:00 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Wed Jul 29 10:03:00 2015] [info] del connid entry: da31c014c9a4b99aaeaae92ec170e5b2
+[Wed Jul 29 10:03:10 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:03:10 2015] [info] INFO: connvalue: 4d30db09c945d44dffb2a0e3e5858fb6 あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:03:10 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:03:10 2015] [info] INFO: 4d30db09c945d44dffb2a0e3e5858fb6 9b8f818d83b99c778784072de2279314860b9653faf67e9f6eef91a3 Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Wed Jul 29 10:03:24 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : 4d30db09c945d44dffb2a0e3e5858fb6
+[Wed Jul 29 10:03:24 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Wed Jul 29 10:03:24 2015] [info] del connid entry: 4d30db09c945d44dffb2a0e3e5858fb6
+[Wed Jul 29 10:04:39 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:04:39 2015] [info] INFO: connvalue: 6346108fa56621900f0f2a7320e9462f あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:04:39 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:04:39 2015] [info] INFO: 6346108fa56621900f0f2a7320e9462f 9b8f818d83b99c778784072de2279314860b9653faf67e9f6eef91a3 Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Wed Jul 29 10:04:45 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : 6346108fa56621900f0f2a7320e9462f
+[Wed Jul 29 10:04:45 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 0
+[Wed Jul 29 10:04:45 2015] [info] del connid entry: 6346108fa56621900f0f2a7320e9462f
+[Wed Jul 29 10:04:51 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:04:51 2015] [info] INFO: connvalue: db9e69b4059a262064c65a136b024696 あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:04:51 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:04:51 2015] [info] INFO: db9e69b4059a262064c65a136b024696 9b8f818d83b99c778784072de2279314860b9653faf67e9f6eef91a3 Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Wed Jul 29 10:05:13 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:05:13 2015] [info] INFO: connvalue: ed0f5c9075781bc6d4d308bcff4e79e2 あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:05:13 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:05:13 2015] [info] INFO: ed0f5c9075781bc6d4d308bcff4e79e2 aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579 Yayoi Sakurai https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50
+[Wed Jul 29 10:07:37 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : db9e69b4059a262064c65a136b024696
+[Wed Jul 29 10:07:37 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Wed Jul 29 10:07:37 2015] [info] del connid entry: db9e69b4059a262064c65a136b024696
+[Wed Jul 29 10:08:19 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:08:19 2015] [info] INFO: connvalue: 1b916329642903febf02b6562e76e347 あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:08:19 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:08:19 2015] [info] INFO: 1b916329642903febf02b6562e76e347 aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579 Yayoi Sakurai https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50
+[Wed Jul 29 10:08:24 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:08:24 2015] [info] INFO: connvalue: 9520e30aa7ffbe99f125a3aeb59eb8ba あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:08:24 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:08:24 2015] [info] INFO: 9520e30aa7ffbe99f125a3aeb59eb8ba 9b8f818d83b99c778784072de2279314860b9653faf67e9f6eef91a3 Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Wed Jul 29 10:08:48 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : ed0f5c9075781bc6d4d308bcff4e79e2
+[Wed Jul 29 10:08:48 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 2
+[Wed Jul 29 10:08:48 2015] [info] del connid entry: ed0f5c9075781bc6d4d308bcff4e79e2
+[Wed Jul 29 10:09:22 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : 1b916329642903febf02b6562e76e347
+[Wed Jul 29 10:09:22 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Wed Jul 29 10:09:22 2015] [info] del connid entry: 1b916329642903febf02b6562e76e347
+[Wed Jul 29 10:09:37 2015] [info] Get connidroom tablename: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:09:37 2015] [info] INFO: connvalue: 80b013f4e6650dc210ee7220b01579d1 あ room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:09:37 2015] [info] DEBUG: CREATE TABLE room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                      
+[Wed Jul 29 10:09:37 2015] [info] INFO: 80b013f4e6650dc210ee7220b01579d1 aff9dfd957f1470c518286beac5471e79205ce2dfc22ff45a79c0579 Yayoi Sakurai https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50
+[Wed Jul 29 10:10:12 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : 9520e30aa7ffbe99f125a3aeb59eb8ba
+[Wed Jul 29 10:10:12 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Wed Jul 29 10:10:12 2015] [info] del connid entry: 9520e30aa7ffbe99f125a3aeb59eb8ba
+[Wed Jul 29 10:10:15 2015] [info] DELETE entry: room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       : 80b013f4e6650dc210ee7220b01579d1
+[Wed Jul 29 10:10:15 2015] [info] room_43fefabd4b5d797522d2e9a717bfccef_tbl                                                                                                                                                                                                                       REMAIN entry 0
+[Wed Jul 29 10:10:15 2015] [info] del connid entry: 80b013f4e6650dc210ee7220b01579d1
+[Thu Jul 30 11:10:13 2015] [info] Listening at "http://192.168.0.8:3800"
+[Thu Jul 30 11:10:13 2015] [info] Manager 4928 started
+[Thu Jul 30 11:10:13 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun Aug  9 14:39:03 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sun Aug  9 14:39:03 2015] [info] INFO: 2e78ea2f49c94a2f02f1d74bd1df4b3d 26991361627841f5c63a487091af57490b11b3263f605f114e45658b Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Sun Aug  9 14:40:45 2015] [info] INFO: DEL Entry signal_tbl 26991361627841f5c63a487091af57490b11b3263f605f114e45658b
+[Sun Aug  9 16:55:04 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sun Aug  9 16:55:04 2015] [info] INFO: cc174c0bf59524476fb1be1c71b29ca7 26991361627841f5c63a487091af57490b11b3263f605f114e45658b Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Sun Aug  9 16:55:38 2015] [info] INFO: DEL Entry signal_tbl 26991361627841f5c63a487091af57490b11b3263f605f114e45658b
+[Sun Aug  9 17:06:45 2015] [info] INFO: CREATE TABLE signal_tbl
+[Sun Aug  9 17:06:45 2015] [info] INFO: f60e497761a568c2893f78c17cfad7af 26991361627841f5c63a487091af57490b11b3263f605f114e45658b Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Sun Aug  9 17:10:15 2015] [info] INFO: DEL Entry signal_tbl 26991361627841f5c63a487091af57490b11b3263f605f114e45658b
+[Thu Aug 13 23:27:39 2015] [info] Listening at "http://192.168.0.8:3800"
+[Thu Aug 13 23:27:39 2015] [info] Manager 31205 started
+[Thu Aug 13 23:27:39 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
