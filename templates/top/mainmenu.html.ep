@@ -26,6 +26,13 @@
         <a href="/menu/mirror" class="ui-btn" data-transition="flip" rel="external">ミラー(Video TEST)</a>
         <a href="/menu/upload" class="ui-btn" data-transition="flip" rel="external">ファイルアップロード</a>
         <a href="/menu/settings" class="ui-btn" data-transition="flip">設定変更</a>
+
+%#    <svg id="bbb" viewBox="0 0 300 400">
+%#    <path d="M 0 0 L 100 250 L 200 0" stroke-width="20" stroke="blue" fill="none"/>
+%#    <rect x="50" y="200" width="250" height="50" stroke-width="5" stroke="red" fill="pink"/>
+%#    <circle cx="25" cy="150" r="80" stroke-width="10" stroke="green" fill="yellow"/>
+%#    </svg>
+
     </div>
     <div data-role="footer" style="backgroud: #aac78d;">
     <a href="/" class="ui-btn ui-btn-inline">top</a>

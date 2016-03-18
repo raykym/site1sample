@@ -1,1 +1,649 @@
 
+[Fri Mar 18 10:57:25 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 10:57:25 2016] [info] Listening at "http://192.168.0.8:3800"
+[Fri Mar 18 10:57:33 2016] [debug] GET "/menu/upload"
+[Fri Mar 18 10:57:35 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 10:57:35 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 10:57:35 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 10:57:36 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 10:57:36 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 10:57:36 2016] [debug] DEBUG: value: null
+[Fri Mar 18 10:57:36 2016] [debug] DEBUG: new value: null
+[Fri Mar 18 10:57:36 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 10:57:36 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 10:57:36 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 10:57:36 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "upload"
+[Fri Mar 18 10:57:36 2016] [debug] DEBUG: MOJO_MAX_MESSAGE_SIZE:  104857600
+[Fri Mar 18 10:57:36 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 10:57:36 2016] [debug] get user upload file list.
+[Fri Mar 18 10:57:36 2016] [debug] Rendering template "filestore/upload.html.ep"
+[Fri Mar 18 10:57:36 2016] [debug] Rendering template "layouts/mobidef.html.ep"
+[Fri Mar 18 10:57:36 2016] [debug] 200 OK (2.232223s, 0.448/s)
+[Fri Mar 18 10:57:36 2016] [debug] GET "/appcache.mani"
+[Fri Mar 18 10:57:36 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 10:57:36 2016] [debug] Rendering template "top/unknown.html.ep"
+[Fri Mar 18 10:57:36 2016] [debug] Rendering template "layouts/mobidef.html.ep"
+[Fri Mar 18 10:57:36 2016] [debug] 200 OK (0.017318s, 57.743/s)
+[Fri Mar 18 10:57:41 2016] [debug] GET "/signinact"
+[Fri Mar 18 10:57:41 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 10:57:41 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 10:57:41 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 10:57:41 2016] [debug] 200 OK (0.002224s, 449.640/s)
+[Fri Mar 18 10:57:41 2016] [debug] GET "/appcache.mani"
+[Fri Mar 18 10:57:41 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 10:57:41 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 10:57:41 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 10:57:41 2016] [debug] 200 OK (0.002274s, 439.754/s)
+[Fri Mar 18 10:57:47 2016] [debug] GET "/"
+[Fri Mar 18 10:57:47 2016] [debug] Routing to controller "Site1::Controller::Top" and action "top"
+[Fri Mar 18 10:57:47 2016] [debug] Rendering template "top/top.html.ep"
+[Fri Mar 18 10:57:47 2016] [debug] Rendering template "layouts/mobidef.html.ep"
+[Fri Mar 18 10:57:47 2016] [debug] 200 OK (0.020364s, 49.106/s)
+[Fri Mar 18 10:57:47 2016] [debug] GET "/appcache.mani"
+[Fri Mar 18 10:57:47 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 10:57:47 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 10:57:47 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 10:57:47 2016] [debug] 200 OK (0.003251s, 307.598/s)
+[Fri Mar 18 10:57:49 2016] [debug] GET "/signin"
+[Fri Mar 18 10:57:49 2016] [debug] Routing to controller "Site1::Controller::Login" and action "signin"
+[Fri Mar 18 10:57:49 2016] [debug] Rendering template "login/signin.html.ep"
+[Fri Mar 18 10:57:49 2016] [debug] Rendering template "layouts/mobidef.html.ep"
+[Fri Mar 18 10:57:49 2016] [debug] 200 OK (0.012611s, 79.296/s)
+[Fri Mar 18 10:58:02 2016] [debug] POST "/signinact"
+[Fri Mar 18 10:58:02 2016] [debug] Routing to controller "Site1::Controller::Login" and action "signinact"
+[Fri Mar 18 10:58:02 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 10:58:02 2016] [debug] 302 Found (0.061217s, 16.335/s)
+[Fri Mar 18 10:58:02 2016] [debug] GET "/menu"
+[Fri Mar 18 10:58:02 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 10:58:02 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 10:58:02 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 10:58:02 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 10:58:02 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 10:58:02 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 10:58:02 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 10:58:02 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 10:58:02 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 10:58:02 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 10:58:02 2016] [debug] Routing to controller "Site1::Controller::Top" and action "mainmenu"
+[Fri Mar 18 10:58:02 2016] [debug] Rendering template "top/mainmenu.html.ep"
+[Fri Mar 18 10:58:02 2016] [debug] Rendering template "layouts/mobidef.html.ep"
+[Fri Mar 18 10:58:02 2016] [debug] 200 OK (0.091761s, 10.898/s)
+[Fri Mar 18 10:58:06 2016] [debug] GET "/menu/upload"
+[Fri Mar 18 10:58:06 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 10:58:06 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 10:58:06 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 10:58:06 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 10:58:06 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 10:58:06 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 10:58:06 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 10:58:06 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 10:58:06 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 10:58:06 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 10:58:06 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "upload"
+[Fri Mar 18 10:58:06 2016] [debug] DEBUG: MOJO_MAX_MESSAGE_SIZE:  104857600
+[Fri Mar 18 10:58:06 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 10:58:06 2016] [debug] get user upload file list.
+[Fri Mar 18 10:58:06 2016] [debug] Rendering cached template "filestore/upload.html.ep"
+[Fri Mar 18 10:58:06 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 10:58:06 2016] [debug] 200 OK (0.095146s, 10.510/s)
+[Fri Mar 18 10:58:06 2016] [debug] GET "/appcache.mani"
+[Fri Mar 18 10:58:06 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 10:58:06 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 10:58:06 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 10:58:06 2016] [debug] 200 OK (0.002003s, 499.251/s)
+[Fri Mar 18 11:01:09 2016] [debug] GET "/signinact"
+[Fri Mar 18 11:01:09 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 11:01:09 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 11:01:09 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:01:09 2016] [debug] 200 OK (0.000977s, 1023.541/s)
+[Fri Mar 18 11:01:09 2016] [debug] GET "/appcache.mani"
+[Fri Mar 18 11:01:09 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 11:01:09 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 11:01:09 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:01:09 2016] [debug] 200 OK (0.001914s, 522.466/s)
+[Fri Mar 18 11:01:15 2016] [debug] GET "/"
+[Fri Mar 18 11:01:15 2016] [debug] Routing to controller "Site1::Controller::Top" and action "top"
+[Fri Mar 18 11:01:15 2016] [debug] Rendering cached template "top/top.html.ep"
+[Fri Mar 18 11:01:15 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:01:15 2016] [debug] 200 OK (0.002809s, 355.999/s)
+[Fri Mar 18 11:01:15 2016] [debug] GET "/appcache.mani"
+[Fri Mar 18 11:01:15 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 11:01:15 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 11:01:15 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:01:15 2016] [debug] 200 OK (0.001855s, 539.084/s)
+[Fri Mar 18 11:01:20 2016] [debug] GET "/signin"
+[Fri Mar 18 11:01:20 2016] [debug] Routing to controller "Site1::Controller::Login" and action "signin"
+[Fri Mar 18 11:01:20 2016] [debug] Rendering cached template "login/signin.html.ep"
+[Fri Mar 18 11:01:20 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:01:20 2016] [debug] 200 OK (0.002220s, 450.450/s)
+[Fri Mar 18 11:01:25 2016] [debug] POST "/signinact"
+[Fri Mar 18 11:01:25 2016] [debug] Routing to controller "Site1::Controller::Login" and action "signinact"
+[Fri Mar 18 11:01:25 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:01:25 2016] [debug] Notice: Not get username!
+[Fri Mar 18 11:01:25 2016] [debug] Rendering cached template "login/signin.html.ep"
+[Fri Mar 18 11:01:25 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:01:25 2016] [debug] 200 OK (0.030238s, 33.071/s)
+[Fri Mar 18 11:01:39 2016] [debug] POST "/signinact"
+[Fri Mar 18 11:01:39 2016] [debug] Routing to controller "Site1::Controller::Login" and action "signinact"
+[Fri Mar 18 11:01:39 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:01:40 2016] [debug] 302 Found (0.060300s, 16.584/s)
+[Fri Mar 18 11:01:40 2016] [debug] GET "/menu"
+[Fri Mar 18 11:01:40 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:01:40 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:01:40 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:01:40 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:01:40 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:01:40 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:01:40 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:01:40 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:01:40 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:01:40 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:01:40 2016] [debug] Routing to controller "Site1::Controller::Top" and action "mainmenu"
+[Fri Mar 18 11:01:40 2016] [debug] Rendering cached template "top/mainmenu.html.ep"
+[Fri Mar 18 11:01:40 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:01:40 2016] [debug] 200 OK (0.063836s, 15.665/s)
+[Fri Mar 18 11:01:44 2016] [debug] GET "/menu/upload"
+[Fri Mar 18 11:01:44 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:01:44 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:01:44 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:01:44 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:01:44 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:01:44 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:01:44 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:01:44 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:01:44 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:01:44 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:01:44 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "upload"
+[Fri Mar 18 11:01:44 2016] [debug] DEBUG: MOJO_MAX_MESSAGE_SIZE:  104857600
+[Fri Mar 18 11:01:44 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:01:44 2016] [debug] get user upload file list.
+[Fri Mar 18 11:01:44 2016] [debug] Rendering cached template "filestore/upload.html.ep"
+[Fri Mar 18 11:01:44 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:01:44 2016] [debug] 200 OK (0.071387s, 14.008/s)
+[Fri Mar 18 11:01:44 2016] [debug] GET "/appcache.mani"
+[Fri Mar 18 11:01:44 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 11:01:44 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 11:01:44 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:01:44 2016] [debug] 200 OK (0.003156s, 316.857/s)
+[Fri Mar 18 11:02:31 2016] [debug] GET "/"
+[Fri Mar 18 11:02:31 2016] [debug] Routing to controller "Site1::Controller::Top" and action "top"
+[Fri Mar 18 11:02:31 2016] [debug] Rendering cached template "top/top.html.ep"
+[Fri Mar 18 11:02:31 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:02:31 2016] [debug] 200 OK (0.003852s, 259.605/s)
+[Fri Mar 18 11:02:31 2016] [debug] GET "/appcache.mani"
+[Fri Mar 18 11:02:31 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 11:02:31 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 11:02:31 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:02:31 2016] [debug] 200 OK (0.003195s, 312.989/s)
+[Fri Mar 18 11:02:36 2016] [debug] GET "/signin"
+[Fri Mar 18 11:02:36 2016] [debug] Routing to controller "Site1::Controller::Login" and action "signin"
+[Fri Mar 18 11:02:36 2016] [debug] Rendering cached template "login/signin.html.ep"
+[Fri Mar 18 11:02:36 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:02:36 2016] [debug] 200 OK (0.002198s, 454.959/s)
+[Fri Mar 18 11:02:55 2016] [debug] POST "/signinact"
+[Fri Mar 18 11:02:55 2016] [debug] Routing to controller "Site1::Controller::Login" and action "signinact"
+[Fri Mar 18 11:02:55 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:02:55 2016] [debug] 302 Found (0.064372s, 15.535/s)
+[Fri Mar 18 11:02:55 2016] [debug] GET "/menu"
+[Fri Mar 18 11:02:55 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:02:55 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:02:55 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:02:55 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:02:55 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:02:55 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:02:55 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:02:55 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:02:55 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:02:55 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:02:55 2016] [debug] Routing to controller "Site1::Controller::Top" and action "mainmenu"
+[Fri Mar 18 11:02:55 2016] [debug] Rendering cached template "top/mainmenu.html.ep"
+[Fri Mar 18 11:02:55 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:02:55 2016] [debug] 200 OK (0.063612s, 15.720/s)
+[Fri Mar 18 11:02:59 2016] [debug] GET "/menu/upload"
+[Fri Mar 18 11:02:59 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:02:59 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:02:59 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:02:59 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:02:59 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:02:59 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:02:59 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:02:59 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:02:59 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:02:59 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:02:59 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "upload"
+[Fri Mar 18 11:02:59 2016] [debug] DEBUG: MOJO_MAX_MESSAGE_SIZE:  104857600
+[Fri Mar 18 11:02:59 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:02:59 2016] [debug] get user upload file list.
+[Fri Mar 18 11:02:59 2016] [debug] Rendering cached template "filestore/upload.html.ep"
+[Fri Mar 18 11:02:59 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:02:59 2016] [debug] 200 OK (0.088004s, 11.363/s)
+[Fri Mar 18 11:03:00 2016] [debug] GET "/appcache.mani"
+[Fri Mar 18 11:03:00 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 11:03:00 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 11:03:00 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:03:00 2016] [debug] 200 OK (0.003168s, 315.657/s)
+[Fri Mar 18 11:03:22 2016] [debug] POST "/menu/uploadact"
+[Fri Mar 18 11:03:22 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:03:22 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:03:22 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:22 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:03:22 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:22 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:03:22 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:03:22 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:03:22 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:03:22 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:22 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "uploadact"
+[Fri Mar 18 11:03:22 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:22 2016] [debug] DEBUG: write h82ttKPZsanDiv5y7QeetA
+[Fri Mar 18 11:03:22 2016] [debug] Rendering cached template "filestore/upload.html.ep"
+[Fri Mar 18 11:03:22 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:03:22 2016] [debug] 200 OK (0.394976s, 2.532/s)
+[Fri Mar 18 11:03:29 2016] [debug] GET "/menu/listview"
+[Fri Mar 18 11:03:29 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:03:29 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:03:29 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:29 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "listview"
+[Fri Mar 18 11:03:29 2016] [debug] Notice: list process passed!!!!
+[Fri Mar 18 11:03:29 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:29 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "listview_p"
+[Fri Mar 18 11:03:29 2016] [debug] Rendering template "filestore/listview.html.ep"
+[Fri Mar 18 11:03:29 2016] [debug] Rendering template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:03:29 2016] [debug] 200 OK (0.165063s, 6.058/s)
+[Fri Mar 18 11:03:29 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:03:29 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:03:29 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:03:29 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:29 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:03:29 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:29 2016] [debug] DEBUG: h82ttKPZsanDiv5y7QeetA
+[Fri Mar 18 11:03:29 2016] [debug] 200 OK (0.035835s, 27.906/s)
+[Fri Mar 18 11:03:30 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:03:30 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:03:30 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:03:30 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:30 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:03:30 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: IMtdXV74tH4YOEpDx/uEaQ
+[Fri Mar 18 11:03:30 2016] [debug] 200 OK (0.085727s, 11.665/s)
+[Fri Mar 18 11:03:30 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:03:30 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:03:30 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:03:30 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:30 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:03:30 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: 1RujoiIz3+ue1yBPwbokCA
+[Fri Mar 18 11:03:30 2016] [debug] 200 OK (0.026255s, 38.088/s)
+[Fri Mar 18 11:03:30 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:03:30 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:03:30 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:03:30 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:30 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:03:30 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: wCwBMUh0P6kjUAhbp7ViTg
+[Fri Mar 18 11:03:30 2016] [debug] 200 OK (0.016126s, 62.012/s)
+[Fri Mar 18 11:03:30 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:03:30 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:03:30 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:03:30 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:30 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:03:30 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:30 2016] [debug] DEBUG: 9NMnmYvJiyF60A2t/uq2Qw
+[Fri Mar 18 11:03:30 2016] [debug] 200 OK (0.012642s, 79.101/s)
+[Fri Mar 18 11:03:33 2016] [debug] POST "/menu/fileview"
+[Fri Mar 18 11:03:33 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:03:33 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:03:33 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:33 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:03:33 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:33 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:03:33 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:03:33 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:03:33 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:03:33 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:33 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "fileview"
+[Fri Mar 18 11:03:33 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:33 2016] [debug] Rendering template "filestore/imgview.html.ep"
+[Fri Mar 18 11:03:33 2016] [debug] Rendering template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:03:33 2016] [debug] 200 OK (0.129161s, 7.742/s)
+[Fri Mar 18 11:03:40 2016] [debug] GET "/menu/listview"
+[Fri Mar 18 11:03:40 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:03:40 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:03:40 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:40 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:03:40 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:40 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:03:40 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:03:40 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:03:40 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:03:40 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:03:40 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "listview"
+[Fri Mar 18 11:03:40 2016] [debug] Notice: list process passed!!!!
+[Fri Mar 18 11:03:40 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:03:40 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "listview_p"
+[Fri Mar 18 11:03:40 2016] [debug] Rendering cached template "filestore/listview.html.ep"
+[Fri Mar 18 11:03:40 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:03:40 2016] [debug] 200 OK (0.091951s, 10.875/s)
+[Fri Mar 18 11:06:56 2016] [debug] GET "/"
+[Fri Mar 18 11:06:56 2016] [debug] Routing to controller "Site1::Controller::Top" and action "top"
+[Fri Mar 18 11:06:56 2016] [debug] Rendering cached template "top/top.html.ep"
+[Fri Mar 18 11:06:56 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:06:56 2016] [debug] 200 OK (0.004417s, 226.398/s)
+[Fri Mar 18 11:06:56 2016] [debug] GET "/appcache.mani"
+[Fri Mar 18 11:06:56 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 11:06:56 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 11:06:56 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:06:56 2016] [debug] 200 OK (0.004548s, 219.877/s)
+[Fri Mar 18 11:06:59 2016] [debug] GET "/signin"
+[Fri Mar 18 11:06:59 2016] [debug] Routing to controller "Site1::Controller::Login" and action "signin"
+[Fri Mar 18 11:06:59 2016] [debug] Rendering cached template "login/signin.html.ep"
+[Fri Mar 18 11:06:59 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:06:59 2016] [debug] 200 OK (0.003867s, 258.598/s)
+[Fri Mar 18 11:07:07 2016] [debug] POST "/signinact"
+[Fri Mar 18 11:07:07 2016] [debug] Routing to controller "Site1::Controller::Login" and action "signinact"
+[Fri Mar 18 11:07:07 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:07 2016] [debug] 302 Found (0.060681s, 16.480/s)
+[Fri Mar 18 11:07:07 2016] [debug] GET "/menu"
+[Fri Mar 18 11:07:07 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:07:07 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:07:07 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:07 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:07:07 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:07 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:07:07 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:07:07 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:07:07 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:07:07 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:07 2016] [debug] Routing to controller "Site1::Controller::Top" and action "mainmenu"
+[Fri Mar 18 11:07:07 2016] [debug] Rendering cached template "top/mainmenu.html.ep"
+[Fri Mar 18 11:07:07 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:07:07 2016] [debug] 200 OK (0.051483s, 19.424/s)
+[Fri Mar 18 11:07:10 2016] [debug] GET "/menu/upload"
+[Fri Mar 18 11:07:10 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:07:10 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:07:10 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:10 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:07:10 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:10 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:07:10 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:07:10 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:07:10 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:07:10 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:11 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "upload"
+[Fri Mar 18 11:07:11 2016] [debug] DEBUG: MOJO_MAX_MESSAGE_SIZE:  104857600
+[Fri Mar 18 11:07:11 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:11 2016] [debug] get user upload file list.
+[Fri Mar 18 11:07:11 2016] [debug] Rendering cached template "filestore/upload.html.ep"
+[Fri Mar 18 11:07:11 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:07:11 2016] [debug] 200 OK (0.071438s, 13.998/s)
+[Fri Mar 18 11:07:11 2016] [debug] GET "/appcache.mani"
+[Fri Mar 18 11:07:11 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 11:07:11 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 11:07:11 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:07:11 2016] [debug] 200 OK (0.003501s, 285.633/s)
+[Fri Mar 18 11:07:23 2016] [debug] GET "/menu/listview"
+[Fri Mar 18 11:07:23 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:07:23 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:07:23 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:23 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:07:23 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:23 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:07:23 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:07:23 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:07:23 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:07:23 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:23 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "listview"
+[Fri Mar 18 11:07:23 2016] [debug] Notice: list process passed!!!!
+[Fri Mar 18 11:07:23 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:23 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "listview_p"
+[Fri Mar 18 11:07:23 2016] [debug] Rendering cached template "filestore/listview.html.ep"
+[Fri Mar 18 11:07:23 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:07:23 2016] [debug] 200 OK (0.070441s, 14.196/s)
+[Fri Mar 18 11:07:24 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:07:24 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:07:24 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:07:24 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:24 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:07:24 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: h82ttKPZsanDiv5y7QeetA
+[Fri Mar 18 11:07:24 2016] [debug] 200 OK (0.073892s, 13.533/s)
+[Fri Mar 18 11:07:24 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:07:24 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:07:24 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:07:24 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:24 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:07:24 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: IMtdXV74tH4YOEpDx/uEaQ
+[Fri Mar 18 11:07:24 2016] [debug] 200 OK (0.013028s, 76.758/s)
+[Fri Mar 18 11:07:24 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:07:24 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:07:24 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:07:24 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:24 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:07:24 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: 1RujoiIz3+ue1yBPwbokCA
+[Fri Mar 18 11:07:24 2016] [debug] 200 OK (0.020894s, 47.861/s)
+[Fri Mar 18 11:07:24 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:07:24 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:07:24 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:07:24 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:24 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:07:24 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: wCwBMUh0P6kjUAhbp7ViTg
+[Fri Mar 18 11:07:24 2016] [debug] 200 OK (0.014375s, 69.565/s)
+[Fri Mar 18 11:07:24 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:07:24 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:07:24 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:07:24 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:07:24 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:07:24 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:07:24 2016] [debug] DEBUG: 9NMnmYvJiyF60A2t/uq2Qw
+[Fri Mar 18 11:07:24 2016] [debug] 200 OK (0.015432s, 64.800/s)
+[Fri Mar 18 11:10:37 2016] [debug] GET "/menu"
+[Fri Mar 18 11:10:37 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:10:37 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:10:37 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:37 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:10:37 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:37 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:10:37 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:10:37 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:10:37 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:10:37 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:37 2016] [debug] Routing to controller "Site1::Controller::Top" and action "mainmenu"
+[Fri Mar 18 11:10:37 2016] [debug] Rendering cached template "top/mainmenu.html.ep"
+[Fri Mar 18 11:10:37 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:10:37 2016] [debug] 200 OK (0.065641s, 15.234/s)
+[Fri Mar 18 11:10:41 2016] [debug] GET "/menu/upload"
+[Fri Mar 18 11:10:41 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:10:41 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:10:41 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:41 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:10:41 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:41 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:10:41 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:10:41 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:10:41 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:10:41 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:41 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "upload"
+[Fri Mar 18 11:10:41 2016] [debug] DEBUG: MOJO_MAX_MESSAGE_SIZE:  104857600
+[Fri Mar 18 11:10:41 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:41 2016] [debug] get user upload file list.
+[Fri Mar 18 11:10:41 2016] [debug] Rendering cached template "filestore/upload.html.ep"
+[Fri Mar 18 11:10:41 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:10:41 2016] [debug] 200 OK (0.064201s, 15.576/s)
+[Fri Mar 18 11:10:41 2016] [debug] GET "/appcache.mani"
+[Fri Mar 18 11:10:41 2016] [debug] Routing to controller "Site1::Controller::Top" and action "unknown"
+[Fri Mar 18 11:10:41 2016] [debug] Rendering cached template "top/unknown.html.ep"
+[Fri Mar 18 11:10:41 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:10:41 2016] [debug] 200 OK (0.002940s, 340.136/s)
+[Fri Mar 18 11:10:47 2016] [debug] GET "/menu/listview"
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:10:47 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:10:47 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "listview"
+[Fri Mar 18 11:10:47 2016] [debug] Notice: list process passed!!!!
+[Fri Mar 18 11:10:47 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "listview_p"
+[Fri Mar 18 11:10:47 2016] [debug] Rendering cached template "filestore/listview.html.ep"
+[Fri Mar 18 11:10:47 2016] [debug] Rendering cached template "layouts/mobidef.html.ep"
+[Fri Mar 18 11:10:47 2016] [debug] 200 OK (0.070744s, 14.135/s)
+[Fri Mar 18 11:10:47 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:10:47 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:10:47 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:10:47 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: h82ttKPZsanDiv5y7QeetA
+[Fri Mar 18 11:10:47 2016] [debug] 200 OK (0.041253s, 24.241/s)
+[Fri Mar 18 11:10:47 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:10:47 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:10:47 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:10:47 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: 1RujoiIz3+ue1yBPwbokCA
+[Fri Mar 18 11:10:47 2016] [debug] 200 OK (0.035771s, 27.956/s)
+[Fri Mar 18 11:10:47 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:10:47 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:10:47 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:10:47 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: IMtdXV74tH4YOEpDx/uEaQ
+[Fri Mar 18 11:10:47 2016] [debug] 200 OK (0.019455s, 51.401/s)
+[Fri Mar 18 11:10:47 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:10:47 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:10:47 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:10:47 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: 9NMnmYvJiyF60A2t/uq2Qw
+[Fri Mar 18 11:10:47 2016] [debug] 200 OK (0.021046s, 47.515/s)
+[Fri Mar 18 11:10:47 2016] [debug] GET "/imgload"
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Login" and action "usercheck"
+[Fri Mar 18 11:10:47 2016] [debug] Notice: Usercheck ON!
+[Fri Mar 18 11:10:47 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: username(local): テスト１ユーザ
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: uid(local): 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: value: {"image":{}}
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: new value: {"image":{}}
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: email: test1@test.com
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: displayName: テスト１ユーザ
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: guid: 9tQF0i6xKCDrOIsLbir+JA
+[Fri Mar 18 11:10:47 2016] [debug] Routing to controller "Site1::Controller::Filestore" and action "imgload"
+[Fri Mar 18 11:10:47 2016] [debug] Reading configuration file "/storage/perlwork/mojowork/server/site1/site1.conf"
+[Fri Mar 18 11:10:47 2016] [debug] DEBUG: wCwBMUh0P6kjUAhbp7ViTg
+[Fri Mar 18 11:10:47 2016] [debug] 200 OK (0.024037s, 41.603/s)

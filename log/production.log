@@ -810,3 +810,81 @@ FATAL:  ??????????????? at /home/debian/perl5/lib/perl5/Mojo/Pg.pm line 83.
 [Thu Aug 13 23:27:39 2015] [info] Listening at "http://192.168.0.8:3800"
 [Thu Aug 13 23:27:39 2015] [info] Manager 31205 started
 [Thu Aug 13 23:27:39 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu Aug 20 11:18:31 2015] [info] Listening at "http://192.168.0.8:3800"
+[Thu Aug 20 11:18:31 2015] [info] Manager 5043 started
+[Thu Aug 20 11:18:31 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Tue Dec 22 16:39:36 2015] [info] Listening at "http://192.168.0.8:3800"
+[Tue Dec 22 16:39:36 2015] [info] Manager 31182 started
+[Tue Dec 22 16:39:36 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Tue Dec 22 16:43:17 2015] [info] Listening at "http://192.168.0.8:3800"
+[Tue Dec 22 16:43:17 2015] [info] Manager 31223 started
+[Tue Dec 22 16:43:17 2015] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Mon Feb  8 11:01:09 2016] [info] INFO: CREATE TABLE signal_tbl
+[Mon Feb  8 11:01:09 2016] [info] INFO: 4ace09401d401f3e1b354fe307203673 c6959d1e7c5fe03b71983a490a40d657c68700b5764e2db51b165320 Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Mon Feb  8 11:01:48 2016] [info] INFO: DEL Entry signal_tbl c6959d1e7c5fe03b71983a490a40d657c68700b5764e2db51b165320
+[Tue Mar  8 11:09:47 2016] [info] INFO: CREATE TABLE signal_tbl
+[Tue Mar  8 11:09:47 2016] [info] INFO: 1655d19e5a4251935074cbdc6a477fba 1422318cc15e3036317ffd5ff2044569840557d3a6fb96181144c80a テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Tue Mar  8 11:09:51 2016] [info] INFO: DEL Entry signal_tbl 1422318cc15e3036317ffd5ff2044569840557d3a6fb96181144c80a
+[Tue Mar  8 11:11:12 2016] [info] Get connidroom tablename: 
+[Tue Mar  8 11:11:12 2016] [info] TABLENAME: room_329e8e65d96a8d0b296ca3ab25aa73d9_tbl
+[Tue Mar  8 11:11:12 2016] [info] INFO: connvalue: 098ef6b719b59e6e5712a8860a3fd21d aaa room_329e8e65d96a8d0b296ca3ab25aa73d9_tbl
+[Tue Mar  8 11:11:12 2016] [info] DEBUG: CREATE TABLE room_329e8e65d96a8d0b296ca3ab25aa73d9_tbl
+[Tue Mar  8 11:11:12 2016] [info] INFO: 098ef6b719b59e6e5712a8860a3fd21d 32be96ee2ba28a08da0a4d0dc715f00b663653e22bc50679f0319fa4 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Tue Mar  8 11:11:23 2016] [info] Get connidroom tablename: room_329e8e65d96a8d0b296ca3ab25aa73d9_tbl                                                                                                                                                                                                                      
+[Tue Mar  8 11:11:23 2016] [info] INFO: connvalue: 23980c305835bb0d8fe88b8ce21a32db aaa room_329e8e65d96a8d0b296ca3ab25aa73d9_tbl                                                                                                                                                                                                                      
+[Tue Mar  8 11:11:24 2016] [info] DEBUG: CREATE TABLE room_329e8e65d96a8d0b296ca3ab25aa73d9_tbl                                                                                                                                                                                                                      
+[Tue Mar  8 11:11:24 2016] [info] INFO: 23980c305835bb0d8fe88b8ce21a32db 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Tue Mar  8 11:12:12 2016] [info] DELETE entry: room_329e8e65d96a8d0b296ca3ab25aa73d9_tbl                                                                                                                                                                                                                       : 098ef6b719b59e6e5712a8860a3fd21d
+[Tue Mar  8 11:12:12 2016] [info] room_329e8e65d96a8d0b296ca3ab25aa73d9_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Tue Mar  8 11:12:12 2016] [info] del connid entry: 098ef6b719b59e6e5712a8860a3fd21d
+[Tue Mar  8 11:12:25 2016] [info] DELETE entry: room_329e8e65d96a8d0b296ca3ab25aa73d9_tbl                                                                                                                                                                                                                       : 23980c305835bb0d8fe88b8ce21a32db
+[Tue Mar  8 11:12:25 2016] [info] room_329e8e65d96a8d0b296ca3ab25aa73d9_tbl                                                                                                                                                                                                                       REMAIN entry 0
+[Tue Mar  8 11:12:25 2016] [info] del connid entry: 23980c305835bb0d8fe88b8ce21a32db
+[Tue Mar  8 11:12:34 2016] [info] Get connidroom tablename: 
+[Tue Mar  8 11:12:34 2016] [info] TABLENAME: room_5a1f2381f1c741cee47d6b924672c7b3_tbl
+[Tue Mar  8 11:12:34 2016] [info] INFO: connvalue: e7becd5a347d181105fa45edb0950968 aaa room_5a1f2381f1c741cee47d6b924672c7b3_tbl
+[Tue Mar  8 11:12:34 2016] [info] DEBUG: CREATE TABLE room_5a1f2381f1c741cee47d6b924672c7b3_tbl
+[Tue Mar  8 11:12:34 2016] [info] INFO: e7becd5a347d181105fa45edb0950968 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Tue Mar  8 11:13:15 2016] [info] Get connidroom tablename: room_5a1f2381f1c741cee47d6b924672c7b3_tbl                                                                                                                                                                                                                      
+[Tue Mar  8 11:13:15 2016] [info] INFO: connvalue: 24d0bb7d45c1a4b3fde3a7b2ecd670ce aaa room_5a1f2381f1c741cee47d6b924672c7b3_tbl                                                                                                                                                                                                                      
+[Tue Mar  8 11:13:15 2016] [info] DEBUG: CREATE TABLE room_5a1f2381f1c741cee47d6b924672c7b3_tbl                                                                                                                                                                                                                      
+[Tue Mar  8 11:13:15 2016] [info] INFO: 24d0bb7d45c1a4b3fde3a7b2ecd670ce ad766693cac25b89b57dc2ff9c15a94e46b932c89a134fca8c5b428f テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Tue Mar  8 11:14:03 2016] [info] DELETE entry: room_5a1f2381f1c741cee47d6b924672c7b3_tbl                                                                                                                                                                                                                       : e7becd5a347d181105fa45edb0950968
+[Tue Mar  8 11:14:03 2016] [info] room_5a1f2381f1c741cee47d6b924672c7b3_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Tue Mar  8 11:14:03 2016] [info] del connid entry: e7becd5a347d181105fa45edb0950968
+[Tue Mar  8 11:14:08 2016] [info] DELETE entry: room_5a1f2381f1c741cee47d6b924672c7b3_tbl                                                                                                                                                                                                                       : 24d0bb7d45c1a4b3fde3a7b2ecd670ce
+[Tue Mar  8 11:14:08 2016] [info] room_5a1f2381f1c741cee47d6b924672c7b3_tbl                                                                                                                                                                                                                       REMAIN entry 0
+[Tue Mar  8 11:14:08 2016] [info] del connid entry: 24d0bb7d45c1a4b3fde3a7b2ecd670ce
+[Tue Mar  8 11:14:44 2016] [info] INFO: CREATE TABLE signal_tbl
+[Tue Mar  8 11:14:44 2016] [info] INFO: 63309f3a439790ccea5d28457dbae281 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Tue Mar  8 11:14:46 2016] [info] INFO: CREATE TABLE signal_tbl
+[Tue Mar  8 11:14:46 2016] [info] INFO: 4269e168d7066a425a54af21f2b52ae8 2dbbdc14b91d20cb5bfd581c2853ef01cff9aeb85310a06a19ee8b08 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Tue Mar  8 11:15:34 2016] [info] INFO: DEL Entry signal_tbl 2dbbdc14b91d20cb5bfd581c2853ef01cff9aeb85310a06a19ee8b08
+[Tue Mar  8 11:15:36 2016] [info] INFO: CREATE TABLE signal_tbl
+[Tue Mar  8 11:15:36 2016] [info] INFO: dfa69a8ac4618f133fd639153fafb3ea 2dbbdc14b91d20cb5bfd581c2853ef01cff9aeb85310a06a19ee8b08 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Tue Mar  8 11:15:44 2016] [info] INFO: DEL Entry signal_tbl 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba
+[Tue Mar  8 11:15:46 2016] [info] INFO: CREATE TABLE signal_tbl
+[Tue Mar  8 11:15:46 2016] [info] INFO: 3802320dd5de82384b1b642b02185104 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Tue Mar  8 11:16:35 2016] [info] INFO: DEL Entry signal_tbl 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba
+[Tue Mar  8 11:16:38 2016] [info] INFO: CREATE TABLE signal_tbl
+[Tue Mar  8 11:16:38 2016] [info] INFO: 4918daa9931a682b7a594ca6e9a9e802 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Tue Mar  8 11:16:43 2016] [info] INFO: DEL Entry signal_tbl 2dbbdc14b91d20cb5bfd581c2853ef01cff9aeb85310a06a19ee8b08
+[Tue Mar  8 11:16:45 2016] [info] INFO: CREATE TABLE signal_tbl
+[Tue Mar  8 11:16:45 2016] [info] INFO: 63ed5978ab35214d231e158669bcc6ec 2dbbdc14b91d20cb5bfd581c2853ef01cff9aeb85310a06a19ee8b08 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Tue Mar  8 11:17:02 2016] [info] INFO: DEL Entry signal_tbl 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba
+[Tue Mar  8 11:17:06 2016] [info] INFO: CREATE TABLE signal_tbl
+[Tue Mar  8 11:17:06 2016] [info] INFO: a4529dc096ea01b52394ed6db8dcc56e 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Tue Mar  8 11:17:17 2016] [info] INFO: DEL Entry signal_tbl 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba
+[Tue Mar  8 11:17:19 2016] [info] INFO: CREATE TABLE signal_tbl
+[Tue Mar  8 11:17:19 2016] [info] INFO: ad891347d49629e696c37b1a7dc33ff8 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Tue Mar  8 11:17:22 2016] [info] INFO: DEL Entry signal_tbl 2dbbdc14b91d20cb5bfd581c2853ef01cff9aeb85310a06a19ee8b08
+[Tue Mar  8 11:17:23 2016] [info] INFO: CREATE TABLE signal_tbl
+[Tue Mar  8 11:17:23 2016] [info] INFO: 27236e2689cf579aca60a94bfedce2ff 2dbbdc14b91d20cb5bfd581c2853ef01cff9aeb85310a06a19ee8b08 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Tue Mar  8 11:18:44 2016] [info] INFO: DEL Entry signal_tbl 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba
+[Tue Mar  8 11:18:47 2016] [info] INFO: DEL Entry signal_tbl 2dbbdc14b91d20cb5bfd581c2853ef01cff9aeb85310a06a19ee8b08
+[Tue Mar  8 11:18:47 2016] [info] INFO: CREATE TABLE signal_tbl
+[Tue Mar  8 11:18:47 2016] [info] INFO: 1090d3e386b98f8ff12238f8bd6fd0f8 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Tue Mar  8 11:18:49 2016] [info] INFO: CREATE TABLE signal_tbl
+[Tue Mar  8 11:18:49 2016] [info] INFO: 791e9ec932dba23f60c0db15762ce8e0 2dbbdc14b91d20cb5bfd581c2853ef01cff9aeb85310a06a19ee8b08 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Tue Mar  8 11:19:05 2016] [info] INFO: DEL Entry signal_tbl 2dbbdc14b91d20cb5bfd581c2853ef01cff9aeb85310a06a19ee8b08
+[Tue Mar  8 11:19:52 2016] [info] INFO: DEL Entry signal_tbl 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba
