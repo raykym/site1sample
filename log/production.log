@@ -888,3 +888,74 @@ FATAL:  ??????????????? at /home/debian/perl5/lib/perl5/Mojo/Pg.pm line 83.
 [Tue Mar  8 11:18:49 2016] [info] INFO: 791e9ec932dba23f60c0db15762ce8e0 2dbbdc14b91d20cb5bfd581c2853ef01cff9aeb85310a06a19ee8b08 テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
 [Tue Mar  8 11:19:05 2016] [info] INFO: DEL Entry signal_tbl 2dbbdc14b91d20cb5bfd581c2853ef01cff9aeb85310a06a19ee8b08
 [Tue Mar  8 11:19:52 2016] [info] INFO: DEL Entry signal_tbl 81568a408b985daf6af9b3099ee6fdb588b5d83daeaad39caceedcba
+[Fri Mar 18 11:17:44 2016] [info] Listening at "http://192.168.0.8:3800"
+[Fri Mar 18 11:17:44 2016] [info] Manager 5832 started
+[Fri Mar 18 11:17:44 2016] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Wed Mar 23 14:48:19 2016] [info] Get connidroom tablename: 
+[Wed Mar 23 14:48:19 2016] [info] TABLENAME: room_9f236975ce76fb63a265fb7a5ba67dac_tbl
+[Wed Mar 23 14:48:19 2016] [info] INFO: connvalue: 1bd628a4378843fdfb20eb33aa108d77 秘密の部屋 room_9f236975ce76fb63a265fb7a5ba67dac_tbl
+[Wed Mar 23 14:48:19 2016] [info] DEBUG: CREATE TABLE room_9f236975ce76fb63a265fb7a5ba67dac_tbl
+[Wed Mar 23 14:48:19 2016] [info] INFO: 1bd628a4378843fdfb20eb33aa108d77 15ea80d667426441f431de5acd5040dc71204cffd0efe9db280e10c0 Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Wed Mar 23 14:49:04 2016] [info] Get connidroom tablename: room_9f236975ce76fb63a265fb7a5ba67dac_tbl                                                                                                                                                                                                                      
+[Wed Mar 23 14:49:04 2016] [info] INFO: connvalue: f09e360f7f4c8e368aaedecd92f8cfa9 秘密の部屋 room_9f236975ce76fb63a265fb7a5ba67dac_tbl                                                                                                                                                                                                                      
+[Wed Mar 23 14:49:04 2016] [info] DEBUG: CREATE TABLE room_9f236975ce76fb63a265fb7a5ba67dac_tbl                                                                                                                                                                                                                      
+[Wed Mar 23 14:49:04 2016] [info] INFO: f09e360f7f4c8e368aaedecd92f8cfa9 a93bc02a9fa8da60f0ddbf45231a06741e8b82cb84018f7eee80818b テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Wed Mar 23 14:53:23 2016] [info] DELETE entry: room_9f236975ce76fb63a265fb7a5ba67dac_tbl                                                                                                                                                                                                                       : f09e360f7f4c8e368aaedecd92f8cfa9
+[Wed Mar 23 14:53:23 2016] [info] room_9f236975ce76fb63a265fb7a5ba67dac_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Wed Mar 23 14:53:23 2016] [info] del connid entry: f09e360f7f4c8e368aaedecd92f8cfa9
+[Wed Mar 23 14:53:45 2016] [info] DELETE entry: room_9f236975ce76fb63a265fb7a5ba67dac_tbl                                                                                                                                                                                                                       : 1bd628a4378843fdfb20eb33aa108d77
+[Wed Mar 23 14:53:45 2016] [info] room_9f236975ce76fb63a265fb7a5ba67dac_tbl                                                                                                                                                                                                                       REMAIN entry 0
+[Wed Mar 23 14:53:45 2016] [info] del connid entry: 1bd628a4378843fdfb20eb33aa108d77
+[Sat Mar 26 00:00:23 2016] [info] Listening at "http://192.168.0.8:3800"
+[Sat Mar 26 00:00:23 2016] [info] Manager 24858 started
+[Sat Mar 26 00:00:23 2016] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sat Mar 26 09:55:56 2016] [info] Get connidroom tablename: 
+[Sat Mar 26 09:55:56 2016] [info] TABLENAME: room_c28689d06e505cc8bc29c8d881b08ad3_tbl
+[Sat Mar 26 09:55:56 2016] [info] INFO: connvalue: 134cff1a07f4f753070e29bb4dc66cca A room_c28689d06e505cc8bc29c8d881b08ad3_tbl
+[Sat Mar 26 09:55:56 2016] [info] DEBUG: CREATE TABLE room_c28689d06e505cc8bc29c8d881b08ad3_tbl
+[Sat Mar 26 09:55:56 2016] [info] INFO: 134cff1a07f4f753070e29bb4dc66cca ed8ea6333f12268d4da73aeeb4c0850bdd7e72e41f52fb47d97267eb テスト１ユーザ /imgcomm?oid=MVJ1am9pSXozK3VlMXlCUHdib2tDQQ
+[Sat Mar 26 09:56:07 2016] [info] Get connidroom tablename: room_c28689d06e505cc8bc29c8d881b08ad3_tbl                                                                                                                                                                                                                      
+[Sat Mar 26 09:56:07 2016] [info] INFO: connvalue: fc294175ce2dd62b88b1c3b8cf65ca3e A room_c28689d06e505cc8bc29c8d881b08ad3_tbl                                                                                                                                                                                                                      
+[Sat Mar 26 09:56:07 2016] [info] DEBUG: CREATE TABLE room_c28689d06e505cc8bc29c8d881b08ad3_tbl                                                                                                                                                                                                                      
+[Sat Mar 26 09:56:07 2016] [info] INFO: fc294175ce2dd62b88b1c3b8cf65ca3e d9aa953e84434ff3f3e8cbbf4790ddc779b9ed3d4bdf915a880f1aa5 Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Sat Mar 26 09:57:58 2016] [info] DELETE entry: room_c28689d06e505cc8bc29c8d881b08ad3_tbl                                                                                                                                                                                                                       : fc294175ce2dd62b88b1c3b8cf65ca3e
+[Sat Mar 26 09:57:58 2016] [info] room_c28689d06e505cc8bc29c8d881b08ad3_tbl                                                                                                                                                                                                                       REMAIN entry 1
+[Sat Mar 26 09:57:58 2016] [info] del connid entry: fc294175ce2dd62b88b1c3b8cf65ca3e
+[Sat Mar 26 09:58:03 2016] [info] DELETE entry: room_c28689d06e505cc8bc29c8d881b08ad3_tbl                                                                                                                                                                                                                       : 134cff1a07f4f753070e29bb4dc66cca
+[Sat Mar 26 09:58:03 2016] [info] room_c28689d06e505cc8bc29c8d881b08ad3_tbl                                                                                                                                                                                                                       REMAIN entry 0
+[Sat Mar 26 09:58:03 2016] [info] del connid entry: 134cff1a07f4f753070e29bb4dc66cca
+[Sat Mar 26 14:01:11 2016] [info] Listening at "http://192.168.0.8:3800"
+[Sat Mar 26 14:01:11 2016] [info] Manager 28758 started
+[Sat Mar 26 14:01:11 2016] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun Mar 27 02:39:03 2016] [info] Listening at "http://192.168.0.8:3800"
+[Sun Mar 27 02:39:03 2016] [info] Manager 32369 started
+[Sun Mar 27 02:39:03 2016] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Sun Mar 27 14:31:49 2016] [info] Listening at "http://192.168.0.8:3800"
+[Sun Mar 27 14:31:49 2016] [info] Manager 3136 started
+[Sun Mar 27 14:31:50 2016] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Tue Mar 29 16:12:01 2016] [info] Listening at "http://192.168.0.8:3800"
+[Tue Mar 29 16:12:01 2016] [info] Manager 14437 started
+[Tue Mar 29 16:12:01 2016] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu Mar 31 00:21:31 2016] [info] Listening at "http://192.168.0.8:3800"
+[Thu Mar 31 00:21:31 2016] [info] Manager 21906 started
+[Thu Mar 31 00:21:31 2016] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu Mar 31 23:34:09 2016] [info] Listening at "http://192.168.0.8:3800"
+[Thu Mar 31 23:34:09 2016] [info] Manager 27262 started
+[Thu Mar 31 23:34:09 2016] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Thu Mar 31 23:50:25 2016] [info] Get connidroom tablename: 
+[Thu Mar 31 23:50:25 2016] [info] TABLENAME: room_cd25d61c8526d0bf0a44fa02ef4b8f01_tbl
+[Thu Mar 31 23:50:25 2016] [info] INFO: connvalue: 318820c665203fcd4f8d1c2ac9830b41 himitunoheya room_cd25d61c8526d0bf0a44fa02ef4b8f01_tbl
+[Thu Mar 31 23:50:25 2016] [info] DEBUG: CREATE TABLE room_cd25d61c8526d0bf0a44fa02ef4b8f01_tbl
+[Thu Mar 31 23:50:25 2016] [info] INFO: 318820c665203fcd4f8d1c2ac9830b41 b8f290c9d6379efc28d1943e78e8dd9951d3edcde64b2783a87749f4 Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Thu Mar 31 23:51:22 2016] [info] DELETE entry: room_cd25d61c8526d0bf0a44fa02ef4b8f01_tbl                                                                                                                                                                                                                       : 318820c665203fcd4f8d1c2ac9830b41
+[Thu Mar 31 23:51:22 2016] [info] room_cd25d61c8526d0bf0a44fa02ef4b8f01_tbl                                                                                                                                                                                                                       REMAIN entry 0
+[Thu Mar 31 23:51:22 2016] [info] del connid entry: 318820c665203fcd4f8d1c2ac9830b41
+[Fri Apr  1 14:02:03 2016] [info] Listening at "http://192.168.0.8:3800"
+[Fri Apr  1 14:02:03 2016] [info] Manager 31857 started
+[Fri Apr  1 14:02:03 2016] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"
+[Fri Apr  1 17:12:38 2016] [info] INFO: CREATE TABLE signal_tbl
+[Fri Apr  1 17:12:38 2016] [info] INFO: ec5d2ebe245d0fd6192e3aabd7167851 8d7735049f8cfe1b8ec630d57691c6a5c2931aafc658be7ef3abf4ec Ray kym https://lh4.googleusercontent.com/-NZoS00jhMdU/AAAAAAAAAAI/AAAAAAAABGw/zqtXOTZ20xE/photo.jpg?sz=50
+[Fri Apr  1 17:14:55 2016] [info] INFO: DEL Entry signal_tbl 8d7735049f8cfe1b8ec630d57691c6a5c2931aafc658be7ef3abf4ec
+[Sat Apr  2 00:41:58 2016] [info] Listening at "http://192.168.0.8:3800"
+[Sat Apr  2 00:41:58 2016] [info] Manager 2155 started
+[Sat Apr  2 00:41:59 2016] [info] Creating process id file "/storage/perlwork/mojowork/server/site1/script/hypnotoad.pid"

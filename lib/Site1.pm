@@ -77,6 +77,9 @@ sub startup {
   $bridge->websocket('/wsocket/signaling')->to(controller => 'Webroom', action => 'signaling');
   $bridge->websocket('/echopubsub')->to(controller => 'Chatroom', action => 'echopubsub');
   $bridge->websocket('/webnotice')->to(controller => 'Webnotice', action => 'webnotice');
+  $bridge->websocket('/menu/rec-timeline/record')->to(controller => 'Timeline',action => 'record');
+  $r->websocket('/menu/rec-timeline/chrome')->to(controller => 'Timeline',action => 'chrome');
+  $bridge->websocket('/menu/maptimeline/echo')->to(controller => 'Timeline',action => 'echo');
 
 
   # Normal route to controller
@@ -88,6 +91,8 @@ sub startup {
   $r->post('/signupact')->to('login#signupact'); #template未使用 
 
   $r->any('/CAdownload')->to( controller => 'OreoreCA', action => 'download');
+
+  $r->any('/oauth2callback')->to(controller => 'Login', action => 'oauth2callback');
 
    # 以下はログイン認証済でないとページに入れない
   $bridge->get('/menu')->to('top#mainmenu');          
@@ -137,7 +142,8 @@ sub startup {
 
   $bridge->get('/webnotice/view')->to('webnotice#view');
 
-  $r->any('/oauth2callback')->to(controller => 'Login', action => 'oauth2callback');
+  $bridge->get('/menu/rec-timeline')->to('timeline#view');
+  $bridge->get('/menu/maptimeline')->to('timeline#mapview');
 
   $r->any('*')->to('Top#unknown'); # 未定義のパスは全てunknown画面へ
 }

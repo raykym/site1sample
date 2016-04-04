@@ -1,0 +1,119 @@
+% layout 'mobidef';
+% title 'Rec-Timeline';
+<script type="text/javascript">
+
+
+    var ws = null;
+    ws = new WebSocket('wss://westwind.iobb.net/menu/rec-timeline/record');
+
+    ws.onopen = function(){
+        console.log('Connection opened');
+    };
+
+   ws.onclose = function(){
+        console.log("Close:");
+        ws = null;
+    }; 
+
+    ws.onerror = function(){
+       alert("please Reload, Reconnect websocket!");
+    };
+
+    ws.onmessage = function(msg){
+
+        console.log("On message!");
+
+                var evt = JSON.parse(msg.data);
+
+        %# get GPS
+        getPosition();
+  
+    %# getPosition in append view
+    %#    $("#logview").append("<li>" + gps_local_pos + "</li>");
+
+    };
+
+
+ function getPosition(){
+    console.log("getPosition START!!!");
+
+    var geoOptions = {
+        enableHighAccuracy: true,   //高精度要求
+        timeout: 6000,          //タイムアウト(ミリ秒)
+        maximumAge: 0       //キャッシュ有効期限(ミリ秒)
+    }
+
+  var watchID =  navigator.geolocation.watchPosition(successCallback, errorCallback,geoOptions);
+
+    function successCallback(position) {
+%#  var gl_text = "緯度：" + position.coords.latitude + "<br>";
+%#    gl_text += "経度：" + position.coords.longitude + "<br>";
+%#    gl_text += "高度：" + position.coords.altitude + "<br>";
+%#    gl_text += "緯度・経度の誤差：" + position.coords.accuracy + "<br>";
+%#    gl_text += "高度の誤差：" + position.coords.altitudeAccuracy + "<br>";
+%#    gl_text += "方角：" + position.coords.heading + "<br>";
+%#    gl_text += "速度：" + position.coords.speed + "<br>";
+
+
+      %# MAP表示センター指定
+      lat = position.coords.latitude;
+      lng = position.coords.longitude;
+
+    var DD = new Date();
+
+    var gpslocal_pos = {"gpslocation": {"Year": DD.getYear(),"Mounth": DD.getMonth(),"Date": DD.getDate(),"Hour": DD.getHours(),"Minut": DD.getMinutes(),"Second": DD.getSeconds(),"latitude": position.coords.latitude,"longitude": position.coords.longitude, "altitude": position.coords.altitude, "accuracy": position.coords.accuracy, "altitudeAccuracy": position.coords.altitudeAccuracy, "heading": position.coords.heading, "speed": position.coords.speed }};
+
+       DD = null;
+
+       var gps_local_pos = JSON.stringify(gpslocal_pos);
+       console.log("GPS:" + gps_local_pos );
+       ws.send(gps_local_pos);
+
+       var disp_pos = gpslocal_pos.gpslocation;
+
+       $("#logview").prepend("<li>" + disp_pos.Hour + ":" + disp_pos.Minut + ":" + disp_pos.Second + " lat:" + disp_pos.latitude + " long:" + disp_pos.longitude + "</li>");
+
+
+   %# 追跡の停止
+       navigator.geolocation.clearWatch(watchID);
+
+
+    }  // successCallback
+
+function errorCallback(error) {
+  var err_msg = "";
+  switch(error.code)
+  {
+    case 1:
+      err_msg = "位置情報の利用が許可されていません";
+      break;
+    case 2:
+      err_msg = "デバイスの位置が判定できません";
+      break;
+    case 3:
+      err_msg = "タイムアウトしました";
+      break;
+  }
+  alert(err_msg);
+  return;
+ }
+
+    }  //getPosition
+
+
+</script>
+
+<div data-role="page" style="background: #80aa55">
+    <div><h3>Recoding Timeline page</h3></div>
+    <div style="color: #ff0000"><%= $msg_w %></div>
+
+    <div>
+        <ul id="logview" data-role="listview" data-inset="true"></ul>
+    </div>
+
+    <div data-role="footer" style="backgroud: #aac78d;">
+    <a href="" data-rel="back" class="btn-inline">back</a>
+    <a href="/menu" class="btn-inline">メニュー</a>
+    </div>
+
+</div>

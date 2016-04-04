@@ -1,0 +1,28 @@
+% layout 'mobidef';
+% title 'Map View';
+<script type="text/javascript">
+
+  var mapoptions = null;
+  var mapobj = null;
+  var makerobj = new google.maps.Marker();
+
+    var ws = null;
+%#    ws = new WebSocket('wss://westwind.iobb.net/menu/maptimeline');
+
+
+
+
+</script>
+
+<div data-role="page" style="background: #80aa55">
+    <div><h3>TimeLine Map View</h3></div>
+    <div style="color: #ff0000"><%= $msg_w %></div>
+        <div style="border: 1px solid">
+         <div page-role="panel" id="r_panel" data-display="overlay">
+         <div id="gmap" style="width : 360px; height : 360px;"></div>
+         </div>
+        </div>
+    <div data-role="footer" style="backgroud: #aac78d;">
+    <a href="" data-rel="back">back</a>
+    </div>
+</div>
