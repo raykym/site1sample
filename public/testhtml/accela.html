@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script type="text/javascript">
+
+isMotion = true;
+
+function ToggleAcc() {
+   if (isMotion) { 
+           isMotion = false;
+           console.log("DEBUG: isMotion  false");
+    } else {
+           isMotion = true;
+           console.log("DEBUG: isMotion  true");
+        }
+}
+
+$(function(){
+
+    AccelaDevi();
+
+});
+
+function AccelaDevi() {
+
+// 加速度センサー
+window.addEventListener("devicemotion", devicemotionHandler);
+
+function devicemotionHandler(event) {
+
+   if (isMotion) return;
+
+     a = {
+        x : event.acceleration.x,
+        y : event.acceleration.y,
+        z : event.acceleration.z,
+     //   x : event.accelerationIncludingGravity.x,
+     //   y : event.accelerationIncludingGravity.y,
+     //   z : event.accelerationIncludingGravity.z,
+     //   x : event.rotationRate.beta,
+     //   y : event.rotationRate.gamma,
+     //   z : event.rotationRate.alpha,
+    };
+
+    //$('#output_x').text(a.x);
+    //$('#output_y').text(a.y);
+    //$('#output_z').text(a.z);
+
+      $('#disp').append("<li>" + a.x.toFixed(3) + " : " + a.y.toFixed(3) + " : " + a.z.toFixed(3) + " JAIRO: " + beta.toFixed(3) + " : " + gamma.toFixed(3) + " : " + alpha.toFixed(3) + "</li>");
+    
+}
+
+
+// ジャイロセンサー
+window.addEventListener("deviceorientation", deviceorientationHandler);
+ 
+function deviceorientationHandler(event) {
+
+   if (isMotion) return;
+
+  // X軸
+   beta = event.beta;
+  //  $('#event_x').text(event.beta);
+  // Y軸
+   gamma = event.gamma;
+  //  $('#event_y').text(event.gamma);
+  // Z軸
+   alpha = event.alpha;
+  //  $('#event_z').text(event.alpha);
+
+      $('#disp').append("<li>" + a.x.toFixed(3) + " : " + a.y.toFixed(3) + " : " + a.z.toFixed(3) + " JAIRO: " + beta.toFixed(3) + " : " + gamma.toFixed(3) + " : " + alpha.toFixed(3) + "</li>");
+  //    $('#disp').append("<li>" + a.x + " : " + a.y + " : " + a.z + " JAIRO: " + beta + " : " + gamma + " : " + alpha + "</li>");
+}
+} // AccelaDevi
+
+
+</script>
+
+</HEAD>
+<BODY>
+  <p><h1>加速度センサー  ジャイロセンサー</h1></p>
+  <button type="button" class="ui-btn ui-btn-inline" onclick="ToggleAcc();">Toggle</button>
+  <div><ul id="disp" data-role="listview" data-inset="true"></ul></div>
+
+</BODY>
+</HTML>
+

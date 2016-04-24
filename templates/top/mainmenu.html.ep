@@ -9,6 +9,7 @@
         <p>このサイトは、サイト構築の習作として構築しています。文言やイメージなど統一性もありませんが、機能を追加しながら実験する為のサイトです。</p>
         <p>SSLの認証エラーをバイパスする為には、<a href="/oreoreCA/oreoreCAcert.der" rel="external">自己証明認証局</a>をダウンロードしてから、ブラウザの設定->証明証の管理->認証局->インポートで、DERエンコードバイナリファイルとしてwestwind.iobb.netを登録して下さい。androidは4.3以降で拡張子が.crtに変更する必要があります。</p>
         <h2><%= $msg %></h2>
+        <a href="/testhtml/rewrite_walkgame.html" class="ui-btn" data-transition="flip" rel="external">散歩ゲーム</a>
         <a href="/menu/chatopen" class="ui-btn" data-transition="flip" rel="external">オープンチャット</a>
   %#      <a href="/menu/chatroom" class="ui-btn ui-btn-inline" data-transition="flip" rel="external">チャット(websocket test)</a>
   %#      <a href="/menu/chatroomdb" class="ui-btn ui-btn-inline" data-transition="flip" rel="external">チャット(mongoDB base)</a>

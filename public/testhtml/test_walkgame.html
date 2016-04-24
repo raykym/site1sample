@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true_or_false"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script type="text/javascript">
+
+ res_disp = "判定中";
+ isMotion = false;  // false is move. true is END game.
+ onCount = 0;     // attack count
+ direct = false;  // direct renge check
+ acc_shl = 10;    // renge wide
+ alpha_shl = 380;  // init over number
+ gpslocal_pos = null;  //user gps object
+ ene_pos = null;    // enemy gps object
+ geo_dist = null;
+ eneMoveID = null;
+
+ map = null ;
+ mapoptions = null;
+ mapobj = null;
+ makerobj = new google.maps.Marker();
+ makerobj2 = new google.maps.Marker();
+
+ EnmInterval = 6000;  // ターゲットを移動させると電池の消費が半端ない
+
+
+function dumCall(){
+       //dummy Callback...
+       }
+
+function hitEmure(){
+    // Hit Emurate setting
+       onCount = 2;
+       }
+
+var lat = 0;
+var lng = 0;
+
+  // map描写
+        google.maps.event.addDomListener(window, 'load', function() {
+                    map = document.getElementById("gmap");
+                var options = {
+                        zoom: 16,
+                        center: new google.maps.LatLng(lat, lng),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP,
+                        scaleControl: true
+                };
+                mapobj = new google.maps.Map(map, options);
+              });
+
+  // エネミー初期化
+function enmset(){
+        EnemySet();
+        getDirection();
+        eneMoveID = window.setInterval(EnmMove,EnmInterval);
+    };
+
+  // リセット
+function hangUp(){
+    window.location.reload();
+    }
+
+
+// Sencer check  Not Active this section.......
+if ( ! window.DeviceMotionEvent ) {
+       dispSupport = "Not Support!";
+       console.log("DEBUG: DeviceMotionEvent NOT Support");
+    } else {
+       dispSupport = "";
+       console.log("DEBUG: DeviceMotionEvent Support");
+    }
+
+
+// 加速度センサー
+window.addEventListener("devicemotion", devicemotionHandler);
+
+function devicemotionHandler(event) {
+
+   // 距離が20m以下になるまで動作しない Enemyがセットされるまでは動作する。
+   if (geo_dist > 20) { 
+                       res_disp = "待機";
+                       $('#output').text(res_disp);
+                        return;
+                      }
+
+    res_disp = "判定中";
+
+    var a = {
+        x : event.acceleration.x,
+        y : event.acceleration.y,
+        z : event.acceleration.z,
+    };
+
+    if ((a.x > acc_shl)||(a.y > acc_shl)||(a.z > acc_shl)||(a.x < -acc_shl)||(a.y < -acc_shl)||(a.z < -acc_shl)) { 
+                   onCount++;
+                 };
+
+             // shake 2hit & direct(20wide) & distance 10m 終了判定
+          if ( (onCount > 2)&&(direct)&& (geo_dist < 10)) {
+                   res_disp = "終了";
+                   isMotion = true;  // JAIRO STOP
+                   clearInterval(eneMoveID);
+                 };
+
+          if ( (onCount > 3)&&(! direct)){
+                   onCount = 0;
+                 };
+
+    $('#output').text(res_disp + " x: " + Math.ceil(a.x) + " y: " + Math.ceil(a.y) + " z: " + Math.ceil(a.z) + " Count:" + onCount + dispSupport);
+
+}
+
+// JAIRO Sencer check Not Active this section...............
+if ( ! window.DeviceOrientationEvent ) {
+       dispSupport_j = "Not Support!";
+       console.log("DEBUG: DeviceOrientationEvent NOT Support");
+    } else {
+       dispSupport_j = "";
+       console.log("DEBUG: DeviceOrientationEvent Support");
+    }
+
+// JAIRO   activity alltime
+window.addEventListener("deviceorientation", deviceorientationHandler);
+
+function deviceorientationHandler(event) {
+
+   if (isMotion) return;
+
+  // X軸
+    $('#event_x').text(event.beta);
+  // Y軸
+    $('#event_y').text(event.gamma);
+  // Z軸
+     // trunsrate RightRound
+     N0r = 360 - event.alpha;
+    $('#event_z').text(N0r);
+
+    if ((N0r > alpha_shl-5) && ( N0r < alpha_shl+5 )) {
+        
+        direct = true;
+
+        } else {
+
+        direct = false;
+
+        };
+
+        // 方向指示表示
+        $("#arrow").css({
+            "transform" : "rotate(" + (alpha_shl - N0r) + "deg)"
+            })
+
+
+  //  $('#output_j').text(res_disp + " beta: " + Math.ceil(event.beta) + " gamma: " + Math.ceil(event.gamma) + " alpha:(-360) " + Math.ceil(N0r) + dispSupport_j);
+    $('#output_j').text("alpha:(-360) " + Math.ceil(N0r) + dispSupport_j);
+}
+
+ // GPS get  aCallback is dummy callback for Promise
+function gpsset(aCallback){
+    getPosition(aCallback);
+    };
+
+
+function getPosition(aCallback){
+    console.log("getPosition START!!!");
+
+    var geoOptions = {
+        enableHighAccuracy: true,   //高精度要求
+        timeout: 6000,          //タイムアウト(ミリ秒)
+        maximumAge: 0       //キャッシュ有効期限(ミリ秒)
+    }
+
+
+  var watchID =  navigator.geolocation.watchPosition(successCallback, errorCallback,geoOptions);
+
+  function successCallback(position) {
+
+      // MAP表示センター指定
+      lat = position.coords.latitude;
+      lng = position.coords.longitude;
+
+          gpslocal_pos = {"gpslocation": {"latitude": position.coords.latitude,"longitude": position.coords.longitude, "altitude": position.coords.altitude, "accuracy": position.coords.accuracy, "altitudeAccuracy": position.coords.altitudeAccuracy, "heading": position.coords.heading, "speed": position.coords.speed }};
+
+       console.log("GPS:" + JSON.stringify(gpslocal_pos) );
+
+   // 再描写用 GPSの座標をセンターに再描写
+       var opt2 = { center: new google.maps.LatLng(lat, lng)};
+       mapobj.setOptions(opt2);
+
+   // 追跡の停止
+       navigator.geolocation.clearWatch(watchID);
+
+  // Marker Set
+       console.log("Marker SET");
+
+                makerobj.setMap(null);
+
+                makerobj = new google.maps.Marker({
+                               position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                               map: mapobj,
+                               title: "mySelf"
+                          });
+                   console.log("Marker:" + position.coords.latitude + "|" + position.coords.longitude);
+        aCallback(); // for promise
+    }  // successCallback
+
+function errorCallback(error) {
+  var err_msg = "";
+  switch(error.code)
+  {
+    case 1:
+      err_msg = "位置情報の利用が許可されていません";
+      break;
+    case 2:
+      err_msg = "デバイスの位置が判定できません";
+      break;
+    case 3:
+      err_msg = "タイムアウトしました";
+      break;
+  }
+  alert(err_msg);
+  return;
+ }
+
+}  //getPosition
+
+
+function EnemySet(){
+
+    if (! gpslocal_pos) { console.log("DEBUG: EnemySet RETURN!"); return;};
+
+    // Enemy Setting
+       //     var ene_lat = gpslocal_pos.gpslocation.latitude + (Math.random() * 0.01) - 0.005;
+       //     var ene_lng = gpslocal_pos.gpslocation.longitude + (Math.random() * 0.01) - 0.005;
+
+       // ジャイロの方向に従ってポイントを設定
+       case_dir = 1; // default seting
+       if ( N0r < 90 ) { case_dir = 1 };
+       if (( 90 < N0r )&&( N0r < 180 )) { case_dir = 2 };
+       if (( 180 < N0r )&&( N0r < 270 )) { case_dir = 3 };
+       if (( 270 < N0r )&&( N0r < 360 )) { case_dir = 4 };
+
+       switch (case_dir) {
+            case 1:
+                var ene_lat = gpslocal_pos.gpslocation.latitude + (Math.random() * 0.005);
+                var ene_lng = gpslocal_pos.gpslocation.longitude + (Math.random() * 0.005);
+                break ;
+            case 2:
+                var ene_lat = gpslocal_pos.gpslocation.latitude - (Math.random() * 0.005);
+                var ene_lng = gpslocal_pos.gpslocation.longitude + (Math.random() * 0.005);
+                break ;
+            case 3:
+                var ene_lat = gpslocal_pos.gpslocation.latitude - (Math.random() * 0.005);
+                var ene_lng = gpslocal_pos.gpslocation.longitude - (Math.random() * 0.005);
+                break ;
+            case 4:
+                var ene_lat = gpslocal_pos.gpslocation.latitude + (Math.random() * 0.005);
+                var ene_lng = gpslocal_pos.gpslocation.longitude - (Math.random() * 0.005);
+                break ;
+            };
+
+            console.log("DEBUG:" + ene_lat + " " + ene_lng);
+
+            ene_pos = { "latitude" : ene_lat,
+                        "longitude" : ene_lng,
+                        "status" : "attack",
+                        "reng" : 900,
+                        "rundirect" : 300 };
+
+            console.log("DEBUG: ene_pos:" + ene_pos.latitude + ":" + ene_pos.longitude);
+
+           // Enemy position Maker +1 SET
+
+                     var icon = "/img/target_icon.png";
+                makerobj2 = new google.maps.Marker({
+                               position: new google.maps.LatLng(ene_pos.latitude, ene_pos.longitude),
+                               map: mapobj,
+                               title: "ene_pos",
+                               icon: icon
+                          });
+              console.log ("DEBUG: Mark makerobj2");
+    };
+
+
+
+// Calc Direct
+
+function geoDirection(lat1, lng1, lat2, lng2) {
+  // 緯度経度 lat1, lng1 の点を出発として、緯度経度 lat2, lng2 への方位
+  // 北を０度で右回りの角度０～３６０度
+  var Y = Math.cos(lng2 * Math.PI / 180) * Math.sin(lat2 * Math.PI / 180 - lat1 * Math.PI / 180);
+  var X = Math.cos(lng1 * Math.PI / 180) * Math.sin(lng2 * Math.PI / 180) - Math.sin(lng1 * Math.PI / 180) * Math.cos(lng2 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180 - lat1 * Math.PI / 180);
+  var dirE0 = 180 * Math.atan2(Y, X) / Math.PI; // 東向きが０度の方向
+  if (dirE0 < 0) {
+    dirE0 = dirE0 + 360; //0～360 にする。
+  }
+  var dirN0 = (dirE0 + 90) % 360; //(dirE0+90)÷360の余りを出力 北向きが０度の方向
+  return dirN0;
+
+}
+
+function getDirection(){
+        if ((! gpslocal_pos)||(! ene_pos)) return;
+
+        // Direct position
+        alpha_shl = geoDirection(gpslocal_pos.gpslocation.latitude, gpslocal_pos.gpslocation.longitude, ene_pos.latitude, ene_pos.longitude);
+        console.log("DEBUG: alpha_shl:" + alpha_shl);
+
+        // Distance Check!  ６ケタの精度
+        geo_dist = geoDistance(gpslocal_pos.gpslocation.latitude, gpslocal_pos.gpslocation.longitude, ene_pos.latitude, ene_pos.longitude, 6);
+
+         //   $('#output_d').text("alpha_shl: " + Math.ceil(alpha_shl) + " Distance(m):" + Math.ceil(geo_dist));
+            $('#output_d').text("Distance(m):" + Math.ceil(geo_dist));
+
+        };
+
+//
+// 測地線航海算法の公式
+//
+function geoDistance(lat1, lng1, lat2, lng2, precision) {
+  // 引数　precision は小数点以下の桁数（距離の精度）
+  var distance = 0;
+  if ((Math.abs(lat1 - lat2) < 0.00001) && (Math.abs(lng1 - lng2) < 0.00001)) {
+    distance = 0;
+  } else {
+    lat1 = lat1 * Math.PI / 180;
+    lng1 = lng1 * Math.PI / 180;
+    lat2 = lat2 * Math.PI / 180;
+    lng2 = lng2 * Math.PI / 180;
+ 
+    var A = 6378140;
+    var B = 6356755;
+    var F = (A - B) / A;
+ 
+    var P1 = Math.atan((B / A) * Math.tan(lat1));
+    var P2 = Math.atan((B / A) * Math.tan(lat2));
+ 
+    var X = Math.acos(Math.sin(P1) * Math.sin(P2) + Math.cos(P1) * Math.cos(P2) * Math.cos(lng1 - lng2));
+    var L = (F / 8) * ((Math.sin(X) - X) * Math.pow((Math.sin(P1) + Math.sin(P2)), 2) / Math.pow(Math.cos(X / 2), 2) - (Math.sin(X) - X) * Math.pow(Math.sin(P1) - Math.sin(P2), 2) / Math.pow(Math.sin(X), 2));
+ 
+    distance = A * (X + L);
+    var decimal_no = Math.pow(10, precision);
+    distance = Math.round(decimal_no * distance / 1) / decimal_no;   // kmに変換するときは(1000で割る)
+  }
+  return distance;
+}
+
+
+// sound input
+
+window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+var recognition = new webkitSpeechRecognition();
+recognition.lang = 'ja';
+
+// 録音終了時トリガー
+recognition.addEventListener('result', function(event){
+    var text = event.results.item(0).item(0).transcript;
+
+          console.log("DEBUG: SoundInput!!!: " + text);
+          $('#output_s').text("text:" + text);
+
+    if (( text == "チェック" )||( text == "check")|| ( text == "確認")){
+
+       var fetchgps = new Promise(function(resolv){
+
+// Callback type....
+//   var regetPosition = function(aCollback){
+//           getPosition();
+//           aCollback();
+//      }
+
+               gpsset(resolv);
+            });
+
+           fetchgps.then(function(){
+                getDirection();
+           });
+
+        }; // if
+
+}, false);
+
+// key input
+function keyInput(){
+       var fetchgps = new Promise(function(resolv){
+               gpsset(resolv);
+            });
+ 
+           fetchgps.then(function(){
+                getDirection();
+           });
+}
+
+
+// 録音開始
+function record()
+{
+    $('#output_s').text("text:");
+    recognition.start();
+}
+
+
+// 移動処理
+function EnmMove(){
+    if (! ene_pos.status ) return;
+
+    getDirection();
+    console.log("DEBUG: EnmMove START");
+
+    if ( geo_dist < 10 ) {
+                     ene_pos.status = "runaway";
+                     ene_pos.rundirect = Math.random() * 360 ;  // 逃走方向
+                     ene_pos.reng = Math.random() * 900 + 100 ; // 反転閾値
+
+                     console.log("DEBUG: rundirect: " + ene_pos.rundirect + " Reng: " + ene_pos.reng );
+         } 
+
+    if ( geo_dist > ene_pos.reng) { ene_pos.status = "attack"; }
+
+    console.log("DEBUG: status:" + ene_pos.status + " geo_dist: " + geo_dist);
+
+
+      var trg_diff_lat = ene_pos.latitude * 1000000 - gpslocal_pos.gpslocation.latitude * 1000000;
+      var trg_diff_lng = ene_pos.longitude * 1000000 - gpslocal_pos.gpslocation.longitude * 1000000;
+
+  //    console.log("DEBUG: trg_diff_lat: " + trg_diff_lat + " trg_diff_lng: " + trg_diff_lng);
+
+    if ( ene_pos.status == "attack"){
+
+        if ( trg_diff_lat < 0 ) {
+                      // 近づくには、マイナスならタス
+                      ene_pos.latitude = ene_pos.latitude + (Math.random() * 0.0001);
+                  } else {
+                      // 近づくには、プラスならひく
+                      ene_pos.latitude = ene_pos.latitude - (Math.random() * 0.0001);
+                          }
+
+        if ( trg_diff_lng < 0 ) {
+                      // 近づくには、マイナスならタス
+                      ene_pos.longitude = ene_pos.longitude + (Math.random() * 0.0001);
+                  } else {
+                      // 近づくには、プラスならひく
+                      ene_pos.longitude = ene_pos.longitude - (Math.random() * 0.0001);
+                          }
+
+            // Enemy Maker Set...
+                makerobj2.setMap(null);
+
+            var icon = "/img/target_icon.png";
+                makerobj2 = new google.maps.Marker({
+                               position: new google.maps.LatLng(ene_pos.latitude, ene_pos.longitude),
+                               map: mapobj,
+                               title: "ene_pos",
+                               icon: icon
+                          });
+    } // attack
+
+    if ( ene_pos.status == "runaway"){
+
+       // 逃走方向に従って変異させる
+       var runaway_dir = 1; // default seting
+       if ( ene_pos.rundirect < 90 ) { runaway_dir = 1 };
+       if (( 90 < ene_pos.rundirect )&&( ene_pos.rundirect < 180 )) { runaway_dir = 2 };
+       if (( 180 < ene_pos.rundirect )&&( ene_pos.rundirect < 270 )) { runaway_dir = 3 };
+       if (( 270 < ene_pos.rundirect )&&( ene_pos.rundirect < 360 )) { runaway_dir = 4 };
+
+       switch (runaway_dir) {
+            case 1:
+                ene_pos.latitude = ene_pos.latitude + (Math.random() * 0.0001);
+                ene_pos.longitude = ene_pos.longitude + (Math.random() * 0.0001);
+
+                // 逃走方向の変移
+                ene_pos.rundirect = Math.random() * 90 + ( Math.random() * 45 -23) ;  // 逃走方向
+
+                break ;
+            case 2:
+                ene_pos.latitude = ene_pos.latitude - (Math.random() * 0.0001);
+                ene_pos.longitude = ene_pos.longitude + (Math.random() * 0.0001);
+
+                ene_pos.rundirect = Math.random() * 90 + 90 + ( Math.random() * 45 -23) ;  // 逃走方向
+
+                break ;
+            case 3:
+                ene_pos.latitude = ene_pos.latitude - (Math.random() * 0.0001);
+                ene_pos.longitude = ene_pos.longitude - (Math.random() * 0.0001);
+
+                ene_pos.rundirect = Math.random() * 90 + 180 + ( Math.random() * 45 -23);  // 逃走方向
+
+                break ;
+            case 4:
+                ene_pos.latitude = ene_pos.latitude + (Math.random() * 0.0001);
+                ene_pos.longitude = ene_pos.longitude - (Math.random() * 0.0001);
+
+                ene_pos.rundirect = Math.random() * 90 + 270 + ( Math.random() * 45 -23);  // 逃走方向
+
+                break ;
+            };
+
+
+            // Enemy Maker Set...
+                makerobj2.setMap(null);
+
+            var icon = "/img/target_icon.png";
+                makerobj2 = new google.maps.Marker({
+                               position: new google.maps.LatLng(ene_pos.latitude, ene_pos.longitude),
+                               map: mapobj,
+                               title: "ene_pos",
+                               icon: icon
+                          });
+    } // runaway
+
+    console.log("DEBUG: Enemy lat:" + ene_pos.latitude + " lng: " + ene_pos.longitude);
+
+} // EnmMove
+
+
+</script>
+
+</HEAD>
+<BODY>
+<div id="hantei" data-role="page">
+    <div data-role="header">
+        <a href="#panel" data-icon="bars" data-iconpos="notext">panel</a>
+        <h1>散歩ゲーム</h1>
+    </div>
+<div data-role="panel" id="panel" data-display="overlay">
+  <p><input type="button" onClick="hitEmure()" value="HIT Emurator Support" /></p>
+  <p><input type="button" onClick="record()" value="Check SOUND INPUT" /><a id="output_s"></a></p>
+  <p><input type="button" onClick="keyInput()" value="Check KEY INPUT" /></p>
+  <button type="button" class="ui-btn " onclick="gpsset(dumCall);">GPS Enable</button>
+  <button type="button" class="ui-btn " onclick="enmset();">EnemySet</button>
+  <button type="button" class="ui-btn " onclick="hangUp();">Restart</button>
+  <a href="#r_panel" data-icon="arrow" class="ui-btn">Direction</a>
+</div>
+
+<div data-role="panel" id="r_panel" data-display="overlay" data-position="right">
+        // Panel
+	<img id="arrow_s" src="/img/cyrclearrow.png" />
+</div>
+
+  <p>JAIRO：<img id="arrow" src="/img/cyrclearrow.png" /></p>
+  <p>Direct：<a id="output_d">res_disp</a></p>
+  <p>表示：<a id="output">res_disp</a></p>
+  <div id="gmap" style="width : 350px; height : 350px;"></div>
+</div>
+</BODY>
+</HTML>
+

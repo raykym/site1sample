@@ -1,5 +1,5 @@
 <!DOCTYPE html>
- <html lang="ja" manifest="/appcache.mani">
+ <html lang="ja" manifest="appcache.mani">
   <head>
   <meta charset="UTF-8">
   <meta http-equiv="Pragma" content="no-cache">

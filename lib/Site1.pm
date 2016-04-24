@@ -4,6 +4,7 @@ use Mojo::Base 'Mojolicious';
 use DBIx::Connector;
 use Mojo::Pg;
 use Mojolicious::Plugin::OAuth2;
+use MongoDB;
 
 sub startup {
   my $self = shift;
@@ -44,6 +45,12 @@ sub startup {
         sub { state $pg = Mojo::Pg->new('postgresql://sitedata:sitedatapass@192.168.0.8:5433/sitedata');
             });
 
+   # $self->app->mongoclientでアクセス
+   $self->app->helper(mongoclient =>
+        sub { state $mongoclient = MongoDB->connect('mongodb://192.168.0.5:27017');
+            });
+
+
 ##  my $sth = $self->app->dbh->prepare("$config->{sql1}");
 ##     $sth->execute();
 
@@ -80,6 +87,7 @@ sub startup {
   $bridge->websocket('/menu/rec-timeline/record')->to(controller => 'Timeline',action => 'record');
   $r->websocket('/menu/rec-timeline/chrome')->to(controller => 'Timeline',action => 'chrome');
   $bridge->websocket('/menu/maptimeline/echo')->to(controller => 'Timeline',action => 'echo');
+  $bridge->websocket('/walkworld')->to(controller => 'Walkworld',action => 'echo');
 
 
   # Normal route to controller
@@ -144,6 +152,8 @@ sub startup {
 
   $bridge->get('/menu/rec-timeline')->to('timeline#view');
   $bridge->get('/menu/maptimeline')->to('timeline#mapview');
+
+  $bridge->get('/walkworld/view')->to('walkworld#view');
 
   $r->any('*')->to('Top#unknown'); # 未定義のパスは全てunknown画面へ
 }

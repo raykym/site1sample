@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script type="text/javascript">
+
+var res_disp = "判定中";
+var isMotion = false;
+var onCount = 0;
+var direct = false;
+var acc_shl_x = 20;
+var acc_shl_y = 10;
+var acc_shl_z = 5;
+var alpha_shl = 190;
+
+
+// 加速度センサー
+window.addEventListener("devicemotion", devicemotionHandler);
+
+function devicemotionHandler(event) {
+
+   if (isMotion) return;
+
+    var a = {
+        x : event.acceleration.x,
+        y : event.acceleration.y,
+        z : event.acceleration.z,
+    };
+
+//    if ((a.x > acc_shl)||(a.y > acc_shl)||(a.z > acc_shl)||(a.x < -acc_shl)||(a.y < -acc_shl)||(a.z < -acc_shl)) { 
+//                   onCount++;
+//                 };
+
+    // X座標のシェイク、Y座標のシェイク、Z座標のシェイクを順に実行させる
+
+    function Xshake(shake){
+                if (a.x > acc_shl_x){
+                   console.log("DEBUG: Xshake Passed!!");
+                   $('#output_log').append("<li>Xshake Passed!</li>");
+                                 shake();
+                }
+            }
+    function mXshake(shake){
+                if (a.x > -acc_shl_x){
+                   console.log("DEBUG: mXshake Passed!!");
+                   $('#output_log').append("<li>mXshake Passed!</li>");
+                                 shake();
+                }
+            }
+
+    function Yshake(shake){
+                if (a.y > acc_shl_y){
+                   console.log("DEBUG: Yshake Passed!!");
+                   $('#output_log').append("<li>Yshake Passed!</li>");
+                                 shake();
+                }
+            }
+    function mYshake(shake){
+                if (a.y > -acc_shl_y){
+                   console.log("DEBUG: mYshake Passed!!");
+                   $('#output_log').append("<li>mYshake Passed!</li>");
+                                 shake();
+                }
+            }
+
+    function Zshake(shake){
+                if (a.z > acc_shl_z){
+                   console.log("DEBUG: Zshake Passed!!");
+                   $('#output_log').append("<li>Zshake Passed!</li>");
+                                 shake();
+                }
+            }
+    function mZshake(shake){
+                if (a.z > -acc_shl_z){
+                   console.log("DEBUG: mZshake Passed!!");
+                   $('#output_log').append("<li>mZshake Passed!</li>");
+                                 shake();
+                }
+            }
+
+    var XDance = function(){
+                   return new Promise(function(resolv){
+                        Xshake(resolv);
+                     });
+                   }
+    var mXDance = function(){
+                   return new Promise(function(resolv){
+                        mXshake(resolv);
+                     });
+                   }
+    var YDance = function(){
+                   return new Promise(function(resolv){
+                        Yshake(resolv);
+                     });
+                   }
+    var mYDance = function(){
+                   return new Promise(function(resolv){
+                        mYshake(resolv);
+                     });
+                   }
+    var ZDance = function(){
+                   return new Promise(function(resolv){
+                        Zshake(resolv);
+                     });
+                   }
+    var mZDance = function(){
+                   return new Promise(function(resolv){
+                        mZshake(resolv);
+                     });
+                   }
+
+     XDance().then(mXDance).then(YDance).then(mYDance).then(ZDance).then(mZDance).then(function(){ 
+  //  YDance().then(YDance).then(mXDance).then(mXDance).then(XDance).then(YDance).then(ZDance).then(YDance).then(function(){ 
+                   res_disp = "終了";
+                   isMotion = true;
+                   $('#output').text(res_disp + " x: " + Math.ceil(a.x) + " y: " + Math.ceil(a.y) + " z: " + Math.ceil(a.z) + " Count:" + onCount);
+                 });
+
+    //      if ( (onCount > 3)&&(! direct)){
+    //               onCount = 0;
+    //             };
+
+    $('#output').text(res_disp + " x: " + Math.ceil(a.x) + " y: " + Math.ceil(a.y) + " z: " + Math.ceil(a.z) + " Count:" + onCount);
+}
+
+// JAIRO
+window.addEventListener("deviceorientation", deviceorientationHandler);
+
+function deviceorientationHandler(event) {
+
+   if (isMotion) return;
+
+  // X軸
+    $('#event_x').text(event.beta);
+  // Y軸
+    $('#event_y').text(event.gamma);
+  // Z軸
+    // transrate turnRight
+    var N0r = 360 - event.alpha;
+    $('#event_z').text(N0r);
+
+    if ((N0r > alpha_shl-5) && ( N0r < alpha_shl+5 )) {
+        
+        direct = true;
+
+        } else {
+
+        direct = false;
+
+        };
+
+    $('#output_j').text(res_disp + " beta: " + Math.ceil(event.beta) + " gamma: " + Math.ceil(event.gamma) + " alpha:(-360) " + Math.ceil(N0r));
+}
+
+</script>
+
+</HEAD>
+<BODY>
+  <p><h1>判定テスト</h1></p>
+  <p><h1>表示：<a id="output">res_disp</a></h1></p>
+  <p><h1>JAIRO：<a id="output_j">res_disp</a></h1></p>
+  <p><ul id="output_log" data-role="listview" data-inset="true"></ul></p>
+
+</BODY>
+</HTML>
+
