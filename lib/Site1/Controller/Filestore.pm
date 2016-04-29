@@ -214,6 +214,9 @@ sub imgcomm {
     my $self = shift;
    # Filestoreで登録したファイルを表示で利用するためのパス
    # chatroomでアイコン表示するためにoidのみで表示するパス
+   # walkworld向けにresize機能を用意した。処理が多くなると重くなるのは必定
+
+    use GD;
 
     use Mojolicious::Types;
     my $types = Mojolicious::Types->new;
@@ -223,6 +226,8 @@ sub imgcomm {
     my $oid_url = $self->param('oid');
     my $oid = urlsafe_b64decode($oid_url);
        $self->app->log->debug("DEBUG: $oid");
+    my $resize = $self->param('resize');
+       $self->app->log->debug("DEBUG: $resize");
 
        $sth_getimagcomm->execute($oid);
     my $res = $sth_getimagcomm->fetchrow_hashref();
@@ -230,9 +235,25 @@ sub imgcomm {
        #結果が取れない場合エラーを表示
        return $self->render(text => 'error') if (! defined $res);
 
-    my $extention = $types->detect($res->{mime});
+       # Resise用処理  &resize=1等、数字は何でも良いけれど
+    my $newImage;
+       if (defined $resize) {
+           my $bimage = GD::Image->newFromJpegData($res->{data});
+           my @bound = $bimage->getBounds();
+           my $w = int($bound[0] * 0.03); #固定率10%を指定
+           my $h = int($bound[1] * 0.03);
+           $newImage = new GD::Image($w, $h); 
+           $newImage->copyResized($bimage, 0, 0, 0, 0, $w, $h, $bound[0], $bound[1]); 
+       }
 
+    my $extention = $types->detect($res->{mime});
+    if ( ! defined $newImage){
     $self->render(data => $res->{data},format => $extention);
+       $self->app->log->debug("DEBUG: base image");
+      } else {
+    $self->render(data => $newImage->jpeg,format => $extention);
+       $self->app->log->debug("DEBUG: resize image");
+      }
 }
 
 sub fileview {
